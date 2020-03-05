@@ -35,6 +35,12 @@ btnAddCard.addEventListener('click', () => {
 
 });
 body.addEventListener('click', () => {
-    //  message1.textContent = "The element clicked was: " + dom_Manipulation.elementClicked(event);
-    console.log(dom_Manipulation.elementDelete(event));
+    if (event.target.innerText == "Delete") {
+        dom_Manipulation.elementDelete(dom_Manipulation.elementClicked(event));
+    } else if (event.target.innerText == "Add Before") {
+        dom_Manipulation.cardButtonAddBefore(panel1, dom_Manipulation.elementClicked(event));
+    } else if (event.target.innerText == "Add After") {
+        dom_Manipulation.cardButtonAddAfter(panel1);
+    }
+
 });

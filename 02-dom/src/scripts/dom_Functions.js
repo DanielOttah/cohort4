@@ -91,13 +91,23 @@ const dom_Manipulation = {
 
 
     },
-    elementDelete: (param) => {
-        param = event.target;
-        // this.parentNode.remove();
-        // if (param != parentNode) {
-        param.parentNode.remove();
-        // }
-        return param.id;
+    elementDelete: (elID) => {
+        let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
+        elCloner.remove(); //remove parent
+
+    },
+    cardButtonAddBefore: (par, elID) => {
+        let itm = par.lastChild
+        let clone = itm.cloneNode(true); //Clone Card
+
+        let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
+
+        elCloner.insertAdjacentElement("beforeBegin", clone); //insert cloned card before the cloner
+    },
+    cardButtonAddAfter: (elID) => {
+        let itm = elID.lastChild
+        let clone = itm.cloneNode(true);
+        elID.appendChild(clone); //nb insertAdjacentElement-Afterend js method can be used as well
     },
 }
 export default dom_Manipulation;
