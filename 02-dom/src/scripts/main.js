@@ -8,7 +8,7 @@ const btnDel = document.getElementById("btnDel");
 const btnAdd2Start = document.getElementById("add2Start");
 const btnAddCard = document.getElementById("addCard");
 const panel1 = document.querySelector("#panel1");
-const body = document.querySelector("#body");
+const body = document.querySelector(".cardContainer");
 
 // outer_Container.addEventListener('click', () => {
 //     message1.textContent = "The element clicked was: " + dom_Manipulation.elementClicked(event);

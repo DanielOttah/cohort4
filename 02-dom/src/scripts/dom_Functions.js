@@ -22,9 +22,10 @@ const dom_Manipulation = {
     deleteElement: (elD, un) => {
 
         if (elD.hasChildNodes()) {
+            //  console.log(un);
             elD.removeChild(elD.childNodes[un]);
         }
-        param.parentNode.removeChild(param);
+        // param.parentNode.removeChild(param);
     },
     elementClicked: (param) => {
         param = event.target;
