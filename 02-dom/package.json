@@ -1,0 +1,22 @@
+{
+    "name": "02-dom",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "testcov": "jest --coverage",
+        "test1": "jest src/02-dom",
+        "test1cov": "jest src/02-dom --coverage",
+        "testfile": "jest src/02-dom/scripts/lfsplay.test.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "jest": "^25.1.0"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.8.6",
+        "@babel/preset-flow": "^7.8.3"
+    }
+}

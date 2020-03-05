@@ -1,0 +1,49 @@
+.borderStyle {
+    width: 60%;
+    margin: auto;
+    border-style: solid;
+    border-color: rgb(235, 235, 235);
+}
+
+.botomMargin {
+    padding: 10px;
+}
+
+.cardStyle {
+    background-color: rgb(235, 235, 235);
+    margin-bottom: 5px;
+}
+
+.taxContainer {
+    border-style: solid;
+    border-color: black;
+}
+
+.putCenter {
+    justify-content: center;
+    margin: auto;
+}
+
+.col2 {
+    display: inline-block;
+    padding: 5px;
+}
+
+.addPad {
+    padding: 10px;
+}
+
+.txtCenter {
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-style: outset;
+}
+
+.blok {
+    display: block;
+    /* grid-template-rows: 1fr 1fr 1fr; */
+}

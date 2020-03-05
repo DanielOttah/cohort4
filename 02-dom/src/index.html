@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./dom_Main.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Dom Manipulation</title>
+</head>
+
+<body id="body">
+    <div class="w3-content w3-container w3-padding-64 w3-center">
+
+        <div id="outer_Container" class="taxContainer">
+            <!--Array Section-->
+            <div id="HeaderContainer" class="putCenter">
+                <div id="innerHeaderContainer" class="pullLeft">
+                    <h3 id="header">Basic DOM</h3>
+                    <h5 id="subHeader">This is a list of stuff...</h5>
+                </div>
+                <hr>
+                <div id="itemContainer" class="putCenter">
+                    <ol id="itemList">
+                        <li id="item1">Item 1</li>
+                        <li id="item2">Item 2</li>
+                        <li id="item3">Item 3</li>
+                        <li id="item4">Item 4</li>
+                        <li id="item5">Item 5</li>
+                    </ol>
+                </div>
+                <div id="buttonContainer">
+                    <div id="show" class="col2"><button id="btnShow" class="col2">Show</button></div>
+                    <div id="add" class="col2"><button id="btnAdd" class="col2">Add</button></div>
+                    <div id="del" class="col2"><button id="btnDel" class="col2">Delete</button></div>
+                    <div id="add2Start" class="col2"><button id="add2Start" class="col2">Add to Start</button></div>
+
+                </div>
+                <input id="inputText">
+                <br>
+                <div id="messageContainer">
+                    <div id="message1">
+                    </div>
+                    <div id="message2">
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!--Cards Section-->
+    <div class="">
+        <h3 class="txtCenter">Working with Cards</h3>
+        <div class="container">
+            <div id="panel1" class=" txtCenter putCenter borderStyle">
+                <div class="addPad"> <button id="addCard">Add Card</button></div>
+                <!-- <div id="card1" class="cardStyle">
+                    <div class="addPad"> Card 1</div>
+                    <div class="botomMargin">
+                        <button id="btnAddBefore1">Add Before</button>
+                        <button id="btnAddAfter1">Add After</button>
+                        <button id="btnDelete1">Delete</button>
+                    </div> -->
+            </div>
+            <div id="panel2" class="txtCenter putCenter borderStyle">
+                <div>Right Side</div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    </div>
+
+    <script type="module" src="./scripts/main.js"></script>
+</body>
+
+</html>
