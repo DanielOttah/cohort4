@@ -109,28 +109,28 @@ l36.addEventListener('change', () => {
     taxableIncome = l36.value;
     l42.style.fontWeight = "bold";
     if (taxableIncome <= b1) {
-        l37.innerHTML = "0";
-        l39.innerHTML = "15% ~ CAD$" + taxableIncome;
-        l42.innerHTML = "CAD$" + " " + functions.taxCalcBase1(taxableIncome);
+        l37.textContent = "0";
+        l39.textContent = "15% ~ CAD$" + taxableIncome;
+        l42.textContent = "CAD$" + " " + functions.taxCalcBase1(taxableIncome);
     } else if (taxableIncome > b1 && taxableIncome <= 97069) {
-        l37.innerHTML = "CAD$48353 | CAD$" + (taxableIncome - b1);
-        l39.innerHTML = "15% ~ CAD$48353 | 20.5% ~ CAD$" + (taxableIncome - b1);
-        l42.innerHTML = "CAD$" + " " + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(taxableIncome - b1));
+        l37.textContent = "CAD$48353 | CAD$" + (taxableIncome - b1);
+        l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$" + (taxableIncome - b1);
+        l42.textContent = "CAD$" + " " + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(taxableIncome - b1));
 
     } else if (taxableIncome > 97069 && taxableIncome <= 150473) {
-        l37.innerHTML = "CAD$48353 | CAD$48534 | CAD$" + (taxableIncome - 97069);
-        l39.innerHTML = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$" + (taxableIncome - 97069);
-        l42.innerHTML = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(taxableIncome - 97069));
+        l37.textContent = "CAD$48353 | CAD$48534 | CAD$" + (taxableIncome - 97069);
+        l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$" + (taxableIncome - 97069);
+        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(taxableIncome - 97069));
 
     } else if (taxableIncome > (150473) && taxableIncome <= 214368) {
-        l37.innerHTML = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$" + (taxableIncome - 150473);
-        l39.innerHTML = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$" + (taxableIncome - 150473);
-        l42.innerHTML = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(taxableIncome - 150473));
+        l37.textContent = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$" + (taxableIncome - 150473);
+        l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$" + (taxableIncome - 150473);
+        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(taxableIncome - 150473));
 
     } else if (taxableIncome > 214368) {
-        l37.innerHTML = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$63895 | CAD$" + (taxableIncome - 214368);
-        l39.innerHTML = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$63895 | CAD$" + (taxableIncome - 214368);
-        l42.innerHTML = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(b4) + functions.taxCalcBase5(taxableIncome - 214368));
+        l37.textContent = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$63895 | CAD$" + (taxableIncome - 214368);
+        l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$63895 | CAD$" + (taxableIncome - 214368);
+        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(b4) + functions.taxCalcBase5(taxableIncome - 214368));
 
     }
 });
@@ -139,7 +139,7 @@ const myArray = [];
 
 myBtnAdd.addEventListener('click', () => {
     if (arrInput.value.length == 0) {
-        message.innerHTML = "Please enter a number in the input field abbove";
+        message.textContent = "Please enter a number in the input field abbove";
     } else if (arrInput.value.length != 0) {
         exercise.addToEndofArray(arrInput.value, myArray)
         arrInput.value = "";
@@ -149,15 +149,15 @@ myBtnAdd.addEventListener('click', () => {
 
 myBtnShow.addEventListener('click', () => {
     if (myArray.length == 0) {
-        message.innerHTML = "Sorry, nothing to show as the array is empty";
+        message.textContent = "Sorry, nothing to show as the array is empty";
     } else if (myArray.length != 0) {
-        message.innerHTML = "The array is: [" + myArray + "]";
+        message.textContent = "The array is: [" + myArray + "]";
     }
 });
 myBtnTotal.addEventListener('click', () => {
     var sum = 0;
     if (myArray.length == 0) {
-        message.innerHTML = "Total is 0, the array is empty.";
+        message.textContent = "Total is 0, the array is empty.";
     } else if (myArray.length != 0) {
         message.textContent = "The sum of array items equals: " + exercise.aForEachFunction(myArray);
         //message.textContent = "The sum of array items equals: " + myArray.reduce((a, b) => a + b, 0);
@@ -165,7 +165,7 @@ myBtnTotal.addEventListener('click', () => {
 });
 myBtnClear.addEventListener('click', () => {
     myArray.length = 0;
-    message.innerHTML = "The array is empty";
+    message.textContent = "The array is empty";
 
 });
 //=========== DICTIONARY AND LIBRARY=================
