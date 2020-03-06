@@ -5,12 +5,12 @@ const ol = document.getElementById("itemList");
 
 //Test for add child element 
 test('Check to see if child was added', () => {
-    var el = btnAdd;
-    var etype = 'click';
+    let el = btnAdd;
+    let etype = 'click';
     if (el.fireEvent) {
         el.fireEvent('on' + etype);
     } else {
-        var evObj = document.createEvent('Events');
+        let evObj = document.createEvent('Events');
         evObj.initEvent(etype, true, false);
         el.dispatchEvent(evObj);
     }

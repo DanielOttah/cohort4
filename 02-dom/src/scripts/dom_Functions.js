@@ -7,13 +7,13 @@ const dom_Manipulation = {
     showAllChildren: (elID) => {
         let childrenList = document.getElementById(elID);
         const mmm = [];
-        for (var q = 0; q < childrenList.children.length; q++) {
+        for (let q = 0; q < childrenList.children.length; q++) {
             mmm[q] = " " + childrenList.children[q].innerText;
         }
         return mmm;
     },
     addAChild: (elID, nodeTxt) => {
-        var li = document.createElement("li");
+        let li = document.createElement("li");
         li.appendChild(document.createTextNode(nodeTxt));
         elID.appendChild(li);
         return elID.lastChild.innerHTML;
@@ -33,16 +33,16 @@ const dom_Manipulation = {
     },
     add2Start: (elID, nodeTxt) => {
         let mmm = [];
-        for (var q = 0; q < elID.children.length; q++) {
+        for (let q = 0; q < elID.children.length; q++) {
             mmm[q] = " " + elID.children[q].innerText;
         }
         while (elID.lastElementChild) {
             elID.removeChild(elID.lastElementChild);
         }
-        var li = document.createElement("li");
+        let li = document.createElement("li");
         li.appendChild(document.createTextNode(nodeTxt));
         elID.appendChild(li);
-        for (var t = 0; t < mmm.length; t++) {
+        for (let t = 0; t < mmm.length; t++) {
             let li = document.createElement("li");
             li.appendChild(document.createTextNode(mmm[t]));
             elID.appendChild(li);
@@ -51,21 +51,21 @@ const dom_Manipulation = {
     },
     //Card Section
     addACard: (elID) => {
-        var divNo = 0;
+        let divNo = 0;
         if (elID.lastElementChild.innerText != "Add Card") { //Check if any card has been created
             divNo = Number(elID.lastChild.id.split("card")[1]) + 1;
         } else {
             divNo = 1; //If no div has been created assign number to the first 
         }
 
-        var div = document.createElement("div"); //create a div
+        let div = document.createElement("div"); //create a div
         div.id = "card" + divNo; //set the div id
         div.style.width = "100%"; //set the div width
         div.style.backgroundColor = "rgb(235, 235, 235)"; //set div background color
         div.style.padding = "20px"; // set div padding
         div.style.marginBottom = "10px"
 
-        var txtDiv = document.createElement("div"); //create a div
+        let txtDiv = document.createElement("div"); //create a div
         txtDiv.appendChild(document.createTextNode("Card " + divNo)) //create text ie 'Card 1'
 
         let btnAddBefore = document.createElement("BUTTON"); //create Add Before button
