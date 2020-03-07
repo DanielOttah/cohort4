@@ -12,20 +12,22 @@ const dom_Manipulation = {
         }
         return mmm;
     },
+
     addAChild: (elID, nodeTxt) => {
         let li = document.createElement("li");
         li.appendChild(document.createTextNode(nodeTxt));
         elID.appendChild(li);
-        return elID.lastChild.innerHTML;
+        return elID.lastChild.textContent;
 
     },
     deleteElement: (elD, un) => {
 
         if (elD.hasChildNodes()) {
-            //  console.log(un);
             elD.removeChild(elD.childNodes[un]);
         }
-        // param.parentNode.removeChild(param);
+        console.log(elD.children.length);
+
+        return elD.children.length;
     },
     elementClicked: (param) => {
         param = event.target;
