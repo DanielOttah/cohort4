@@ -75,10 +75,18 @@ test('Check if child was added at the beginning', () => {
     expect(dom_Manipulation.add2Start(aNewOlElement, "Very Very first Element")).toBe("Very Very first Element");
 
 });
-//Test function createAndStyleDiv
+//Test if card was created
 test('Test if card was added', () => {
-    expect(dom_Manipulation.createAndStyleDiv()).toBe(7);
-    // expect(dom_Manipulation.addACard(aNewOlElement, 1)).toBe(6);
-    // expect(dom_Manipulation.addACard(aNewOlElement, 2)).toBe(5);
+    expect(dom_Manipulation.addACard(aNewBodyElement)).toBe(true);
+
+});
+//Test if card was added after
+test('Test if card was added after', () => {
+    expect(dom_Manipulation.cardButtonAddAfter(aNewBodyElement)).toBe(true);
+
+});
+//Test if card was added Before
+test('Test if card was added Before', () => {
+    //  expect(dom_Manipulation.cardButtonAddBefore(aNewBodyElement)).toBe(true);
 
 });

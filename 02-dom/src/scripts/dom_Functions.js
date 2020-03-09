@@ -26,10 +26,6 @@ const dom_Manipulation = {
         }
         return elD.children.length;
     },
-    // elementClicked: (param) => {
-    //     param = event.target;
-    //     return param.id;
-    // },
     add2Start: (elID, nodeTxt) => {
         let li = document.createElement("li");
         li.appendChild(document.createTextNode(nodeTxt));
@@ -74,8 +70,8 @@ const dom_Manipulation = {
         div.appendChild(btnAddBefore); // attach add before button to div
         div.appendChild(btnAddAfter); // attach add after button to div
         div.appendChild(btnAddDelete); // attach delete button to div
-
         elID.appendChild(div); //attach div to parent div
+        return elID.contains(div);
     },
     elementDelete: (elID) => {
         let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
@@ -84,17 +80,19 @@ const dom_Manipulation = {
     },
     cardButtonAddBefore: (par, elID) => {
         let itm = par.lastChild
-        let clone = itm.cloneNode(true); //Clone Card
-        clone.childNodes[0].textContent = "Card " + (++dom_Manipulation.divNo);
+        let clone2 = itm.cloneNode(true); //Clone Card
+        clone2.childNodes[0].textContent = "Card " + (++dom_Manipulation.divNo);
         let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
-        elCloner.insertAdjacentElement("beforeBegin", clone); //insert cloned card before the cloner
+        elCloner.insertAdjacentElement("beforeBegin", clone2); //insert cloned card before the cloner
 
+        // return elID.contains(clone2);
     },
     cardButtonAddAfter: (elID) => {
         let itm = elID.lastChild
         let clone = itm.cloneNode(true);
         clone.childNodes[0].textContent = "Card " + (++dom_Manipulation.divNo);
         elID.appendChild(clone); //nb insertAdjacentElement-Afterend js method can be used as well
+        return elID.contains(clone);
     },
 }
 export default dom_Manipulation;
