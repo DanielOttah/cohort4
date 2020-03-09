@@ -151,11 +151,12 @@ myBtnShow.addEventListener('click', () => {
     if (myArray.length == 0) {
         message.textContent = "Sorry, nothing to show as the array is empty";
     } else if (myArray.length != 0) {
+        let i = "";
         message.textContent = "The array is: [" + myArray + "]";
+
     }
 });
 myBtnTotal.addEventListener('click', () => {
-    var sum = 0;
     if (myArray.length == 0) {
         message.textContent = "Total is 0, the array is empty.";
     } else if (myArray.length != 0) {
