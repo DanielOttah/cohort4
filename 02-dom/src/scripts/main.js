@@ -19,7 +19,6 @@ btnShow.addEventListener('click', () => {
 
 });
 btnAdd.addEventListener('click', () => {
-
     message2.textContent = dom_Manipulation.addAChild(ol, inputText.value) + " has been added to the list"
 });
 
@@ -27,7 +26,7 @@ btnDel.addEventListener('click', () => {
     dom_Manipulation.deleteElement(ol, Number(inputText.value));
 });
 btnAdd2Start.addEventListener('click', () => {
-    message2.textContent = dom_Manipulation.add2Start(ol, "item 0");
+    message2.textContent = dom_Manipulation.add2Start(ol, inputText.value);
 });
 //Card Section
 btnAddCard.addEventListener('click', () => {
