@@ -114,6 +114,11 @@ html {
     display: grid;
 }
 
+.col4 {
+    grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+}
+
 .taxContainer {
     border-style: outset;
 }

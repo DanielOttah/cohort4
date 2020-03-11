@@ -1,9 +1,9 @@
 class Account {
-    constructor(acctName, initBal) {
+    constructor(acctName, accNo, initBal) {
         this.acctName = acctName;
+        this.accNo = accNo;
         this.initBal = initBal;
         this.currentCash = initBal;
-        // this.currentCash;
     }
     depositCash(cash) {
         this.currentCash = this.currentCash + cash;
@@ -16,6 +16,5 @@ class Account {
     cashBalance() {
         return this.currentCash;
     }
-
 }
 export default Account;
