@@ -1,7 +1,8 @@
 import Account from './account.js';
+import AccountController from './accountController.js';
 
 
-const daniel = new Account("Daniel Ottah", '0123-445698', 500000);
+const daniel = new Account("Daniel Ottah", 'Savings', 500000);
 
 //===== Event Listeners ======================
 window.addEventListener('load', loadDetails);
