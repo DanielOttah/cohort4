@@ -22,21 +22,31 @@
      constructor() {
          this.customersCount = 0;
          this.allCustomers = [];
+
      }
 
      genAccNumber() {
          return `${Math.floor((Math.random() * 1000) + 1)}-${Math.floor((Math.random() * 1000) + 1)}`; //Generates Account Number
      }
 
-     createAccount(name, address, initialDeposit) {
+     createAccount(name, address, typeOfAccount, initialDeposit) {
          let newAccount = {};
+         let AccountType = {};
          ++this.customersCount;
+
          newAccount = Object.assign({ Name: name }, newAccount);
+         newAccount = Object.assign({ Account_Number: this.genAccNumber() }, newAccount);
          newAccount = Object.assign({ Address: address }, newAccount);
-         newAccount = Object.assign({ Savings_Account: this.genAccNumber() }, newAccount);
-         newAccount = Object.assign({ Chequeing_Account: '' }, newAccount);
-         newAccount = Object.assign({ CarFundAccount: '' }, newAccount);
-         newAccount = Object.assign({ Initial_Deposit: initialDeposit }, newAccount);
+         if (typeOfAccount == 'Savings') {
+             AccountType = Object.assign({ Savings_Account: initialDeposit }, AccountType);
+             newAccount = Object.assign(AccountType, newAccount);
+         } else if (typeOfAccount == 'Chequeing') {
+             AccountType = Object.assign({ Chequeing_Account: initialDeposit }, AccountType);
+             newAccount = Object.assign(AccountType, newAccount);
+         } else if (typeOfAccount == 'Car_Fund') {
+             AccountType = Object.assign({ CarFundAccount: initialDeposit }, AccountType);
+             newAccount = Object.assign(AccountType, newAccount);
+         }
          this.allCustomers.push(newAccount);
          //return this.allCustomers;
      }
@@ -48,32 +58,32 @@
              }
          }
          if (accToRemove.includes('Sav')) {
-             this.allCustomers[count].Savings_Account = '';
+             delete this.allCustomers[count].Savings_Account;
          }
          if (accToRemove.includes('Cheq')) {
-             this.allCustomers[count].Chequeing_Account = '';
+             delete this.allCustomers[count].Chequeing_Account;
          }
          if (accToRemove.includes('Car')) {
-             this.allCustomers[count].CarFundAccount = '';
+             delete this.allCustomers[count].CarFundAccount;
          }
          return count;
 
      }
-     addAccount(accName, accToRemove) {
+     addAccount(accName, accToAdd, deposit) {
          let count;
          for (let i = 0; i < this.allCustomers.length; i++) {
              if (this.allCustomers[i].Name == accName) {
                  count = i;
              }
          }
-         if (accToRemove.includes('Sav')) {
-             this.allCustomers[count].Savings_Account = this.genAccNumber();
+         if (accToAdd.includes('Sav')) {
+             this.allCustomers[count] = Object.assign({ Savings_Account: deposit }, this.allCustomers[count]);
          }
-         if (accToRemove.includes('Cheq')) {
-             this.allCustomers[count].Chequeing_Account = this.genAccNumber();
+         if (accToAdd.includes('Cheq')) {
+             this.allCustomers[count] = Object.assign({ Chequeing_Account: deposit }, this.allCustomers[count]);
          }
-         if (accToRemove.includes('Car')) {
-             this.allCustomers[count].CarFundAccount = this.genAccNumber();
+         if (accToAdd.includes('Car')) {
+             this.allCustomers[count] = Object.assign({ CarFundAccount: deposit }, this.allCustomers[count]);
          }
          return count;
 
