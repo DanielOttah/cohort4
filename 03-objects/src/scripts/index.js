@@ -1,8 +1,9 @@
 import Account from './account.js';
-import AccountController from './accountController.js';
+import AccountController from './account.js';
 
 
 const daniel = new Account("Daniel Ottah", 'Savings', 500000);
+const dan = new AccountController();
 
 //===== Event Listeners ======================
 window.addEventListener('load', loadDetails);
@@ -12,6 +13,7 @@ btnTxnAcc1.addEventListener('click', calcTransaction);
 //=================== Functions =====================
 
 function loadDetails() {
+
     fName.textContent = `${daniel.acctName}`;
     address.textContent = `1st Str. 4th Ave. South A1T 2Z9`;
     totNoOfAcc.textContent = 4;

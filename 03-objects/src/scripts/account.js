@@ -1,9 +1,9 @@
  export class Account {
-     constructor(acctName, accType, initBal) {
-         this.acctName = acctName;
-         this.accType = accType;
-         this.initBal = initBal;
-         this.currentCash = initBal;
+     constructor(prevBal) {
+         //  this.acctName = accName;
+         //  this.accType = accType;
+         this.prevBal = prevBal;
+         this.currentCash = prevBal;
      }
      depositCash(cash) {
          this.currentCash = this.currentCash + cash;
@@ -22,33 +22,30 @@
      constructor() {
          this.customersCount = 0;
          this.allCustomers = [];
-
      }
-
      genAccNumber() {
          return `${Math.floor((Math.random() * 1000) + 1)}-${Math.floor((Math.random() * 1000) + 1)}`; //Generates Account Number
      }
 
      createAccount(name, address, typeOfAccount, initialDeposit) {
          let newAccount = {};
-         let AccountType = {};
+         const AccountType = {};
          ++this.customersCount;
 
-         newAccount = Object.assign({ Name: name }, newAccount);
-         newAccount = Object.assign({ Account_Number: this.genAccNumber() }, newAccount);
-         newAccount = Object.assign({ Address: address }, newAccount);
+         //Another Method of adding:  newAccount = Object.assign({ Name: name }, newAccount);
+         newAccount.Name = name;
+         newAccount.Account_Number = this.genAccNumber();
+         newAccount.Address = address;
+
          if (typeOfAccount == 'Savings') {
-             AccountType = Object.assign({ Savings_Account: initialDeposit }, AccountType);
-             newAccount = Object.assign(AccountType, newAccount);
+             newAccount.Savings_Account = initialDeposit;
          } else if (typeOfAccount == 'Chequeing') {
-             AccountType = Object.assign({ Chequeing_Account: initialDeposit }, AccountType);
-             newAccount = Object.assign(AccountType, newAccount);
+             newAccount.Chequeing_Account = initialDeposit;
          } else if (typeOfAccount == 'Car_Fund') {
-             AccountType = Object.assign({ CarFundAccount: initialDeposit }, AccountType);
-             newAccount = Object.assign(AccountType, newAccount);
+             newAccount.CarFundAccount = initialDeposit;
          }
+         newAccount = Object.assign(AccountType, newAccount);
          this.allCustomers.push(newAccount);
-         //return this.allCustomers;
      }
      removeAccount(accName, accToRemove) {
          let count;
@@ -77,16 +74,119 @@
              }
          }
          if (accToAdd.includes('Sav')) {
-             this.allCustomers[count] = Object.assign({ Savings_Account: deposit }, this.allCustomers[count]);
+             this.allCustomers[count].Savings_Account = deposit;
          }
          if (accToAdd.includes('Cheq')) {
-             this.allCustomers[count] = Object.assign({ Chequeing_Account: deposit }, this.allCustomers[count]);
+             this.allCustomers[count].Chequeing_Account = deposit;
          }
          if (accToAdd.includes('Car')) {
-             this.allCustomers[count] = Object.assign({ CarFundAccount: deposit }, this.allCustomers[count]);
+             this.allCustomers[count].CarFundAccount = deposit;
          }
          return count;
 
      }
+     accountTotal(accName) {
+         let count, accTotal, v1, v2, v3;
+         for (let i = 0; i < this.allCustomers.length; i++) {
+             if (this.allCustomers[i].Name == accName) {
+                 count = i;
+             }
+         }
+         v1 = this.allCustomers[count].CarFundAccount;
+         v2 = this.allCustomers[count].Chequeing_Account;
+         v3 = this.allCustomers[count].Savings_Account;
+
+         if (v1 == undefined && v2 == undefined && v3 != undefined) {
+             accTotal = v3;
+         } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
+             accTotal = v3 + v2;
+         } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
+             accTotal = v3 + v2 + v1;
+         } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
+             accTotal = v1;
+         } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
+             accTotal = v1 + v2;
+         } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
+             accTotal = v1 + v3;
+         } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
+             accTotal = v2;
+         } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
+             accTotal = 0;
+         }
+         return accTotal;
+     }
+     highestValueAccount(accName) {
+         let count, v1, v2, v3;
+         for (let i = 0; i < this.allCustomers.length; i++) {
+             if (this.allCustomers[i].Name == accName) {
+                 count = i;
+             }
+         }
+         v1 = this.allCustomers[count].CarFundAccount;
+         v2 = this.allCustomers[count].Chequeing_Account;
+         v3 = this.allCustomers[count].Savings_Account;
+
+         if (v1 == undefined && v2 == undefined && v3 != undefined) {
+             return v3;
+         } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
+             return (v2 > v3 ? v2 : v3);
+
+         } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
+             if (v1 > v2 && v1 > v3) {
+                 return v1;
+             } else if (v2 > v1 && v2 > v3) {
+                 return v2;
+             } else if (v3 > v1 && v3 > v2) {
+                 return v3;
+             }
+         } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
+             return v1;
+         } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
+             return (v1 > v2 ? v1 : v2);
+         } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
+             return (v1 > v3 ? v1 : v3);
+         } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
+             return v2;
+         } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
+             return 0;
+         }
+     }
+     lowestValueAccount(accName) {
+         let count, v1, v2, v3;
+         for (let i = 0; i < this.allCustomers.length; i++) {
+             if (this.allCustomers[i].Name == accName) {
+                 count = i;
+             }
+         }
+         v1 = this.allCustomers[count].CarFundAccount;
+         v2 = this.allCustomers[count].Chequeing_Account;
+         v3 = this.allCustomers[count].Savings_Account;
+
+         if (v1 == undefined && v2 == undefined && v3 != undefined) {
+             return v3;
+         } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
+             return (v2 > v3 ? v3 : v2);
+
+         } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
+             if (v1 < v2 && v1 < v3) {
+                 return v1;
+             } else if (v2 < v1 && v2 < v3) {
+                 return v2;
+             } else if (v3 < v1 && v3 < v2) {
+                 return v3;
+             }
+         } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
+             return v1;
+         } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
+             return (v1 > v2 ? v2 : v1);
+         } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
+             return (v1 > v3 ? v3 : v1);
+         } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
+             return v2;
+         } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
+             return 0;
+         }
+     }
+
 
  }
