@@ -20,31 +20,60 @@ function editAccount() {
     //  <option value="RemoveSavings">Remove Savings</option>
     // <option value="RemoveChequeing">Remove Chequeing</option> 
     // <option value="RemoveCarFunds">Remove Car Funds</option>    
+    console.log(Object.keys(danAcc).includes('Savings_Account'));
 
-    if (acctsAddRemove.value == 'addSavings') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Savings Account Opened"
-        dan.addAccount(danAcc.Name, 'Saving', 0);
-    } else if (acctsAddRemove.value == 'addChequeing') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Chequeing Account Opened"
-        dan.addAccount(danAcc.Name, 'Chequeing', 0);
-    } else if (acctsAddRemove.value == 'addCarFund') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Car Fund Account Opened"
-        dan.addAccount(danAcc.Name, 'Car Fund', 0);
-    } else if (acctsAddRemove.value == 'RemoveSavings') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Savings Account Removed"
-        dan.removeAccount(danAcc.Name, 'Saving');
-    } else if (acctsAddRemove.value == 'RemoveChequeing') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Chequeing Account Removed"
-        dan.removeAccount(danAcc.Name, 'Chequeing');
-    } else if (acctsAddRemove.value == 'RemoveCarFund') {
-        report.style.backgroundColor = "lightgreen";
-        report.textContent = "Car Fund Account Removed"
-        dan.removeAccount(danAcc.Name, 'Car Fund');
+    try {
+        if (acctsAddRemove.value == 'addSavings') {
+            if (Object.keys(danAcc).includes('Savings_Account')) {
+                throw "Account already exist";
+            } else {
+                dan.addAccount(danAcc.Name, 'Saving', 0);
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Savings Account Opened"
+            }
+        } else if (acctsAddRemove.value == 'addChequeing') {
+            if (Object.keys(danAcc).includes('Chequeing_Account')) {
+                throw "Account already exist";
+            } else {
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Chequeing Account Opened"
+                dan.addAccount(danAcc.Name, 'Chequeing', 0);
+            }
+        } else if (acctsAddRemove.value == 'addCarFund') {
+            if (Object.keys(danAcc).includes('CarFundAccount')) {
+                throw "Account already exist";
+            } else {
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Car Fund Account Opened"
+                dan.addAccount(danAcc.Name, 'Car Fund', 0);
+            }
+        } else if (acctsAddRemove.value == 'RemoveSavings') {
+            if (Object.keys(danAcc).includes('Savings_Account')) {
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Savings Account Removed"
+                dan.removeAccount(danAcc.Name, 'Saving');
+            } else {
+                throw "Account does not exist";
+            }
+        } else if (acctsAddRemove.value == 'RemoveChequeing') {
+            if (Object.keys(danAcc).includes('Chequeing_Account')) {
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Chequeing Account Removed"
+                dan.removeAccount(danAcc.Name, 'Chequeing');
+            } else {
+                throw "Account does not exist";
+            }
+        } else if (acctsAddRemove.value == 'RemoveCarFund') {
+            if (Object.keys(danAcc).includes('CarFundAccount')) {
+                report.style.backgroundColor = "lightgreen";
+                report.textContent = "Car Fund Account Removed"
+                dan.removeAccount(danAcc.Name, 'Car Fund');
+            } else {
+                throw "Account does not exist";
+            }
+        }
+    } catch (er) {
+        alert(er);
     }
 
 
@@ -63,53 +92,66 @@ function calcTransaction() {
     try {
         let c = parseFloat(cashInputAcc1.value);
         if (typeOfAcccountSelect.value == 'savings') {
-
-            if (txnAcc1.value == 'deposit') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.Savings_Account = danAcc.Savings_Account + c; //dan.newAccTxn.depositCash(c);
-                    showAccount();
+            if (Object.keys(danAcc).includes('Savings_Account')) {
+                if (txnAcc1.value == 'deposit') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.Savings_Account = danAcc.Savings_Account + c; //dan.newAccTxn.depositCash(c);
+                        showAccount();
+                    }
+                } else if (txnAcc1.value == 'withdraw') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.Savings_Account = danAcc.Savings_Account - c; //dan.newAccTxn.withdrawCash(c);
+                        showAccount();
+                    }
                 }
-            } else if (txnAcc1.value == 'withdraw') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.Savings_Account = danAcc.Savings_Account - c; //dan.newAccTxn.withdrawCash(c);
-                    showAccount();
-                }
+            } else {
+                throw "This account does not exist";
             }
         } else if (typeOfAcccountSelect.value == 'chequeing') {
-            if (txnAcc1.value == 'deposit') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.Chequeing_Account = danAcc.Chequeing_Account + c; //dan.newAccTxn.depositCash(c);
-                    showAccount();
+            if (Object.keys(danAcc).includes('Chequeing_Account')) {
+                if (txnAcc1.value == 'deposit') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.Chequeing_Account = danAcc.Chequeing_Account + c; //dan.newAccTxn.depositCash(c);
+                        showAccount();
+                    }
+                } else if (txnAcc1.value == 'withdraw') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.Chequeing_Account = danAcc.Chequeing_Account - c; //dan.newAccTxn.withdrawCash(c);
+                        showAccount();
+                    }
                 }
-            } else if (txnAcc1.value == 'withdraw') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.Chequeing_Account = danAcc.Chequeing_Account - c; //dan.newAccTxn.withdrawCash(c);
-                    showAccount();
-                }
+            } else {
+                throw "This account does not exist";
             }
+
         } else if (typeOfAcccountSelect.value == 'carFund') {
-            if (txnAcc1.value == 'deposit') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.CarFundAccount = danAcc.CarFundAccount + c; //dan.newAccTxn.depositCash(c);
-                    showAccount();
+            if (Object.keys(danAcc).includes('CarFundAccount')) {
+
+                if (txnAcc1.value == 'deposit') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.CarFundAccount = danAcc.CarFundAccount + c; //dan.newAccTxn.depositCash(c);
+                        showAccount();
+                    }
+                } else if (txnAcc1.value == 'withdraw') {
+                    if (isNaN(c)) {
+                        throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
+                    } else {
+                        danAcc.CarFundAccount = danAcc.CarFundAccount + c; //dan.newAccTxn.withdrawCash(c);
+                        showAccount();
+                    }
                 }
-            } else if (txnAcc1.value == 'withdraw') {
-                if (isNaN(c)) {
-                    throw `Error! '${cashInputAcc1.value}' is not a number. Enter a valid number.`;
-                } else {
-                    danAcc.CarFundAccount = danAcc.CarFundAccount + c; //dan.newAccTxn.withdrawCash(c);
-                    showAccount();
-                }
+            } else {
+                throw "This account does not exist";
             }
         }
     } catch (err) {
