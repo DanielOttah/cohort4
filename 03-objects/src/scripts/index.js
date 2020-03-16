@@ -20,11 +20,12 @@ function editAccount() {
     //  <option value="RemoveSavings">Remove Savings</option>
     // <option value="RemoveChequeing">Remove Chequeing</option> 
     // <option value="RemoveCarFunds">Remove Car Funds</option>    
-    console.log(Object.keys(danAcc).includes('Savings_Account'));
+    // console.log(Object.keys(danAcc).includes('Savings_Account'));
 
     try {
         if (acctsAddRemove.value == 'addSavings') {
             if (Object.keys(danAcc).includes('Savings_Account')) {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account already exist";
             } else {
                 dan.addAccount(danAcc.Name, 'Saving', 0);
@@ -33,6 +34,7 @@ function editAccount() {
             }
         } else if (acctsAddRemove.value == 'addChequeing') {
             if (Object.keys(danAcc).includes('Chequeing_Account')) {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account already exist";
             } else {
                 report.style.backgroundColor = "lightgreen";
@@ -41,34 +43,38 @@ function editAccount() {
             }
         } else if (acctsAddRemove.value == 'addCarFund') {
             if (Object.keys(danAcc).includes('CarFundAccount')) {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account already exist";
             } else {
                 report.style.backgroundColor = "lightgreen";
                 report.textContent = "Car Fund Account Opened"
                 dan.addAccount(danAcc.Name, 'Car Fund', 0);
             }
-        } else if (acctsAddRemove.value == 'RemoveSavings') {
+        } else if (acctsAddRemove.value == 'removeSavings') {
             if (Object.keys(danAcc).includes('Savings_Account')) {
                 report.style.backgroundColor = "lightgreen";
                 report.textContent = "Savings Account Removed"
                 dan.removeAccount(danAcc.Name, 'Saving');
             } else {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account does not exist";
             }
-        } else if (acctsAddRemove.value == 'RemoveChequeing') {
+        } else if (acctsAddRemove.value == 'removeChequeing') {
             if (Object.keys(danAcc).includes('Chequeing_Account')) {
                 report.style.backgroundColor = "lightgreen";
                 report.textContent = "Chequeing Account Removed"
                 dan.removeAccount(danAcc.Name, 'Chequeing');
             } else {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account does not exist";
             }
-        } else if (acctsAddRemove.value == 'RemoveCarFund') {
+        } else if (acctsAddRemove.value == 'removeCarFund') {
             if (Object.keys(danAcc).includes('CarFundAccount')) {
                 report.style.backgroundColor = "lightgreen";
                 report.textContent = "Car Fund Account Removed"
                 dan.removeAccount(danAcc.Name, 'Car Fund');
             } else {
+                acctsAddRemove.value = acctsAddRemove[0].value;
                 throw "Account does not exist";
             }
         }
