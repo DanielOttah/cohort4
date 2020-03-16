@@ -22,6 +22,10 @@
      constructor() {
          this.customersCount = 0;
          this.allCustomers = [];
+         this.newAccTxn;
+         this.initialDepositSav;
+         this.initialDepositCheq;
+         this.initialDepositCar;
      }
      genAccNumber() {
          return `${Math.floor((Math.random() * 1000) + 1)}-${Math.floor((Math.random() * 1000) + 1)}`; //Generates Account Number
@@ -29,7 +33,6 @@
 
      createAccount(name, address, typeOfAccount, initialDeposit) {
          let newAccount = {};
-         const AccountType = {};
          ++this.customersCount;
 
          //Another Method of adding:  newAccount = Object.assign({ Name: name }, newAccount);
@@ -38,13 +41,22 @@
          newAccount.Address = address;
 
          if (typeOfAccount == 'Savings') {
-             newAccount.Savings_Account = initialDeposit;
+             this.newAccTxn = new Account(initialDeposit);
+             this.initialDepositSav = initialDeposit;
+             newAccount.initialSavCash = this.initialDepositSav;
+             newAccount.Savings_Account = this.initialDepositSav;
          } else if (typeOfAccount == 'Chequeing') {
-             newAccount.Chequeing_Account = initialDeposit;
-         } else if (typeOfAccount == 'Car_Fund') {
-             newAccount.CarFundAccount = initialDeposit;
+             this.newAccTxn = new Account(initialDeposit);
+             this.initialDepositCheq = initialDeposit;
+             newAccount.initialCheqCash = this.initialDepositCheq;
+             newAccount.Chequeing_Account = this.initialDepositCheq;
+         } else if (typeOfAccount == 'Car Fund') {
+             this.newAccTxn = new Account(initialDeposit);
+             this.initialDepositCar = initialDeposit;
+             newAccount.initialCarCash = this.initialDepositCar;
+             newAccount.CarFundAccount = this.initialDepositCar;
          }
-         newAccount = Object.assign(AccountType, newAccount);
+         // newAccount = Object.assign(AccountType, newAccount);
          this.allCustomers.push(newAccount);
      }
      removeAccount(accName, accToRemove) {
@@ -63,7 +75,7 @@
          if (accToRemove.includes('Car')) {
              delete this.allCustomers[count].CarFundAccount;
          }
-         return count;
+         //return count;
 
      }
      addAccount(accName, accToAdd, deposit) {
@@ -74,15 +86,18 @@
              }
          }
          if (accToAdd.includes('Sav')) {
+             this.allCustomers[count].initialSavCash = deposit;
              this.allCustomers[count].Savings_Account = deposit;
          }
          if (accToAdd.includes('Cheq')) {
+             this.allCustomers[count].initialCheqCash = deposit;
              this.allCustomers[count].Chequeing_Account = deposit;
          }
          if (accToAdd.includes('Car')) {
+             this.allCustomers[count].initialCarCash = deposit;
              this.allCustomers[count].CarFundAccount = deposit;
          }
-         return count;
+         //return count;
 
      }
      accountTotal(accName) {
@@ -116,6 +131,7 @@
          return accTotal;
      }
      highestValueAccount(accName) {
+         let result = [];
          let count, v1, v2, v3;
          for (let i = 0; i < this.allCustomers.length; i++) {
              if (this.allCustomers[i].Name == accName) {
@@ -127,31 +143,41 @@
          v3 = this.allCustomers[count].Savings_Account;
 
          if (v1 == undefined && v2 == undefined && v3 != undefined) {
-             return v3;
+             result.push('Savings', v3);
+             return result;
          } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-             return (v2 > v3 ? v2 : v3);
-
+             (v2 > v3 ? result.push('Chequeing', v2) : result.push('Savings', v3));
+             return result;
          } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
              if (v1 > v2 && v1 > v3) {
-                 return v1;
+                 result.push('Car Fund', v1);
+                 return result;
              } else if (v2 > v1 && v2 > v3) {
-                 return v2;
+                 result.push('Chequeing', v2);
+                 return result;
              } else if (v3 > v1 && v3 > v2) {
-                 return v3;
+                 result.push('Savings', v3);
+                 return result;
              }
          } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
-             return v1;
+             result.push('Car Fund', v1);
+             return result;
          } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-             return (v1 > v2 ? v1 : v2);
+             (v1 > v2 ? result.push('Car Fund', v1) : result.push('Chequeing', v2));
+             return result;
          } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-             return (v1 > v3 ? v1 : v3);
+             (v1 > v3 ? result.push('Car Fund', v1) : result.push('Savings', v3));
+             return result;
          } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
-             return v2;
+             result.push('Chequeing', v2);
+             return result;
          } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
-             return 0;
+             result.push('N/A', 0);
+             return result;
          }
      }
      lowestValueAccount(accName) {
+         let result = [];
          let count, v1, v2, v3;
          for (let i = 0; i < this.allCustomers.length; i++) {
              if (this.allCustomers[i].Name == accName) {
@@ -163,28 +189,38 @@
          v3 = this.allCustomers[count].Savings_Account;
 
          if (v1 == undefined && v2 == undefined && v3 != undefined) {
-             return v3;
+             result.push('Savings', v3);
+             return result;
          } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-             return (v2 > v3 ? v3 : v2);
+             (v2 > v3 ? result.push('Savings', v3) : result.push('Chequeing', v2));
+             return result;
 
          } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
              if (v1 < v2 && v1 < v3) {
-                 return v1;
+                 result.push('Car Fund', v1);
+                 return result;
              } else if (v2 < v1 && v2 < v3) {
-                 return v2;
+                 result.push('Chequeing', v2);
+                 return result;
              } else if (v3 < v1 && v3 < v2) {
-                 return v3;
+                 result.push('Savings', v1);
+                 return result;
              }
          } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
-             return v1;
+             result.push('Car Fund', v1);
+             return result;
          } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-             return (v1 > v2 ? v2 : v1);
+             (v1 > v2 ? result.push('Chequeing', v2) : result.push('Car Fund', v1));
+             return result;
          } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-             return (v1 > v3 ? v3 : v1);
+             (v1 > v3 ? result.push('Savings', v3) : result.push('Car Fund', v1));
+             return result;
          } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
-             return v2;
+             result.push('Chequeing', v2);
+             return result;
          } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
-             return 0;
+             result.push('N/A', 0);
+             return result;
          }
      }
 
