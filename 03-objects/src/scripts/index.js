@@ -16,12 +16,6 @@ dan.createAccount('Daniel Ottah', 'Airdrie', 'Savings', 50000); //create an acco
 let danAcc = dan.allCustomers[0]; // name it danAcc
 
 function editAccount() {
-    // <option value="options">----</option>
-    //  <option value="RemoveSavings">Remove Savings</option>
-    // <option value="RemoveChequeing">Remove Chequeing</option> 
-    // <option value="RemoveCarFunds">Remove Car Funds</option>    
-    // console.log(Object.keys(danAcc).includes('Savings_Account'));
-
     try {
         if (acctsAddRemove.value == 'addSavings') {
             if (Object.keys(danAcc).includes('Savings_Account')) {
