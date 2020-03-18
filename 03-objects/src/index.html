@@ -265,9 +265,6 @@
                            <option value="chequeing">Chequeing Account</option>     
                            <option value="carFund">Car Fund Account</option>    
                        </select>
-                        <hr>
-                        <div id="acc1InitBal"></div>
-                        <div id="acc1CurrBal"></div>
                     </div>
                     <div class="pullRight">
                         <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD">
@@ -276,64 +273,28 @@
                             <option value="deposit">Deposit</option>
                             <option value="withdraw">Withdraw</option>      
                         </select>
-                        <hr>
-                        <div class="pullLeft" id="whichAcc"></div>
-                        <div class="pullLeft" id="accHighest"></div>
-                        <div class="pullLeft" id="accLowest"></div>
+
                     </div>
                     <div>
                         <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
-                        <hr>
-                        <div class="pullLeft" id="accTotal"></div>
-                        <!-- <button class="w3-hover-opacity" id="btnCreate">+</button> -->
+                        <!-- <button class="w3-hover-opacity" id="btnShowAll">+</button> -->
+                    </div>
+                </div>
+                <hr>
+                <div id="" class="col4">
+                    <div>
+                        <div style="padding: 2px" id="acc1InitBal"></div>
+                        <div style="padding: 2px" id="acc1CurrBal"></div>
+                    </div>
+                    <div>
+                        <div style="padding: 2px" class="pullLeft" id="accHighest"></div>
+                        <div style="padding: 2px" class="pullLeft" id="accLowest"></div>
+                    </div>
+                    <div class="letter1">
+                        <div id="accTotal" style="font-weight: bold"></div>
                     </div>
                 </div>
                 <br>
-                <!-- Account Card Section -->
-                <!-- Account 2 Start-->
-                <!-- <div id="accountCard2" class="col4">
-                    <div id="" class="pullLeft">
-                        <div id="typeOfAcccount2"></div>
-                        <div id=""></div>
-                        <div id="acc2InitBal"></div>
-                        <div id="acc2CurrBal"></div>
-                    </div>
-                    <div class="pullRight">
-                        <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc2" placeholder="$CAD">
-                        <select id="txnAcc2">
-                             <option value="options">----</option>
-                            <option value="deposit">Deposit</option>
-                            <option value="withdraw">Withdraw</option>      
-                        </select>
-                    </div>
-                    <div>
-                        <button class="w3-hover-opacity" id="btnTxnAcc2">Complete Transaction</button>
-                    </div>
-                </div>
-                <br> -->
-                <!-- Account 2 End-->
-                <!-- Account 3 Start-->
-                <!-- <div id="accountCard3" class="col4">
-                    <div id="" class="pullLeft">
-                        <div id="typeOfAcccount3"></div>
-                        <div id=""></div>
-                        <div id="acc3InitBal"></div>
-                        <div id="acc3CurrBal"></div>
-                    </div>
-                    <div class="pullRight">
-                        <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc3" placeholder="$CAD">
-                        <select id="txnAcc3">
-                             <option value="options">----</option>
-                            <option value="deposit">Deposit</option>
-                            <option value="withdraw">Withdraw</option>      
-                        </select>
-                    </div>
-                    <div>
-                        <button class="w3-hover-opacity" id="btnTxnAcc3">Complete Transaction</button>
-                    </div>
-                </div>
-                <br> -->
-                <!-- Account 3 End-->
             </div>
         </div>
     </div>
@@ -380,8 +341,8 @@
         }
     </script>
     <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+        let acc = document.getElementsByClassName("accordion");
+        let i;
         for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
                 this.classList.toggle("active");

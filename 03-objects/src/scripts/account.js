@@ -174,6 +174,18 @@
          } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
              result.push('N/A', 0);
              return result;
+         } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
+             (v1 == v2 ? result.push(('Car Fund', v1), ('Chequeing', v2)) : "");
+             return result;
+         } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
+             (v1 == v3 ? result.push(('Car Fund', v1), ('Savings', v3)) : "");
+             return result;
+         } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
+             (v2 == v3 ? result.push(('Chequeing', v2), ('Savings', v3)) : "");
+             return result;
+         } else if ((v1 != undefined && v2 != undefined && v3 != undefined) && v1 == v2 == v3) {
+             result.push(('Car Fund', v1), ('Chequeing', v2), ('Savings', v3));
+             return result;
          }
      }
      lowestValueAccount(accName) {
@@ -220,6 +232,15 @@
              return result;
          } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
              result.push('N/A', 0);
+             return result;
+         } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
+             (v1 == v3 ? result.push(('Car Fund', v1), ('Savings', v3)) : "");
+             return result;
+         } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
+             (v2 == v3 ? result.push(('Chequeing', v2), ('Savings', v3)) : "");
+             return result;
+         } else if ((v1 != undefined && v2 != undefined && v3 != undefined) && v1 == v2 == v3) {
+             result.push(('Car Fund', v1), ('Chequeing', v2), ('Savings', v3));
              return result;
          }
      }

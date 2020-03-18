@@ -10,10 +10,13 @@ window.addEventListener('load', loadDetails);
 btnTxnAcc1.addEventListener('click', calcTransaction);
 typeOfAcccountSelect.addEventListener('change', showAccount);
 makeChangeAccount.addEventListener('click', editAccount);
+
 //=================== Functions ==========================================
 
 dan.createAccount('Daniel Ottah', 'Airdrie', 'Savings', 50000); //create an account
 let danAcc = dan.allCustomers[0]; // name it danAcc
+
+
 
 function editAccount() {
     try {
@@ -42,7 +45,7 @@ function editAccount() {
             } else {
                 report.style.backgroundColor = "lightgreen";
                 report.textContent = "Car Fund Account Opened"
-                dan.addAccount(danAcc.Name, 'Car Fund', 0);
+                dan.addAccount(danAcc.Name, 'Car_Fund', 0);
             }
         } else if (acctsAddRemove.value == 'removeSavings') {
             if (Object.keys(danAcc).includes('Savings_Account')) {
@@ -85,7 +88,6 @@ function loadDetails() {
     AccNumber.textContent = danAcc.Account_Number;
     // totalNoOFAcc.textContent = Object.keys(checkForAccount(danAcc)).length; //get number of Accs   
 }
-
 
 function calcTransaction() {
 
@@ -166,17 +168,28 @@ function showAccount() {
         acc1CurrBal.textContent = `Current Balance: $$CAD N/A`;
 
     } else if (typeOfAcccountSelect.value == 'savings') {
-        acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialSavCash}`;
-        acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.Savings_Account}`;
+        if (Object.keys(danAcc).includes('Savings_Account')) {
+            acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialSavCash}`;
+            acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.Savings_Account}`;
+        } else {
+            alert("Account does not exist");
+        }
 
     } else if (typeOfAcccountSelect.value == 'chequeing') {
-        acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialCheqCash}`;
-        acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.Chequeing_Account}`;
+        if (Object.keys(danAcc).includes('Chequeing_Account')) {
+            acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialCheqCash}`;
+            acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.Chequeing_Account}`;
+        } else {
+            alert("Account does not exist");
+        }
 
     } else if (typeOfAcccountSelect.value == 'carFund') {
-        acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialCarCash}`;
-        acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.CarFundAccount}`;
-
+        if (Object.keys(danAcc).includes('CarFundAccount')) {
+            acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialCarCash}`;
+            acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.CarFundAccount}`;
+        } else {
+            alert("Account does not exist");
+        }
     }
     accTotal.textContent = `Total Cash: $CAD ${dan.accountTotal(danAcc.Name)}`;
     accHighest.textContent = `Highest $: $CAD ${dan.highestValueAccount(danAcc.Name)[1]} | ${dan.highestValueAccount(danAcc.Name)[0]}`;
