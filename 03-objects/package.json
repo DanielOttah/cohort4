@@ -21,8 +21,9 @@
         "whatwg-fetch": "^3.0.0"
     },
     "dependencies": {
+        "acorn": "^7.1.1",
         "fetch": "^1.1.0",
-        "jest-fetch-mock": "^3.0.3"
+        "jest-fetch-mock": "^3.0.3",
+        "minimist": "^1.2.5"
     }
-
 }
