@@ -78,8 +78,6 @@ function editAccount() {
     } catch (er) {
         alert(er);
     }
-
-
 }
 
 function loadDetails() {
