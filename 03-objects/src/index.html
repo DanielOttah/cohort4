@@ -307,54 +307,27 @@
             <button class="accordion">ADD A CITY</button>
             <div class="panel">
                 <div class="col2">
-                    <input class="pullLeft letter2" onfocus="this.value=''" type="text" id="cityName" placeholder="Enter City Name">
-                    <select class="letter2" id="cityAddRemove">
-                            <option value="options">----</option>
-                           <option value="addCity">Add City</option>
-                           <option value="removeCity">Remove City</option> 
-                            </select>
-                    <button class="letter2" id="addCity">Complete</button>
-                    <div class="letter2" id="cityReport"></div>
-
+                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityName" placeholder="Enter City Name">
+                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityLatitude" placeholder="Enter City Latitude Here">
+                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityLongitude" placeholder="Enter City Longitude Here">
+                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityPopulation" placeholder="Enter City Population Here">
+                </div>
+                <div class="col2">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <button class="letter2" id="addCity">Enter City</button>
                 </div>
             </div>
             <div class="col1">
-                <div id="leftPanel">
-                    <div id="cities">
-                        <button class="accordion">CITY 1</button>
-                        <div class="panel">
-                            <div class="pullLeft" id="cityInfo">
-                                <p>City Population: 5000000 people</p>
-                                <p> City latitude: 25112</p>
-                                <p>City Longitude: 2365</p>
-                                <p>City Location: Northern Hemispere</p>
-                            </div>
-                            <div style="padding:7px;" id="">
-                                <button class="letter2" id="editCity1">Edit City</button>
-                                <button class="letter2" id="deleteCity1">Delete City</button>
-                                <button class="letter2" id="editCity1">View City Map</button>
-                            </div>
-                        </div>
-                        <button class="accordion">CITY 2</button>
-                        <div class="panel">
-                            <div class="pullLeft">
-                                <p>City Population: 5000000 people</p>
-                                <p> City latitude: 25112</p>
-                                <p>City Longitude: 2365</p>
-                                <p>City Location: Northern Hemispere</p>
-                            </div>
-                            <div style="padding:7px;">
-                                <button class="letter2" id="editCity1">Edit City</button>
-                                <button class="letter2" id="deleteCity1">Delete City</button>
-                                <button class="letter2" id="editCity1">View City Map</button>
-                            </div>
-                        </div>
+                <div class="" id="leftPanel">
+                    <button class="accordion" id="cityINFO">INFO</button>
+                    <div class="panel pullLeft">Most populated etc</div>
+                    <div class="cityContainer" id="cities" style="height: 460;" style="overflow-y: scroll;">
 
                     </div>
                     <div id="controls">
-                        <!-- <button class="letter2" id="editCity">Edit City</button>
-                        <button class="letter2" id="deleteCity">Delete City</button>
-                        <button class="letter2" id="editCity">View City Map</button> -->
+                        <!--button class="letter2" id="editCity">View City Map</button> -->
                     </div>
                 </div>
                 <div class="mapouter">
@@ -421,6 +394,7 @@
                 }
             });
         }
+        ///===========================================////
     </script>
 </body>
 

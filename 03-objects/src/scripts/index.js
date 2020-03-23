@@ -1,5 +1,7 @@
 import { Account } from './account.js';
 import { AccountController } from './account.js';
+import { Community } from './city_community.js';
+// import { City } from './city_community.js';
 
 
 const dan = new AccountController(); //Create an Instance
@@ -11,7 +13,7 @@ btnTxnAcc1.addEventListener('click', calcTransaction);
 typeOfAcccountSelect.addEventListener('change', showAccount);
 makeChangeAccount.addEventListener('click', editAccount);
 
-//=================== Functions ==========================================
+//=================== Account Functions ==========================================
 
 dan.createAccount('Daniel Ottah', 'Airdrie', 'Savings', 50000); //create an account
 let danAcc = dan.allCustomers[0]; // name it danAcc
@@ -192,5 +194,96 @@ function showAccount() {
     accTotal.textContent = `Total Cash: $CAD ${dan.accountTotal(danAcc.Name)}`;
     accHighest.textContent = `Highest $: $CAD ${dan.highestValueAccount(danAcc.Name)[1]} | ${dan.highestValueAccount(danAcc.Name)[0]}`;
     accLowest.textContent = `Lowest $: $CAD ${dan.lowestValueAccount(danAcc.Name)[1]} | ${dan.lowestValueAccount(danAcc.Name)[0]}`;
+
+}
+//========================== End Account Functions==================================
+let ct = new Community();
+let count = ct.newCt.allCities.length; //Get number of cities
+addCity.addEventListener('click', addNewCity);
+cities.addEventListener('click', cityButtons);
+
+
+//========================== City Functions==================================
+
+function addNewCity() {
+    //  try {
+    let cityLat = Number(cityLatitude.value);
+    let cityLon = Number(cityLongitude.value);
+    let cityPop = Number(cityPopulation.value);
+    let cityNam = cityName.value;
+
+    if (cityLat < 0 || cityLon < 0 || cityPop < 0 || cityNam - 1 == NaN || cityLat - 1 == NaN || cityLon - 1 == NaN || cityPop - 1 == NaN) {
+        throw "Error! Please check your input values again."
+    } else {
+        ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
+        ++count;
+        //alert(`${cityNam} has been entered succesfully.`);
+        let btnCity = document.createElement("button"); //Create Accordion Button
+        btnCity.className = "accordion1"; //Give button class
+        btnCity.id = `btnCity${count}`; //Give button id
+        let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
+        btnCity.appendChild(document.createTextNode(city)); //place text on button
+        cities.appendChild(btnCity); //add accordion button to page
+        let div1 = document.createElement('div'); //Container holding all the infoirmation
+        div1.className = "pullLeft";
+        div1.classList.add("panelShow");
+        div1.id = `infoContainer${count}`;
+        div1.style = "height:460;"
+        div1.style = "overflow-y:scroll;"
+        div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
+        div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+        div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+        div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
+        let h = document.createElement("hr");
+        div1.appendChild(h);
+        div1.appendChild(createButtonElement(`Edit City`));
+        div1.appendChild(document.createElement('span'));
+        div1.appendChild(createButtonElement(`Delete City`));
+        cities.appendChild(div1);
+        div1.appendChild(h);
+        clearAllEntries();
+
+    }
+
+    // } catch (err) {
+    //     alert(err);
+    // }
+}
+
+function clearAllEntries() {
+    cityLatitude.value = "";
+    cityLongitude.value = "";
+    cityPopulation.value = "";
+    cityName.value = "";
+}
+
+function createPElement(txt) { // Creates <p> tag Elements and attaches the texts
+    let p = document.createElement('P');
+    let text = document.createTextNode(txt);
+    text.style = "color:blue";
+    p.appendChild(text);
+    return p;
+}
+
+function createButtonElement(txt) { // Creates <button> tag Elements and attaches the texts
+    let btn = document.createElement('Button');
+    btn.appendChild(document.createTextNode(txt));
+    return btn;
+}
+
+function getElementClicked(event) {
+    let x = event.target;
+    return x.id;
+}
+
+function cityButtons() {
+    let elId = getElementClicked(event); //get id of element
+    let num = elId.substring(7, elId.length); //get id number
+    let cont = document.getElementById(`infoContainer${num}`)
+    if (cont.style.display == "block") {
+        cont.style.display = "none";
+    } else {
+        cont.style.display = "block";
+    }
 
 }
