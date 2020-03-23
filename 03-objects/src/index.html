@@ -307,10 +307,10 @@
             <button class="accordion">ADD A CITY</button>
             <div class="panel">
                 <div class="col2">
-                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityName" placeholder="Enter City Name">
-                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityLatitude" placeholder="Enter City Latitude Here">
-                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityLongitude" placeholder="Enter City Longitude Here">
-                    <input class="pullRight letter2" onfocus="this.value=''" type="text" id="cityPopulation" placeholder="Enter City Population Here">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityName" placeholder="Enter City Name">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityLatitude" placeholder="Enter City Latitude Here">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityLongitude" placeholder="Enter City Longitude Here">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityPopulation" placeholder="Enter City Population Here">
                 </div>
                 <div class="col2">
                     <div></div>
@@ -319,20 +319,35 @@
                     <button class="letter2" id="addCity">Enter City</button>
                 </div>
             </div>
+            <!-- <button class="accordion">ADD A CITY</button> -->
+            <div class="panel" id="editCityInfo">
+                <div class="col2">
+                    seeing you
+                </div>
+
+            </div>
+            <!-- <div class="panel" id="editCityInfo">
+                Seeing you
+                <input class="pullRight letter2" style="border: none;" onfocus="this.value=''" type="text" id="citygitude" placeholder="Enter City Longitude Here">
+                <input class="pullRight letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityulation" placeholder="Enter City Population Here">
+
+            </div> -->
             <div class="col1">
                 <div class="" id="leftPanel">
-                    <button class="accordion" id="cityINFO">INFO</button>
+                    <button class="accordion" id="cityINFO">General City Information</button>
                     <div class="panel pullLeft">Most populated etc</div>
-                    <div class="cityContainer" id="cities" style="height: 460;" style="overflow-y: scroll;">
+                    <div class="cityContainer" id="cities" style="height: 445px;" style="overflow-y: auto;">
+                    </div>
+                    <!-- <div class="panel" id="edit">
+                        Seeing you
+                        <input class="pullRight letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityLongitude" placeholder="Enter City Longitude Here">
+                        <input class="pullRight letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityPopulation" placeholder="Enter City Population Here">
 
-                    </div>
-                    <div id="controls">
-                        <!--button class="letter2" id="editCity">View City Map</button> -->
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mapouter">
-                    <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=airdrie&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
-
+                    <div class="gmap_canvas"><iframe id="gmap_canvas1" width="600" height="500" id="gmap_canvas1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18876468.200307723!2d-113.72221585646199!3d54.72270517403909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b0d03d337cc6ad9%3A0x9968b72aa2438fa5!2sCanada!5e0!3m2!1sen!2sca!4v1584990289869!5m2!1sen!2sca"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/">divi premade layouts preview</a></div>
                 </div>
             </div>
         </div>
