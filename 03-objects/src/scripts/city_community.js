@@ -91,32 +91,36 @@ export class Community {
     getMostNorthern() {
         let northName = [];
         let northLat = [];
+        let returnVal = [];
         let cnt;
         for (let i = 0; i < this.newCt.allCities.length; i++) {
             northName[i] = this.newCt.allCities[i].name;
-            northLat[i] = this.newCt.allCities[i].latitude;
+            northLat[i] = parseFloat(this.newCt.allCities[i].latitude);
 
         }
         cnt = northLat.indexOf(Math.max(...northLat));
+        returnVal.push(northName[cnt], northLat[cnt])
 
-        return northName[cnt];
+        return returnVal;
     }
     getMostSouthern() {
         let northName = [];
         let northLat = [];
+        let returnVal = [];
         let cnt;
         for (let i = 0; i < this.newCt.allCities.length; i++) {
             northName[i] = this.newCt.allCities[i].name;
-            northLat[i] = this.newCt.allCities[i].latitude;
+            northLat[i] = parseFloat(this.newCt.allCities[i].latitude);
         }
         cnt = northLat.indexOf(Math.min(...northLat));
+        returnVal.push(northName[cnt], northLat[cnt])
 
-        return northName[cnt];
+        return returnVal;
     }
     getTotalPopulation() {
         let totalPopulation = 0;
         for (let i = 0; i < this.newCt.allCities.length; i++) {
-            totalPopulation += this.newCt.allCities[i].population;
+            totalPopulation += parseFloat(this.newCt.allCities[i].population);
         }
         return totalPopulation;
     }

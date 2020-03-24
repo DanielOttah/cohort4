@@ -201,6 +201,8 @@ let cityToEdit, cityTabToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
+// getGenInfo.addEventListener('click', genCityInformation);
+document.getElementById("getGenInfo").addEventListener('click', genCityInformation);
 
 
 //========================== City Functions==================================
@@ -232,14 +234,16 @@ function addNewCity() {
             div1.classList.add("panelShow");
             div1.id = `infoContainer${count}`;
             div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
+            div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(cityName.value)}`));
             div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
             div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
             div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
             let h = document.createElement("hr");
             div1.appendChild(h);
             div1.appendChild(createButtonElement(`Edit City`));
-            div1.appendChild(document.createElement('span'));
             div1.appendChild(createButtonElement(`Delete City`));
+            div1.appendChild(createButtonElement(`Discover`));
+
             cities.appendChild(div1);
             div1.appendChild(h);
             clearAllEntries();
@@ -260,7 +264,6 @@ function clearAllEntries() {
 function createPElement(txt) { // Creates <p> tag Elements and attaches the texts
     let p = document.createElement('P');
     let text = document.createTextNode(txt);
-    text.style = "color:blue";
     p.appendChild(text);
     return p;
 }
@@ -270,9 +273,14 @@ function createButtonElement(txt) { // Creates <button> tag Elements and attache
     if (txt == "Edit City") {
         btn.appendChild(document.createTextNode(txt));
         btn.id = `edit${count}`;
+        btn.style = "margin-right: 5px;"
     } else if (txt == "Delete City") {
         btn.appendChild(document.createTextNode(txt));
         btn.id = `delete${count}`;
+        btn.style = "margin-right: 5px;"
+    } else if (txt == "Discover") {
+        btn.appendChild(document.createTextNode(txt));
+        btn.id = `discover${count}`;
     }
 
     return btn;
@@ -309,6 +317,10 @@ function cityButtons() {
         } else {
             ed.style.display = "block";
         }
+    } else if (elId.id.includes("discover")) {
+        let cityToLearn = elId.parentNode.previousElementSibling.textContent; //get name of city to learn more about
+        let url = `https://www.google.com/search?q=${cityToLearn.toLowerCase()}&rlz=1C1CHBF_enCA883CA883&oq=${cityToLearn.toLowerCase()}&aqs=chrome..69i57j46j69i59l3j69i60l3.10207j0j7&sourceid=chrome&ie=UTF-8`
+        window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=600,height=400");
     }
 
 }
@@ -337,13 +349,13 @@ function editCityInformation() {
 
             } else if (newCityLatitude.value.length > 0) {
                 ct.newCt.allCities[cityIndex].latitude = newCityLatitude.value;
-                allPs[1].textContent = `City Latitude: ${ct.newCt.allCities[cityIndex].latitude}`; //update old name to new latitude
+                allPs[2].textContent = `City Latitude: ${ct.newCt.allCities[cityIndex].latitude}`; //update old name to new latitude
             }
             if (newCityLongitude.value.length == 0) {
 
             } else if (newCityLongitude.value.length > 0) {
                 ct.newCt.allCities[cityIndex].longitude = newCityLongitude.value;
-                allPs[2].textContent = `City Longitude: ${ct.newCt.allCities[cityIndex].longitude}`; //update old name to new longitude
+                allPs[3].textContent = `City Longitude: ${ct.newCt.allCities[cityIndex].longitude}`; //update old name to new longitude
             }
             if (newCityPopulation.value.length == 0) {
 
@@ -352,7 +364,8 @@ function editCityInformation() {
                 ct.newCt.allCities[cityIndex].popupation = newCityPopulation.value;
                 allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
             }
-            allPs[3].textContent = `City Location: ${ct.whichSphere(cityToEdit.previousElementSibling.textContent)}`;
+            allPs[4].textContent = `City Location: ${ct.whichSphere(cityToEdit.previousElementSibling.textContent)}`;
+            allPs[1].textContent = `City Category: ${ct.newCt.howBig(cityToEdit.previousElementSibling.textContent)}`;
 
             //===============Update Map of City==========
             document.querySelector("#gmap_canvas1").src = `https://maps.google.com/maps?q=${cityToEdit.previousElementSibling.textContent.toLowerCase()}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
@@ -366,4 +379,18 @@ function editCityInformation() {
         alert(err);
     }
 
+}
+
+function genCityInformation() {
+    // genInfoText,genInfoAnswer
+    if (selectGenInfo.value == "mostNorthern") {
+        genInfoText.textContent = `${ct.getMostNorthern()[0]}`;
+        genInfoAnswer.textContent = `${ct.getMostNorthern()[1]}°`;
+    } else if (selectGenInfo.value == "mostSouthern") {
+        genInfoText.textContent = `${ct.getMostSouthern()[0]}`;
+        genInfoAnswer.textContent = `${ct.getMostSouthern()[1]}°`;
+    } else if (selectGenInfo.value == "totalPopulation") {
+        genInfoText.textContent = `Total Pop.: `;
+        genInfoAnswer.textContent = `${ct.getTotalPopulation()}`;
+    }
 }
