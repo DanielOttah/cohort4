@@ -18,8 +18,6 @@ makeChangeAccount.addEventListener('click', editAccount);
 dan.createAccount('Daniel Ottah', 'Airdrie', 'Savings', 50000); //create an account
 let danAcc = dan.allCustomers[0]; // name it danAcc
 
-
-
 function editAccount() {
     try {
         if (acctsAddRemove.value == 'addSavings') {
@@ -199,53 +197,57 @@ function showAccount() {
 //========================== End Account Functions==================================
 let ct = new Community();
 let count = ct.newCt.allCities.length; //Get number of cities
+let cityToEdit, cityTabToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
+UpdateCity.addEventListener('click', editCityInformation);
 
 
 //========================== City Functions==================================
 
 function addNewCity() {
-    //  try {
-    let cityLat = Number(cityLatitude.value);
-    let cityLon = Number(cityLongitude.value);
-    let cityPop = Number(cityPopulation.value);
-    let cityNam = cityName.value;
+    try {
+        let cityLat = parseFloat(cityLatitude.value);
+        let cityLon = parseFloat(cityLongitude.value);
+        let cityPop = parseFloat(cityPopulation.value);
+        let cityNam = cityName.value;
+        if (cityLatitude.value == "" || cityLongitude.value == "" || cityPopulation.value == "" || cityName.value == "") {
+            throw "Error! Please check your input values again - No entries in one or more fields.";
+        } else if (cityLat < 0 || cityLon < 0 || cityPop < 0) {
+            throw "Error! Please check your input values again - invalid entries entered."
+        } else if (isNaN(cityLatitude.value - 1) || isNaN(cityLongitude.value - 1) || isNaN(cityPopulation.value - 1)) {
+            throw "Error! Please check your input values again - invalid entries entered."
+        } else {
+            ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
+            ++count;
+            alert(`${cityName.value} has been entered succesfully.`);
+            let btnCity = document.createElement("button"); //Create Accordion Button
+            btnCity.className = "accordion1"; //Give button class
+            btnCity.id = `btnCity${count}`; //Give button id
+            let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
+            btnCity.appendChild(document.createTextNode(city)); //place text on button
+            cities.appendChild(btnCity); //add accordion button to page
+            let div1 = document.createElement('div'); //Container holding all the infoirmation
+            div1.className = "pullLeft";
+            div1.classList.add("panelShow");
+            div1.id = `infoContainer${count}`;
+            div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
+            div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+            div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+            div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
+            let h = document.createElement("hr");
+            div1.appendChild(h);
+            div1.appendChild(createButtonElement(`Edit City`));
+            div1.appendChild(document.createElement('span'));
+            div1.appendChild(createButtonElement(`Delete City`));
+            cities.appendChild(div1);
+            div1.appendChild(h);
+            clearAllEntries();
+        }
 
-    if (cityLat < 0 || cityLon < 0 || cityPop < 0 || cityNam - 1 == NaN || cityLat - 1 == NaN || cityLon - 1 == NaN || cityPop - 1 == NaN) {
-        throw "Error! Please check your input values again."
-    } else {
-        ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
-        ++count;
-        //alert(`${cityNam} has been entered succesfully.`);
-        let btnCity = document.createElement("button"); //Create Accordion Button
-        btnCity.className = "accordion1"; //Give button class
-        btnCity.id = `btnCity${count}`; //Give button id
-        let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
-        btnCity.appendChild(document.createTextNode(city)); //place text on button
-        cities.appendChild(btnCity); //add accordion button to page
-        let div1 = document.createElement('div'); //Container holding all the infoirmation
-        div1.className = "pullLeft";
-        div1.classList.add("panelShow");
-        div1.id = `infoContainer${count}`;
-        div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
-        div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
-        div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
-        div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
-        let h = document.createElement("hr");
-        div1.appendChild(h);
-        div1.appendChild(createButtonElement(`Edit City`));
-        div1.appendChild(document.createElement('span'));
-        div1.appendChild(createButtonElement(`Delete City`));
-        cities.appendChild(div1);
-        div1.appendChild(h);
-        clearAllEntries();
-
+    } catch (err) {
+        alert(err);
     }
-
-    // } catch (err) {
-    //     alert(err);
-    // }
 }
 
 function clearAllEntries() {
@@ -282,7 +284,7 @@ function getElementClicked(event) {
 }
 
 function cityButtons() {
-    let elId = getElementClicked(event); //get id of element
+    let elId = getElementClicked(event); //get element
     let num = elId.id.substring(7, elId.length); //get id number
     if (elId.id.includes("btnCity")) {
         let cont = document.getElementById(`infoContainer${num}`);
@@ -300,14 +302,68 @@ function cityButtons() {
         document.querySelector("#gmap_canvas1").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18876468.200307723!2d-113.72221585646199!3d54.72270517403909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b0d03d337cc6ad9%3A0x9968b72aa2438fa5!2sCanada!5e0!3m2!1sen!2sca!4v1584990289869!5m2!1sen!2sca";
 
     } else if (elId.id.includes("edit")) {
-        console.log("seeing edit");
-
+        cityToEdit = elId.parentNode;
         let ed = document.getElementById("editCityInfo");
         if (ed.style.display == "block") {
             ed.style.display = "none";
         } else {
             ed.style.display = "block";
         }
+    }
+
+}
+
+function editCityInformation() {
+    //cityToEdit is name of city - global variable
+
+    try {
+        if (newCityName.value < 0 || newCityLatitude.value < 0 || newCityLongitude.value < 0 || newCityPopulation.value < 0) {
+            //throw "Error! Please check your input values again - invalid entries entered."
+        } else if (isNaN(newCityLatitude.value - 1) || isNaN(newCityLongitude.value - 1) || isNaN(newCityPopulation.value - 1)) {
+            throw "Error! Please check your input values again - invalid entries entered."
+        } else {
+
+            let cityIndex = ct.getindexOfCity(cityToEdit.previousElementSibling.textContent);
+            let allPs = cityToEdit.getElementsByTagName("P"); //get all p tags and update them
+
+            if (newCityName.value.length == 0) {
+
+            } else if (newCityName.value.length > 0) {
+                ct.newCt.allCities[cityIndex].name = newCityName.value;
+                cityToEdit.previousElementSibling.textContent = newCityName.value; //update old name to new name
+
+            }
+            if (newCityLatitude.value.length == 0) {
+
+            } else if (newCityLatitude.value.length > 0) {
+                ct.newCt.allCities[cityIndex].latitude = newCityLatitude.value;
+                allPs[1].textContent = `City Latitude: ${ct.newCt.allCities[cityIndex].latitude}`; //update old name to new latitude
+            }
+            if (newCityLongitude.value.length == 0) {
+
+            } else if (newCityLongitude.value.length > 0) {
+                ct.newCt.allCities[cityIndex].longitude = newCityLongitude.value;
+                allPs[2].textContent = `City Longitude: ${ct.newCt.allCities[cityIndex].longitude}`; //update old name to new longitude
+            }
+            if (newCityPopulation.value.length == 0) {
+
+            } else if (newCityPopulation.value.length > 0) {
+
+                ct.newCt.allCities[cityIndex].popupation = newCityPopulation.value;
+                allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
+            }
+            allPs[3].textContent = `City Location: ${ct.whichSphere(cityToEdit.previousElementSibling.textContent)}`;
+
+            //===============Update Map of City==========
+            document.querySelector("#gmap_canvas1").src = `https://maps.google.com/maps?q=${cityToEdit.previousElementSibling.textContent.toLowerCase()}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+            document.getElementById("editCityInfo").style.display = "none"; //close edit panel
+            newCityName.value = "";
+            newCityLatitude.value = "";
+            newCityLongitude.value = "";
+            newCityPopulation.value = "";
+        }
+    } catch (err) {
+        alert(err);
     }
 
 }

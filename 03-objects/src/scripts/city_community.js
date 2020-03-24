@@ -147,5 +147,14 @@ export class Community {
         }
         this.newCt.allCities.splice(count, 1);
     }
+    getindexOfCity(CtNam) {
+        let count = 0;
+        for (let i = 0; i < this.newCt.allCities.length; i++) {
+            if (CtNam == this.newCt.allCities[i].name) {
+                count = i;
+            }
+        }
+        return count;
+    }
 
 }
