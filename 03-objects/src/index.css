@@ -122,8 +122,19 @@
                                     display: grid;
                                 }
                                 
+                                .col0 {
+                                    grid-template-columns: 1fr 1fr 1fr 2fr;
+                                    display: grid;
+                                }
+                                
+                                .col_2 {
+                                    grid-template-columns: 1fr 1fr;
+                                    display: grid;
+                                }
+                                
                                 .taxContainer {
                                     border-style: outset;
+                                    width: 1000px;
                                 }
                                 
                                 .topPadding {

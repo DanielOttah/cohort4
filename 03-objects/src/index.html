@@ -321,11 +321,18 @@
             </div>
             <div style="display:none;" class="pullLeft" id="editCityInfo">
                 <hr>
-                <div class="col2">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityName" placeholder="Update Name Here">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLatitude" placeholder="Update Latitude Here">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLongitude" placeholder="Update Longitude Here">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityPopulation" placeholder="Update Population Here">
+                <div class="col0">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityName" placeholder="Update Name">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLatitude" placeholder="Update Latitude">
+                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLongitude" placeholder="Update Longitude">
+                    <div class="col_2" style="display:inline-block">
+                        <input class="pullLeft letter2" size="10" onfocus="this.value=''" type="text" id="newCityPopulation" placeholder="Update Pop.">
+                        <select style="margin: 10px;" id="selectMove">
+                        <option value="popUpdate">Update</option>
+                        <option  value="movedIn">Moved In</option>
+                        <option  value="movedOut">Moved Out</option>                           
+                    </select>
+                    </div>
                 </div>
                 <div class="col2">
                     <div></div>
@@ -346,8 +353,10 @@
                             <option  value="totalPopulation">Total Population</option>
                         </select>
                         <button class="letter2" style="margin: 10px;" id="getGenInfo">Get Info</button>
-                        <div class="pullLeft" style="margin: 10px;" id="genInfoText"> Seen</div>
-                        <div class="pullLeft" style="margin: 10px;" id="genInfoAnswer"> Seen</div>
+                        <div class="pullLeft" style="margin: 10px;" id="genInfoText"> </div>
+                        <div class="pullLeft" style="margin: 10px;" id="genInfoAnswer"> </div>
+                        <hr>
+
                     </div>
                     <div class="cityContainer" id="cities" style="height: 445px;" style="overflow-y: auto;">
                     </div>

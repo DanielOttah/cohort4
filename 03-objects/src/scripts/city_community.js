@@ -25,7 +25,7 @@ export class City {
                 count = i;
             }
         }
-        this.allCities[count].population = this.allCities[count].population + num;
+        this.allCities[count].population = parseFloat(this.allCities[count].population) + num;
         return this.allCities[count].population;
 
     }
@@ -36,7 +36,7 @@ export class City {
                 count = i;
             }
         }
-        this.allCities[count].population = this.allCities[count].population - num;
+        this.allCities[count].population = parseFloat(this.allCities[count].population) - num;
         return this.allCities[count].population;
     }
     howBig(cityName) {

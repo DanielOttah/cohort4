@@ -1,8 +1,6 @@
 import { Account } from './account.js';
 import { AccountController } from './account.js';
 import { Community } from './city_community.js';
-// import { City } from './city_community.js';
-
 
 const dan = new AccountController(); //Create an Instance
 const newTxn = new Account(0);
@@ -14,7 +12,6 @@ typeOfAcccountSelect.addEventListener('change', showAccount);
 makeChangeAccount.addEventListener('click', editAccount);
 
 //=================== Account Functions ==========================================
-
 dan.createAccount('Daniel Ottah', 'Airdrie', 'Savings', 50000); //create an account
 let danAcc = dan.allCustomers[0]; // name it danAcc
 
@@ -201,8 +198,8 @@ let cityToEdit, cityTabToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
-// getGenInfo.addEventListener('click', genCityInformation);
-document.getElementById("getGenInfo").addEventListener('click', genCityInformation);
+getGenInfo.addEventListener('click', genCityInformation);
+// document.getElementById("getGenInfo").addEventListener('click', genCityInformation);
 
 
 //========================== City Functions==================================
@@ -330,7 +327,7 @@ function editCityInformation() {
 
     try {
         if (newCityName.value < 0 || newCityLatitude.value < 0 || newCityLongitude.value < 0 || newCityPopulation.value < 0) {
-            //throw "Error! Please check your input values again - invalid entries entered."
+            throw "Error! Please check your input values again - invalid entries entered."
         } else if (isNaN(newCityLatitude.value - 1) || isNaN(newCityLongitude.value - 1) || isNaN(newCityPopulation.value - 1)) {
             throw "Error! Please check your input values again - invalid entries entered."
         } else {
@@ -360,10 +357,19 @@ function editCityInformation() {
             if (newCityPopulation.value.length == 0) {
 
             } else if (newCityPopulation.value.length > 0) {
-
-                ct.newCt.allCities[cityIndex].popupation = newCityPopulation.value;
-                allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
+                const ppleMigrate = parseFloat(newCityPopulation.value);
+                if (selectMove.value == "popUpdate") {
+                    ct.newCt.allCities[cityIndex].popupation = newCityPopulation.value;
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
+                } else if (selectMove.value == "movedIn") {
+                    ct.newCt.allCities[cityIndex].popupation = ct.newCt.movedIn(cityToEdit.previousElementSibling.textContent, ppleMigrate);
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
+                } else if (selectMove.value == "movedOut") {
+                    ct.newCt.allCities[cityIndex].popupation = ct.newCt.movedOut(cityToEdit.previousElementSibling.textContent, ppleMigrate);
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
+                }
             }
+
             allPs[4].textContent = `City Location: ${ct.whichSphere(cityToEdit.previousElementSibling.textContent)}`;
             allPs[1].textContent = `City Category: ${ct.newCt.howBig(cityToEdit.previousElementSibling.textContent)}`;
 
