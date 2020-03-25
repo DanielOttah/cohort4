@@ -7,6 +7,25 @@ ct.createCity('Airdrie', 51.2927, 114.0134, 700);
 ct.createCity('Calgary', 51.0447, 548.2548, 189000);
 ct.createCity('British Columbia', 11.2927, 554.2548, 25000);
 
+test("Testing createCity() in Community Class", () => {
+    let myCity = new Community();
+    myCity.createCity("Halifax", 45.3658, 52.3698, 985000);
+    expect(myCity.newCt.allCities.length).toBe(1);
+    let myFav = myCity;
+    expect(myCity.newCt.allCities[0].population).toBe(985000);
+    expect(myFav.newCt.allCities[0].population).toBe(985000);
+    myCity.newCt.allCities[0].population = myCity.newCt.allCities[0].population + 5000;
+    expect(myCity.newCt.allCities[0].population).toBe(990000);
+    expect(myFav.newCt.allCities[0].population).toBe(990000);
+    myFav.newCt.allCities[0].population = myFav.newCt.allCities[0].population - 10000;
+    expect(myCity.newCt.allCities[0].population).toBe(980000);
+    expect(myFav.newCt.allCities[0].population).toBe(980000);
+
+    console.log(myCity.newCt.allCities[0].population);
+    console.log(myFav.newCt.allCities[0].population);
+
+
+});
 
 test("Testing Show() in City Class", () => {
     expect(ct.newCt.show('Airdrie')).toBe('Airdrie is at latitude:51.2927 and longitude:114.0134 with a population of 700');
@@ -14,8 +33,6 @@ test("Testing Show() in City Class", () => {
     expect(ct.newCt.show('British Columbia')).toBe('British Columbia is at latitude:11.2927 and longitude:554.2548 with a population of 25000');
     expect(ct.newCt.allCities.length).toBe(3);
 });
-
-
 
 test("Testing movedIn() in City Class", () => {
     expect(ct.newCt.movedIn('Airdrie', 10)).toBe(710);
@@ -42,8 +59,10 @@ test("Testing whichSphere() in Community Class", () => {
 
 });
 test("Testing getMostNorthern() &  getMostSouthern() in Community Class", () => {
-    expect(ct.getMostNorthern()).toBe("Airdrie");
-    expect(ct.getMostSouthern()).toBe("British Columbia");
+    expect(ct.getMostNorthern()[0]).toBe("Airdrie");
+    expect(ct.getMostNorthern()[1]).toBe(51.2927);
+    expect(ct.getMostSouthern()[0]).toBe("British Columbia");
+    expect(ct.getMostSouthern()[1]).toBe(11.2927);
 
 });
 test("Testing getTotalPopulation() in Community Class", () => {
