@@ -72,6 +72,7 @@ function editAccount() {
                 throw "Account does not exist";
             }
         }
+        totalNoOFAcc.textContent = checkForNoOfAccount();
     } catch (er) {
         alert(er);
     }
@@ -81,7 +82,8 @@ function loadDetails() {
     fName.textContent = danAcc.Name;
     address.textContent = danAcc.Address;
     AccNumber.textContent = danAcc.Account_Number;
-    // totalNoOFAcc.textContent = Object.keys(checkForAccount(danAcc)).length; //get number of Accs   
+    totalNoOFAcc.textContent = checkForNoOfAccount();
+
 }
 
 function calcTransaction() {
@@ -151,6 +153,7 @@ function calcTransaction() {
                 throw "This account does not exist";
             }
         }
+        totalNoOFAcc.textContent = checkForNoOfAccount();
     } catch (err) {
         alert(err);
     }
@@ -183,14 +186,28 @@ function showAccount() {
             acc1InitBal.textContent = `Initial Balance: $CAD ${danAcc.initialCarCash}`;
             acc1CurrBal.textContent = `Current Balance: $CAD ${danAcc.CarFundAccount}`;
         } else {
+            typeOfAcccountSelect.value = typeOfAcccountSelect[0];
             alert("Account does not exist");
         }
     }
+    totalNoOFAcc.textContent = checkForNoOfAccount();
     accTotal.textContent = `Total Cash: $CAD ${dan.accountTotal(danAcc.Name)}`;
     accHighest.textContent = `Highest $: $CAD ${dan.highestValueAccount(danAcc.Name)[1]} | ${dan.highestValueAccount(danAcc.Name)[0]}`;
     accLowest.textContent = `Lowest $: $CAD ${dan.lowestValueAccount(danAcc.Name)[1]} | ${dan.lowestValueAccount(danAcc.Name)[0]}`;
 
 }
+
+function checkForNoOfAccount() {
+    let cnt = 0;
+    for (let r = 0; r < Object.keys(danAcc).length; r++) {
+        if (Object.keys(danAcc)[r].includes("Account")) {
+            cnt++;
+        }
+    }
+    return cnt - 1;
+}
+
+
 //========================== End Account Functions==================================
 let ct = new Community();
 let count = ct.newCt.allCities.length; //Get number of cities
@@ -317,6 +334,8 @@ function cityButtons() {
     } else if (elId.id.includes("discover")) {
         let cityToLearn = elId.parentNode.previousElementSibling.textContent; //get name of city to learn more about
         let url = `https://www.google.com/search?q=${cityToLearn.toLowerCase()}&rlz=1C1CHBF_enCA883CA883&oq=${cityToLearn.toLowerCase()}&aqs=chrome..69i57j46j69i59l3j69i60l3.10207j0j7&sourceid=chrome&ie=UTF-8`
+        console.log(url);
+
         window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=600,height=400");
     }
 
@@ -388,7 +407,6 @@ function editCityInformation() {
 }
 
 function genCityInformation() {
-    // genInfoText,genInfoAnswer
     if (selectGenInfo.value == "mostNorthern") {
         genInfoText.textContent = `${ct.getMostNorthern()[0]}`;
         genInfoAnswer.textContent = `${ct.getMostNorthern()[1]}°`;
