@@ -6,7 +6,13 @@ const dan = new AccountController(); //Create an Instance
 const newTxn = new Account(0);
 
 //===== Event Listeners ======================
-window.addEventListener('load', loadDetails);
+window.addEventListener('load', () => {
+    loadDetails();
+    loadCities("Airdrie", 51.2369, 144.2546, 79000);
+    loadCities("Calgary", 51.0236, 143.0056, 1200000);
+    loadCities("British Columbia", 52.3654, 145.987, 600000);
+    loadCities("Halifax", "50.9874", 143.2546, 500000);
+});
 btnTxnAcc1.addEventListener('click', calcTransaction);
 typeOfAcccountSelect.addEventListener('change', showAccount);
 makeChangeAccount.addEventListener('click', editAccount);
@@ -216,10 +222,38 @@ addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
 getGenInfo.addEventListener('click', genCityInformation);
-// document.getElementById("getGenInfo").addEventListener('click', genCityInformation);
 
 
 //========================== City Functions==================================
+
+function loadCities(nameOfcity, latitudeOFcity, longitudeOfcity, populationOfCity) {
+    ct.createCity(nameOfcity, latitudeOFcity, longitudeOfcity, populationOfCity);
+    ++count;
+    // alert(`${cityName.value} has been entered succesfully.`);
+    let btnCity = document.createElement("button"); //Create Accordion Button
+    btnCity.className = "accordion1"; //Give button class
+    btnCity.id = `btnCity${count}`; //Give button id
+    let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
+    btnCity.appendChild(document.createTextNode(city)); //place text on button
+    cities.appendChild(btnCity); //add accordion button to page
+    let div1 = document.createElement('div'); //Container holding all the infoirmation
+    div1.className = "pullLeft";
+    div1.classList.add("panelShow");
+    div1.id = `infoContainer${count}`;
+    div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(nameOfcity)}`));
+    div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(nameOfcity)}`));
+    div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+    div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+    div1.appendChild(createPElement(`City Location: ${ct.whichSphere(nameOfcity)}`));
+    let h = document.createElement("hr");
+    div1.appendChild(h);
+    div1.appendChild(createButtonElement(`Edit City`));
+    div1.appendChild(createButtonElement(`Delete City`));
+    div1.appendChild(createButtonElement(`Discover`));
+
+    cities.appendChild(div1);
+    div1.appendChild(h);
+}
 
 function addNewCity() {
     try {
@@ -236,7 +270,7 @@ function addNewCity() {
         } else {
             ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
             ++count;
-            alert(`${cityName.value} has been entered succesfully.`);
+            // alert(`${cityName.value} has been entered succesfully.`);
             let btnCity = document.createElement("button"); //Create Accordion Button
             btnCity.className = "accordion1"; //Give button class
             btnCity.id = `btnCity${count}`; //Give button id
