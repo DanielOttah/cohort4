@@ -137,6 +137,13 @@
                                     width: 1000px;
                                 }
                                 
+                                .apiTaxContainer {
+                                    border-style: outset;
+                                    width: 1000px;
+                                    /* justify-content: center; */
+                                    /* align-items: center; */
+                                }
+                                
                                 .topPadding {
                                     padding-top: 15px;
                                 }
@@ -162,6 +169,10 @@
                                     background-color: rgb(251, 251, 247);
                                     border-color: rgb(238, 238, 238);
                                     border-style: outset;
+                                }
+                                
+                                .smallFont {
+                                    font-size: 13px;
                                 }
                                 
                                 .letter1 {

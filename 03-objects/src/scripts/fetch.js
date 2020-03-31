@@ -26,7 +26,7 @@ export const getData = {
         // console.log(items);
         return items;
     },
-    showDelaySolution: async() => {
+    showDelaySolution: async () => {
         try {
             console.log('One');
             const value = await new Promise((resolve, reject) =>
@@ -39,7 +39,7 @@ export const getData = {
             console.log(error);
         }
     },
-    getUsers: async() => {
+    getUsers: async () => {
         try {
             const response = await fetch(getData.url);
             const data = await response.json();
@@ -50,7 +50,7 @@ export const getData = {
             // throw (error);
         }
     },
-    workWithData: async() => {
+    workWithData: async () => {
         const data = await getData.getUsers();
         // console.log(getData.getFirstName(data));
         // console.log(getData.getAllFirstNames(data));
