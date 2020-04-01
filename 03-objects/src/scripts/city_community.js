@@ -74,6 +74,7 @@ export class Community {
         this.newCt = new City();
         this.cityKey = 0;
         this.url = 'http://localhost:5000/';
+        // this.url = 'http://127.0.0.1:5000/';
     }
 
     whichSphere(ct) {
@@ -191,21 +192,20 @@ export class Community {
         return json;
     }
     apiPostData = async () => {
-        let apiData = await this.postData(this.url + 'clear');
+        // let apiData = await this.postData(this.url + 'clear');
+        let apiData = await this.postData(this.url + 'all');
+        // const clients = [
+        //     { key: 1, name: "Larry" },
+        //     { key: 2, name: "Lorraine" },
+        // ]
+        // apiData = await this.postData(this.url + 'add', clients[0])
+
+        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
+        console.log(apiData.status);
         apiData = await this.postData(this.url + 'all');
         console.log(apiData.status);
         console.log(apiData.length);
-
-        const clients = [
-            { key: 1, name: "Larry" },
-            { key: 2, name: "Lorraine" },
-        ]
-        //apiData = await this.postData(this.url + 'add', clients[0])
-
-        apiData = await this.postData(this.url + 'add', this.newCt.allCities[0])
-        console.log(apiData.status);
-        console.log(apiData.length);
-        // console.log(apiData[0].name);
+        console.log(apiData);
     }
 
 }
