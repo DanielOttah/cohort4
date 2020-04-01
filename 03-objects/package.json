@@ -24,6 +24,7 @@
         "acorn": "^7.1.1",
         "fetch": "^1.1.0",
         "jest-fetch-mock": "^3.0.3",
+        "kind-of": "^6.0.3",
         "minimist": "^1.2.5"
     }
 }
