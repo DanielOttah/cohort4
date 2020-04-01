@@ -15,11 +15,11 @@ const url = 'http://localhost:5000/';
 test('test that the fetch works?', async () => {
 
     const clients = [
-        {key:1, name:"Larry"},
-        {key:2, name:"Lorraine"},
+        { key: 1, name: "Larry" },
+        { key: 2, name: "Lorraine" },
     ]
 
-    // Check that the server is running and clear any data
+    // Check that the server is running and clear any postData
     let data = await postData(url + 'clear');
 
     data = await postData(url + 'all');
@@ -47,23 +47,23 @@ test('test that the fetch works?', async () => {
     expect(data.length).toBe(2);
     expect(data[1].name).toBe("Lorraine");
 
-    data = await postData(url + 'read', {key:1});
+    data = await postData(url + 'read', { key: 1 });
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("Larry");
 
-    data = await postData(url + 'update', {key:1, name:"George"});
+    data = await postData(url + 'update', { key: 1, name: "George" });
     expect(data.status).toEqual(200);
 
-    data = await postData(url + 'read', {key:1});
+    data = await postData(url + 'read', { key: 1 });
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("George");
 
-    data = await postData(url + 'delete', {key:1});
+    data = await postData(url + 'delete', { key: 1 });
     expect(data.status).toEqual(200);
 
-    data = await postData(url + 'read', {key:1});
+    data = await postData(url + 'read', { key: 1 });
     expect(data.status).toEqual(400);
 });
 

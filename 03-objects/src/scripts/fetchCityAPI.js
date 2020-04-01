@@ -14,7 +14,8 @@ export class getAPICities {
             }
             return count;
         } catch (error) {
-            alert('Error:', error);
+            alert(`${ctName} is not stored.`, error);
+            return false;
         }
 
     }
@@ -28,15 +29,17 @@ export class getAPICities {
             return data; //return the data
 
         } catch (error) {
-            alert('Error:', error);
+            // alert(`${cityName} is not a capital city.`, error);
+
         }
     }
     getRealCityData = async (ct) => {
         try {
             let data = await this.getCity(ct); //get the parsed data
-            return data;// return the parsed data
+            return data; //return the data           
         } catch (error) {
-            console.error('Error:', error);
+            // alert(`${cityName} is not a capital city.`, error);
+
         }
     }
 }

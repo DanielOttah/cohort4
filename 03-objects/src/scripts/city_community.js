@@ -5,6 +5,7 @@ export class City {
         this.longitude = lon;
         this.population = popul;
         this.allCities = [];
+        this.cnt = 0;
 
     }
     show(ct) {
@@ -71,6 +72,8 @@ export class City {
 export class Community {
     constructor() {
         this.newCt = new City();
+        this.cityKey = 0;
+        this.url = 'http://localhost:5000/';
     }
 
     whichSphere(ct) {
@@ -92,7 +95,6 @@ export class Community {
         let northName = [];
         let northLat = [];
         let returnVal = [];
-        let cnt;
         for (let i = 0; i < this.newCt.allCities.length; i++) {
             northName[i] = this.newCt.allCities[i].name;
             northLat[i] = parseFloat(this.newCt.allCities[i].latitude);
@@ -134,13 +136,16 @@ export class Community {
         return this.newCt.allCities[count].population;
     }
     createCity(nam, lat, lon, popul) {
+
         let cityObj = {};
+        cityObj.key = ++this.cityKey;
         cityObj.name = nam;
         cityObj.latitude = lat;
         cityObj.longitude = lon;
         cityObj.population = popul;
         this.newCt.allCities.push(cityObj);
-
+        //======================================
+        this.apiPostData();
     }
     deleteCity(ct) {
         let count = 0;
@@ -159,6 +164,48 @@ export class Community {
             }
         }
         return count;
+    }
+    async postData(URL = '', data = {}) {
+        console.log(URL);
+        console.log(data);
+
+        // Default options are marked with *
+        const response = await fetch(URL, {
+            method: 'POST',     // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors',       // no-cors, *cors, same-origin
+            cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow',         // manual, *follow, error
+            referrer: 'no-referrer',    // no-referrer, *client
+            body: JSON.stringify(data)  // body data type must match "Content-Type" header
+        });
+
+        const json = await response.json();    // parses JSON response into native JavaScript objects
+        json.status = response.status;
+        json.statusText = response.statusText;
+        // console.log(json, typeof(json));
+        return json;
+    }
+    apiPostData = async () => {
+        let apiData = await this.postData(this.url + 'clear');
+        apiData = await this.postData(this.url + 'all');
+        console.log(apiData.status);
+        console.log(apiData.length);
+
+        const clients = [
+            { key: 1, name: "Larry" },
+            { key: 2, name: "Lorraine" },
+        ]
+        //apiData = await this.postData(this.url + 'add', clients[0])
+
+        apiData = await this.postData(this.url + 'add', this.newCt.allCities[0])
+        console.log(apiData.status);
+        console.log(apiData.length);
+        // console.log(apiData[0].name);
     }
 
 }

@@ -1,6 +1,7 @@
 // const fetch = require('node-fetch');
 export const getData = {
-    url: 'https://uinames.com/api/?amount=10',
+    // url: 'https://uinames.com/api/?amount=10',
+    url: 'http://127.0.0.1:5000/',
 
     getFirstName: (data) => {
         return data[0].name;
