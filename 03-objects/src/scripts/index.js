@@ -257,50 +257,53 @@ function loadCities(nameOfcity, latitudeOFcity, longitudeOfcity, populationOfCit
 }
 
 function addNewCity() {
-    // try {
-    let cityLat = parseFloat(cityLatitude.value);
-    let cityLon = parseFloat(cityLongitude.value);
-    let cityPop = parseFloat(cityPopulation.value);
-    let cityNam = cityName.value;
-    if (cityLatitude.value == "" || cityLongitude.value == "" || cityPopulation.value == "" || cityName.value == "") {
-        throw "Error! Please check your input values again - No entries in one or more fields.";
-    } else if (cityLat < 0 || cityLon < 0 || cityPop < 0) {
-        throw "Error! Please check your input values again - invalid entries entered."
-    } else if (isNaN(cityLatitude.value - 1) || isNaN(cityLongitude.value - 1) || isNaN(cityPopulation.value - 1)) {
-        throw "Error! Please check your input values again - invalid entries entered."
-    } else {
-        ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
-        ++count;
-        // alert(`${cityName.value} has been entered succesfully.`);
-        let btnCity = document.createElement("button"); //Create Accordion Button
-        btnCity.className = "accordion1"; //Give button class
-        btnCity.id = `btnCity${count}`; //Give button id
-        //  let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
-        btnCity.appendChild(document.createTextNode(cityNam)); //place text on button
-        cities.appendChild(btnCity); //add accordion button to page
-        let div1 = document.createElement('div'); //Container holding all the infoirmation
-        div1.className = "pullLeft";
-        div1.classList.add("panelShow");
-        div1.id = `infoContainer${count}`;
-        div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
-        div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(cityName.value)}`));
-        div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
-        div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
-        div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
-        let h = document.createElement("hr");
-        div1.appendChild(h);
-        div1.appendChild(createButtonElement(`Edit City`));
-        div1.appendChild(createButtonElement(`Delete City`));
-        div1.appendChild(createButtonElement(`Discover`));
 
-        cities.appendChild(div1);
-        div1.appendChild(h);
-        clearAllEntries();
+    try {
+        let cityLat = parseFloat(cityLatitude.value);
+        let cityLon = parseFloat(cityLongitude.value);
+        let cityPop = parseFloat(cityPopulation.value);
+        let cityNam = cityName.value;
+        if (cityLatitude.value == "" || cityLongitude.value == "" || cityPopulation.value == "" || cityName.value == "") {
+            throw "Error! Please check your input values again - No entries in one or more fields.";
+        } else if (cityLat < 0 || cityLon < 0 || cityPop < 0) {
+            throw "Error! Please check your input values again - invalid entries entered."
+        } else if (isNaN(cityLatitude.value - 1) || isNaN(cityLongitude.value - 1) || isNaN(cityPopulation.value - 1)) {
+            throw "Error! Please check your input values again - invalid entries entered."
+        } else {
+            ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
+            ++count;
+            // alert(`${cityName.value} has been entered succesfully.`);
+            let btnCity = document.createElement("button"); //Create Accordion Button
+            btnCity.className = "accordion1"; //Give button class
+            btnCity.id = `btnCity${count}`; //Give button id
+            //  let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
+            btnCity.appendChild(document.createTextNode(cityNam)); //place text on button
+            cities.appendChild(btnCity); //add accordion button to page
+            let div1 = document.createElement('div'); //Container holding all the infoirmation
+            div1.className = "pullLeft";
+            div1.classList.add("panelShow");
+            div1.id = `infoContainer${count}`;
+            div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
+            div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(cityName.value)}`));
+            div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+            div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+            div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
+            let h = document.createElement("hr");
+            div1.appendChild(h);
+            div1.appendChild(createButtonElement(`Edit City`));
+            div1.appendChild(createButtonElement(`Delete City`));
+            div1.appendChild(createButtonElement(`Discover`));
+
+            cities.appendChild(div1);
+            div1.appendChild(h);
+            clearAllEntries();
+            console.log(ct.newCt.allCities);
+
+        }
+
+    } catch (err) {
+        alert(err);
     }
-
-    // } catch (err) {
-    //     alert(err);
-    // }
 }
 
 function clearAllEntries() {

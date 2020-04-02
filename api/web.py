@@ -23,7 +23,7 @@ def hello():
 @app.route("/all", methods=['POST', 'GET'])
 def all():
 
-    print(list(data.values()))
+  #  print(list(data.values()))
     return jsonify(list(data.values())), 200
 
 
@@ -115,7 +115,7 @@ def load():
         for d in data:
             print('Record: ', d)
     print("data2:", data)
-    return "<h1>EvolveU test</h1> <h2>" + str(len(data)) + " records Loaded</h2>"
+    return "<h1>EvolveU test</h1> <h2>" + str(len(data)) + " records has been loaded</h2>"
 
 
 @app.route("/save", methods=['GET'])

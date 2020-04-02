@@ -73,8 +73,8 @@ export class Community {
     constructor() {
         this.newCt = new City();
         this.cityKey = 0;
-        this.url = 'http://localhost:5000/';
-        // this.url = 'http://127.0.0.1:5000/';
+        // this.url = 'http://localhost:5000/';
+        this.url = 'http://127.0.0.1:5000/';
     }
 
     whichSphere(ct) {
@@ -141,12 +141,14 @@ export class Community {
         let cityObj = {};
         cityObj.key = ++this.cityKey;
         cityObj.name = nam;
-        cityObj.latitude = lat;
-        cityObj.longitude = lon;
-        cityObj.population = popul;
+        cityObj.latitude = parseFloat(lat);
+        cityObj.longitude = parseFloat(lon);
+        cityObj.population = parseInt(popul);
         this.newCt.allCities.push(cityObj);
+        // console.log(cityObj.key);
+
         //======================================
-        this.apiPostData();
+        // this.apiPostData();
     }
     deleteCity(ct) {
         let count = 0;
@@ -167,8 +169,8 @@ export class Community {
         return count;
     }
     async postData(URL = '', data = {}) {
-        console.log(URL);
-        console.log(data);
+        // console.log(URL);
+        // console.log(data);
 
         // Default options are marked with *
         const response = await fetch(URL, {
@@ -194,18 +196,20 @@ export class Community {
     apiPostData = async () => {
         // let apiData = await this.postData(this.url + 'clear');
         let apiData = await this.postData(this.url + 'all');
-        // const clients = [
-        //     { key: 1, name: "Larry" },
-        //     { key: 2, name: "Lorraine" },
-        // ]
-        // apiData = await this.postData(this.url + 'add', clients[0])
-
-        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
-        console.log(apiData.status);
+        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 4])
+        console.log("Add status: ", apiData.status);
         apiData = await this.postData(this.url + 'all');
-        console.log(apiData.status);
-        console.log(apiData.length);
-        console.log(apiData);
+        // console.log( apiData.status);
+        console.log('Data Length:', apiData.length);
+        console.log("All data: ", apiData);
+        // this.apiSaveData();
+
+    }
+    apiSaveData = async () => {
+        let apiData = await this.postData(this.url + 'save');
+        console.log("Save status: ", apiData.status);
+        // console.log(apiData.length);
+        // console.log(apiData);
     }
 
 }
