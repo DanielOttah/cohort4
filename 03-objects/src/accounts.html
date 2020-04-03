@@ -27,9 +27,9 @@
             <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
                 <i class="fa fa-bars"></i>
             </a>
-            <a href="#" class="w3-bar-item w3-button">HOME</a>
+            <a href="index.html" class="w3-bar-item w3-button">HOME</a>
             <a href="about.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
-            <a href="accounts.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Account</a>
+            <a href="#" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Account</a>
             <a href="cities.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Cities</a>
             <a href="https://www.evolveu.ca" class="w3-bar-item w3-button w3-hide-small" target="_blank"><i class="fa fa-envelope"></i> CONTACT</a>
             <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
@@ -46,23 +46,107 @@
             <a href="#" class="w3-bar-item w3-button">SEARCH</a>
         </div>
     </div>
-
+    <!-- ACCOUNT SECTION-->
     <div class="bgimg-2 w3-display-container w3-opacity-min">
         <div class="w3-display-middle">
-            <span class="w3-xxlarge w3-text-white ">HOME - COMPETENCIES</span>
+            <span class="w3-xxlarge w3-text-white">WORKING WITH CLASSES | ACCOUNTS</span>
         </div>
     </div>
+
     <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
         <div class="taxContainer">
-            <div class="col_2">
-                <a href="accounts.html" style="display:flex  justify-content= center;">Accounts</a>
-                <a href="cities.html" style="display:flex  justify-content= center;">Cities</a>
-                <a href="http://127.0.0.1:5500/01-getting-started/src/index.html" style="display:flex  justify-content= center;">Calculator etc</a>
 
+            <button class="accordion">Make Changes to  An Account</button>
+            <div class="panel">
+                <div class="col2">
+                    <label class="pullLeft">Add/Remove Account:</label>
+                    <select id="acctsAddRemove">
+                        <option value="options">----</option>
+                       <option value="addSavings">Add Savings</option>
+                       <option value="addChequeing">Add Chequeing</option> 
+                       <option value="addCarFund">Add Car Funds</option>   
+                        <option value="removeSavings">Remove Savings</option>
+                       <option value="removeChequeing">Remove Chequeing</option> 
+                       <option value="removeCarFund">Remove Car Funds</option>    
+                   </select>
+                    <button id="makeChangeAccount">Complete</button>
+                    <div id="report"></div>
+                </div>
+            </div>
+            <!-- End Open Account Section-->
+            <!-- Account Card Section -->
+            <div id="parnt" class="">
+                <div class="pullLeft col2 ">
+                    <div class="topPadding">
+                        <span><img id="imgs" src="./scripts/danielOttah.JPG" alt="" width="180px" height="140px" /></span>
+                    </div>
+                    <div class="topPadding">
+                        <article>
+                            <h6> Name: </h6>
+                            <h6>Address: </h6>
+                            <h6>Account Number:</h6>
+                            <h6 id="showAllAccounts">Total Number of Accounts:</h6>
+                        </article>
+                    </div>
+                    <div class="topPadding">
+                        <article>
+                            <h6 id="fName"> </h6>
+                            <h6 id="address"> </h6>
+                            <h6 id="AccNumber"> </h6>
+                            <h6 id="totalNoOFAcc"></h6>
+                        </article>
+                    </div>
+                    <div class="topPadding"><span><img id="imgs" src="./scripts/sign.png" alt="" width="180px" height="140px" /></span>
+                    </div>
+
+                </div>
+                <hr>
+                <!-- Account 1-->
+                <div id="accountCard" class="col4">
+                    <div id="Acc1" class="pullLeft">
+                        <label>Select Account</label>
+                        <select id="typeOfAcccountSelect">
+                        <option value="options">----</option>
+                       <option value="savings">Savings Account</option>
+                       <option value="chequeing">Chequeing Account</option>     
+                       <option value="carFund">Car Fund Account</option>    
+                   </select>
+                    </div>
+                    <div class="pullRight">
+                        <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD">
+                        <select id="txnAcc1">
+                         <option value="options">--Select--</option>
+                        <option value="deposit">Deposit</option>
+                        <option value="withdraw">Withdraw</option>      
+                    </select>
+
+                    </div>
+                    <div>
+                        <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
+                        <!-- <button class="w3-hover-opacity" id="btnShowAll">+</button> -->
+                    </div>
+                </div>
+                <hr>
+                <div id="" class="col4">
+                    <div>
+                        <div style="padding: 2px" id="acc1InitBal"></div>
+                        <div style="padding: 2px" id="acc1CurrBal"></div>
+                    </div>
+                    <div>
+                        <div style="padding: 2px" class="pullLeft" id="accHighest"></div>
+                        <div style="padding: 2px" class="pullLeft" id="accLowest"></div>
+                    </div>
+                    <div class="letter1">
+                        <div id="accTotal" style="font-weight: bold"></div>
+                    </div>
+                </div>
+                <br>
             </div>
         </div>
-    </div>
+        <div id=allAccountBox style="display:none">
 
+        </div>
+    </div>
 
 
     <!-- Footer -->
@@ -80,7 +164,7 @@
     </footer>
 
 
-    <!-- <script type="module" src="./scripts/index.js"></script> -->
+    <script type="module" src="./scripts/index_Acc.js"></script>
 
     <script>
         // Change style of navbar on scroll
@@ -123,7 +207,10 @@
         }
         ///===========================================////
     </script>
-
 </body>
+
+</html>
+
+</html>
 
 </html>

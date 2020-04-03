@@ -72,7 +72,7 @@ export class City {
 export class Community {
     constructor() {
         this.newCt = new City();
-        this.cityKey = 0;
+        this.cityKey = 3;
         // this.url = 'http://localhost:5000/';
         this.url = 'http://127.0.0.1:5000/';
     }
@@ -148,7 +148,7 @@ export class Community {
         // console.log(cityObj.key);
 
         //======================================
-        // this.apiPostData();
+        this.apiPostData();
     }
     deleteCity(ct) {
         let count = 0;

@@ -19,7 +19,7 @@
     <title>FSD</title>
 </head>
 
-<body id="body1">
+<body>
 
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
@@ -27,8 +27,8 @@
             <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
                 <i class="fa fa-bars"></i>
             </a>
-            <a href="#" class="w3-bar-item w3-button">HOME</a>
-            <a href="about.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
+            <a href="index.html" class="w3-bar-item w3-button">HOME</a>
+            <a href="#" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
             <a href="accounts.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Account</a>
             <a href="cities.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Cities</a>
             <a href="https://www.evolveu.ca" class="w3-bar-item w3-button w3-hide-small" target="_blank"><i class="fa fa-envelope"></i> CONTACT</a>
@@ -47,20 +47,40 @@
         </div>
     </div>
 
-    <div class="bgimg-2 w3-display-container w3-opacity-min">
-        <div class="w3-display-middle">
-            <span class="w3-xxlarge w3-text-white ">HOME - COMPETENCIES</span>
-        </div>
-    </div>
-    <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
-        <div class="taxContainer">
-            <div class="col_2">
-                <a href="accounts.html" style="display:flex  justify-content= center;">Accounts</a>
-                <a href="cities.html" style="display:flex  justify-content= center;">Cities</a>
-                <a href="http://127.0.0.1:5500/01-getting-started/src/index.html" style="display:flex  justify-content= center;">Calculator etc</a>
+    <!-- -------------- First Parallax Image with Logo Text ----------- -->
 
+    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+        <div class="w3-display-middle" style="white-space:nowrap;">
+            <div class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">
+                WELCOME TO <br> Full Stack Development
             </div>
         </div>
+    </div>
+
+    <!-- Container (About The Tools) -->
+
+    <div class="w3-content w3-container w3-padding-64 info-box" id="about">
+        <h3 class="w3-center">ABOUT THE TOOLS & PRACTICES</h3>
+        <p>
+            Here, we describe at a high level the basic tools of the trade and best practices in using the tools. We are a little nervous about using the term “Best Practices”. There are many great tools and practices out there and “Best Practices” is a matter of
+            opinion and are constantly changing. If you understand these tools and these practices, you are in a great position to continue your learning and finding better practices and better tools. You are just beginning a journey of learning that
+            will last as long as your professional development career.
+        </p>
+
+        <ol>
+            <li><b>Editor -</b> Where we spend all our time building. We suggest one of the two: <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime Text</a>.
+
+            </li>
+            <li><b>Source Code Management -</b> According to <a href="https://en.wikipedia.org/wiki/Git" target="_blank">Wikipedia</a> git is a distributed version-control system for tracking changes in source code during software development. It is designed
+                for coordinating work among programmers, and it can also be used to track changes in any set of files. Its goals include speed, data integrity, and support for distributed, non-linear workflows.
+                <p>There is a tool <a href="https://git-scm.com/" target="_blank">git</a> and a development platform called <a href="https://github.com" target="_blank">GitHub</a>. We will be using these extensively throughout the program.</p>
+            </li>
+            <li><b>Code Organization -</b> How do we organize a project? How do we structure our files? </li>
+            <li><b>Modular Design</b> How do we structure our code such that it is easy to read, update, test, and maintain?
+            </li>
+            <li><b>Developer Tools for Test Driven Development -</b> <a href="https://jestjs.io">Jest</a> is a delightful JavaScript Testing Framework with a focus on simplicity.</li>
+        </ol>
+
     </div>
 
 
@@ -80,7 +100,7 @@
     </footer>
 
 
-    <!-- <script type="module" src="./scripts/index.js"></script> -->
+    <script type="module" src="./scripts/main.js"></script>
 
     <script>
         // Change style of navbar on scroll
@@ -106,22 +126,6 @@
                 x.className = x.className.replace(" w3-show", "");
             }
         }
-    </script>
-    <script>
-        let acc = document.getElementsByClassName("accordion");
-        let i;
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-        ///===========================================////
     </script>
 
 </body>
