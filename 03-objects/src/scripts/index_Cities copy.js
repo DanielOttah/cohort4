@@ -4,32 +4,35 @@ import { getAPICities } from './fetchcityAPI.js';
 //===== Event Listeners ======================
 
 let ct = new Community();
-let count; //Get number of cities
+let count = ct.newCt.allCities.length; //Get number of cities
 let cityToEdit, cityTabToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
 getGenInfo.addEventListener('click', genCityInformation);
 
-window.addEventListener('load', loadCities);
 
 //========================== City Functions==================================
-const createCityCard = (cnt) => {
+
+function loadCities(nameOfcity, latitudeOFcity, longitudeOfcity, populationOfCity) {
+    ct.createCity(nameOfcity, latitudeOFcity, longitudeOfcity, populationOfCity);
+    ++count;
+    // alert(`${cityName.value} has been entered succesfully.`);
     let btnCity = document.createElement("button"); //Create Accordion Button
     btnCity.className = "accordion1"; //Give button class
-    btnCity.id = `btnCity${cnt}`; //Give button id
-    let city = ct.newCt.allCities[cnt].name; //get text that will be on button
+    btnCity.id = `btnCity${count}`; //Give button id
+    let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
     btnCity.appendChild(document.createTextNode(city)); //place text on button
     cities.appendChild(btnCity); //add accordion button to page
     let div1 = document.createElement('div'); //Container holding all the infoirmation
     div1.className = "pullLeft";
     div1.classList.add("panelShow");
-    div1.id = `infoContainer${cnt}`;
-    div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(city)}`));
-    div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(city)}`));
-    div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[cnt].latitude}`));
-    div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[cnt].longitude}`));
-    div1.appendChild(createPElement(`City Location: ${ct.whichSphere(city)}`));
+    div1.id = `infoContainer${count}`;
+    div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(nameOfcity)}`));
+    div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(nameOfcity)}`));
+    div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+    div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+    div1.appendChild(createPElement(`City Location: ${ct.whichSphere(nameOfcity)}`));
     let h = document.createElement("hr");
     div1.appendChild(h);
     div1.appendChild(createButtonElement(`Edit City`));
@@ -38,18 +41,6 @@ const createCityCard = (cnt) => {
 
     cities.appendChild(div1);
     div1.appendChild(h);
-
-}
-
-async function loadCities() {
-    try {
-        let apiLdCity = await ct.loadAPICity();
-        for (let y = 0; y < apiLdCity.length; y++) {
-            createCityCard(y);
-        }
-    } catch (err) {
-        alert("Failed to load cities from server! Please check the server is running", err)
-    }
 }
 
 function addNewCity() {
@@ -67,11 +58,34 @@ function addNewCity() {
             throw "Error! Please check your input values again - invalid entries entered."
         } else {
             ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
-            alert(`${cityName.value} has been entered succesfully.`);
-            count = ct.newCt.allCities.length;
-            console.log(count);
-            createCityCard(count - 1);
+            ++count;
+            // alert(`${cityName.value} has been entered succesfully.`);
+            let btnCity = document.createElement("button"); //Create Accordion Button
+            btnCity.className = "accordion1"; //Give button class
+            btnCity.id = `btnCity${count}`; //Give button id
+            //  let city = ct.newCt.allCities[count - 1].name; //get text that will be on button
+            btnCity.appendChild(document.createTextNode(cityNam)); //place text on button
+            cities.appendChild(btnCity); //add accordion button to page
+            let div1 = document.createElement('div'); //Container holding all the infoirmation
+            div1.className = "pullLeft";
+            div1.classList.add("panelShow");
+            div1.id = `infoContainer${count}`;
+            div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(cityName.value)}`));
+            div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(cityName.value)}`));
+            div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[count - 1].latitude}`));
+            div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[count - 1].longitude}`));
+            div1.appendChild(createPElement(`City Location: ${ct.whichSphere(cityName.value)}`));
+            let h = document.createElement("hr");
+            div1.appendChild(h);
+            div1.appendChild(createButtonElement(`Edit City`));
+            div1.appendChild(createButtonElement(`Delete City`));
+            div1.appendChild(createButtonElement(`Discover`));
+
+            cities.appendChild(div1);
+            div1.appendChild(h);
             clearAllEntries();
+            // console.log(ct.newCt.allCities);
+
         }
 
     } catch (err) {
@@ -173,39 +187,33 @@ function editCityInformation() {
             } else if (newCityName.value.length > 0) {
                 ct.newCt.allCities[cityIndex].name = newCityName.value;
                 cityToEdit.previousElementSibling.textContent = newCityName.value; //update old name to new name
-                ct.upDateData(cityIndex, "name", newCityName.value);
 
             }
             if (newCityLatitude.value.length == 0) {
 
             } else if (newCityLatitude.value.length > 0) {
-                ct.newCt.allCities[cityIndex].latitude = parseFloat(newCityLatitude.value);
+                ct.newCt.allCities[cityIndex].latitude = newCityLatitude.value;
                 allPs[2].textContent = `City Latitude: ${ct.newCt.allCities[cityIndex].latitude}`; //update old name to new latitude
-                ct.upDateData(cityIndex, "latitude", newCityLatitude.value);
             }
             if (newCityLongitude.value.length == 0) {
 
             } else if (newCityLongitude.value.length > 0) {
-                ct.newCt.allCities[cityIndex].longitude = parseFloat(newCityLongitude.value);
+                ct.newCt.allCities[cityIndex].longitude = newCityLongitude.value;
                 allPs[3].textContent = `City Longitude: ${ct.newCt.allCities[cityIndex].longitude}`; //update old name to new longitude
-                ct.upDateData(cityIndex, "longitude", newCityLongitude.value);
             }
             if (newCityPopulation.value.length == 0) {
 
             } else if (newCityPopulation.value.length > 0) {
                 const ppleMigrate = parseFloat(newCityPopulation.value);
                 if (selectMove.value == "popUpdate") {
-                    ct.newCt.allCities[cityIndex].population = parseInt(newCityPopulation.value);
-                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].population}`; //update old name to new population
-                    ct.upDateData(cityIndex, "population", newCityPopulation.value);
+                    ct.newCt.allCities[cityIndex].popupation = newCityPopulation.value;
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
                 } else if (selectMove.value == "movedIn") {
-                    ct.newCt.allCities[cityIndex].population = ct.newCt.movedIn(cityToEdit.previousElementSibling.textContent, ppleMigrate);
-                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].population}`; //update old name to new population
-                    ct.upDateData(cityIndex, "population", ct.newCt.allCities[cityIndex].population);
+                    ct.newCt.allCities[cityIndex].popupation = ct.newCt.movedIn(cityToEdit.previousElementSibling.textContent, ppleMigrate);
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
                 } else if (selectMove.value == "movedOut") {
-                    ct.newCt.allCities[cityIndex].population = ct.newCt.movedOut(cityToEdit.previousElementSibling.textContent, ppleMigrate);
-                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].population}`; //update old name to new population
-                    ct.upDateData(cityIndex, "population", ct.newCt.allCities[cityIndex].population);
+                    ct.newCt.allCities[cityIndex].popupation = ct.newCt.movedOut(cityToEdit.previousElementSibling.textContent, ppleMigrate);
+                    allPs[0].textContent = `City Population: ${ct.newCt.allCities[cityIndex].popupation}`; //update old name to new popupation
                 }
             }
 

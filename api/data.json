@@ -1,20 +1,23 @@
 {
     "1": {
         "key": 1,
-        "city": "Calgary",
-        "lat": 51.05,
-        "long": -114.05
+        "name": "Calgary",
+        "latitude": 51.05,
+        "longitude": -114.05,
+        "population": 1285711
     },
     "2": {
         "key": 2,
-        "city": "Edmonton",
-        "lat": 53.55,
-        "long": -113.49
+        "name": "Edmonton",
+        "latitude": 53.55,
+        "longitude": -113.49,
+        "population": 972223
     },
     "3": {
         "key": 3,
-        "city": "Red Deer",
-        "lat": 52.28,
-        "long": -113.81
+        "name": "Red Deer",
+        "latitude": 52.28,
+        "longitude": -113.81,
+        "population": 101002
     }
 }

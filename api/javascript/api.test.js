@@ -52,7 +52,7 @@ test('test that the fetch works?', async () => {
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("Larry");
 
-    data = await postData(url + 'update', { key: 1, name: "George" });
+    data = await postData(url + 'update', { key: 1, name: "George" });//
     expect(data.status).toEqual(200);
 
     data = await postData(url + 'read', { key: 1 });

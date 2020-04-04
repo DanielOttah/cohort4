@@ -27,7 +27,7 @@ export class City {
             }
         }
         this.allCities[count].population = parseFloat(this.allCities[count].population) + num;
-        return this.allCities[count].population;
+        return parseInt(this.allCities[count].population);
 
     }
     movedOut(ct, num) {
@@ -38,7 +38,7 @@ export class City {
             }
         }
         this.allCities[count].population = parseFloat(this.allCities[count].population) - num;
-        return this.allCities[count].population;
+        return parseInt(this.allCities[count].population);
     }
     howBig(cityName) {
         let size = "";
@@ -145,19 +145,17 @@ export class Community {
         cityObj.longitude = parseFloat(lon);
         cityObj.population = parseInt(popul);
         this.newCt.allCities.push(cityObj);
-        // console.log(cityObj.key);
-
         //======================================
         this.apiPostData();
     }
-    deleteCity(ct) {
-        let count = 0;
-        for (let i = 0; i < this.newCt.allCities.length; i++) {
-            if (ct == this.newCt.allCities[i].name) {
-                count = i;
-            }
-        }
+    async deleteCity(ct) {
+        let count = this.getindexOfCity(ct);
         this.newCt.allCities.splice(count, 1);
+        const getKey = this.newCt.allCities[count].key;
+        let apiData = await this.postData(this.url + 'delete', { key: `${getKey - 1}` });
+        apiData = await this.postData(this.url + 'all');
+        console.log(apiData);
+
     }
     getindexOfCity(CtNam) {
         let count = 0;
@@ -168,9 +166,84 @@ export class Community {
         }
         return count;
     }
+    async loadAPICity() {
+        let apiData = await this.postData(this.url + 'clear');
+        apiData = await this.postData(this.url + 'all');
+        apiData = await this.getData(this.url + 'load');
+        for (let r = 0; r < apiData.length; r++) {
+            this.newCt.allCities.push(apiData[r]);
+        }
+        console.log(this.newCt.allCities);
+
+        return apiData;
+
+    }
+    async getData(URL = '') {
+        let json;
+        const response = await fetch(URL);
+        if (response.ok) { // if HTTP-status is 200-299            
+            json = await response.json(); // get the response body (the method explained below)
+        } else {
+            alert("HTTP-Error: " + response.status);
+        }
+        return json;
+    }
+
+    async upDateData(ct, upDateIten, upDatData) {
+        // let cnt = this.getindexOfCity(this.newCt.allCities[0].name);
+        const getKey = this.newCt.allCities[ct].key;
+        let apiDataUpdate;
+
+        if (upDateIten == "name") {
+            let lat = parseFloat(this.newCt.allCities[ct].latitude);
+            let lon = parseFloat(this.newCt.allCities[ct].longitude);
+            let popul = parseInt(this.newCt.allCities[ct].population);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: `${getKey}`,
+                latitude: lat,
+                longitude: lon,
+                name: `${upDatData}`,
+                population: popul
+            });
+        }
+        if (upDateIten == "latitude") {
+            let lat = parseFloat(upDatData);
+            let lon = parseFloat(this.newCt.allCities[ct].longitude);
+            let popul = parseInt(this.newCt.allCities[ct].population);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: `${getKey}`, latitude: lat,
+                longitude: lon, name: this.newCt.allCities[ct].name,
+                population: popul
+            });
+        }
+        if (upDateIten == "longitude") {
+            let lon = parseFloat(upDatData);
+            let lat = parseFloat(this.newCt.allCities[ct].latitude);
+            let popul = parseInt(this.newCt.allCities[ct].population);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: `${getKey}`, latitude: lat,
+                longitude: lon, name: this.newCt.allCities[ct].name,
+                population: popul
+            });
+        }
+        if (upDateIten == "population") {
+            let lon = parseFloat(this.newCt.allCities[ct].longitude);
+            let lat = parseFloat(this.newCt.allCities[ct].latitude);
+            let popul = parseInt(upDatData);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: `${getKey}`, latitude: lat,
+                longitude: lon, name: this.newCt.allCities[ct].name, population: popul
+            });
+        }
+        apiDataUpdate = await this.postData(this.url + 'all');
+        console.log(apiDataUpdate);
+
+    }
     async postData(URL = '', data = {}) {
-        // console.log(URL);
-        // console.log(data);
 
         // Default options are marked with *
         const response = await fetch(URL, {
@@ -194,22 +267,16 @@ export class Community {
         return json;
     }
     apiPostData = async () => {
-        // let apiData = await this.postData(this.url + 'clear');
         let apiData = await this.postData(this.url + 'all');
         apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 4])
-        console.log("Add status: ", apiData.status);
         apiData = await this.postData(this.url + 'all');
-        // console.log( apiData.status);
-        console.log('Data Length:', apiData.length);
-        console.log("All data: ", apiData);
-        // this.apiSaveData();
+
 
     }
     apiSaveData = async () => {
         let apiData = await this.postData(this.url + 'save');
         console.log("Save status: ", apiData.status);
-        // console.log(apiData.length);
-        // console.log(apiData);
+
     }
 
 }
