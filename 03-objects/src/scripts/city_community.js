@@ -270,6 +270,7 @@ export class Community {
         let apiData = await this.postData(this.url + 'all');
         apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 4])
         apiData = await this.postData(this.url + 'all');
+        console.log(apiData);
 
 
     }

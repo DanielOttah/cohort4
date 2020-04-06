@@ -48,7 +48,7 @@ async function loadCities() {
             createCityCard(y);
         }
     } catch (err) {
-        alert("Failed to load cities from server! Please check the server is running", err)
+        alert("Failed to load cities from server! Please confirm the server is running", err)
     }
 }
 
