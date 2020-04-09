@@ -8,19 +8,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="./index.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <title>FSD</title>
 </head>
 
 <body id="body1">
-
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
         <div class="w3-bar" id="myNavbar">
@@ -28,183 +27,340 @@
                 <i class="fa fa-bars"></i>
             </a>
             <a href="index.html" class="w3-bar-item w3-button">HOME</a>
-            <a href="about.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
-            <a href="accounts.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Account</a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Cities</a>
-            <a href="https://www.evolveu.ca" class="w3-bar-item w3-button w3-hide-small" target="_blank"><i class="fa fa-envelope"></i> CONTACT</a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
-                <i class="fa fa-search"></i>
-            </a>
+            <a href="about.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a
+        >
+        <a href="accounts_copy.html" class="w3-bar-item w3-button w3-hide-small"
+          ><i class="fa fa-th"></i> Account</a
+        >
+        <a href="#" class="w3-bar-item w3-button w3-hide-small"
+          ><i class="fa fa-th"></i> Cities</a
+        >
+        <a
+          href="https://www.evolveu.ca"
+          class="w3-bar-item w3-button w3-hide-small"
+          target="_blank"
+          ><i class="fa fa-envelope"></i> CONTACT</a
+        >
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red"
+        >
+          <i class="fa fa-search"></i>
+        </a>
         </div>
 
         <!-- Navbar on small screens -->
         <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-            <a href="about.html" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
-            <a href="accounts.html" class="w3-bar-item w3-button" onclick="toggleFunction()">Account</a>
-            <a href="cities.html" class="w3-bar-item w3-button" onclick="toggleFunction()">Cities</a>
-            <a href="https://www.evolveu.ca" class="w3-bar-item w3-button" onclick="toggleFunction()" target="_blank">CONTACT</a>
-            <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+            <a href="about.html" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a
+        >
+        <a
+          href="accounts_copy.html"
+          class="w3-bar-item w3-button"
+          onclick="toggleFunction()"
+          >Account</a
+        >
+        <a
+          href="cities.html"
+          class="w3-bar-item w3-button"
+          onclick="toggleFunction()"
+          >Cities</a
+        >
+        <a
+          href="https://www.evolveu.ca"
+          class="w3-bar-item w3-button"
+          onclick="toggleFunction()"
+          target="_blank"
+          >CONTACT</a
+        >
+        <a href="#" class="w3-bar-item w3-button">SEARCH</a>
         </div>
     </div>
     <!-- CITTIES SECTION-->
     <div class="bgimg-2 w3-display-container w3-opacity-min">
         <div class="w3-display-middle">
-            <span class="w3-xxlarge w3-text-white ">WORKING WITH CLASSES | CITIES</span>
-        </div>
+            <span class="w3-xxlarge w3-text-white">WORKING WITH CLASSES | CITIES</span
+        >
+      </div>
     </div>
     <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
-        <div class="taxContainer">
-            <button class="accordion">ADD A CITY</button>
-            <div class="panel" id="addCityParent">
-                <div class="col2">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityName" placeholder="Enter City Name">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityLatitude" placeholder="Enter City Latitude Here">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityLongitude" placeholder="Enter City Longitude Here">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="cityPopulation" placeholder="Enter City Population Here">
-                </div>
-                <div class="col2">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <button class="letter2" id="addCity">Enter City</button>
-                </div>
-            </div>
-            <div style="display:none;" class="pullLeft" id="editCityInfo">
-                <hr>
-                <div class="col0">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityName" placeholder="Update Name">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLatitude" placeholder="Update Latitude">
-                    <input class="pullLeft letter2" style="border: none;" onfocus="this.value=''" type="text" id="newCityLongitude" placeholder="Update Longitude">
-                    <div class="col_2" style="display:inline-block">
-                        <input class="pullLeft letter2" size="10" onfocus="this.value=''" type="text" id="newCityPopulation" placeholder="Update Pop.">
-                        <select style="margin: 10px;" id="selectMove">
-                        <option value="popUpdate">Update</option>
-                        <option  value="movedIn">Moved In</option>
-                        <option  value="movedOut">Moved Out</option>                           
-                    </select>
-                    </div>
-                </div>
-                <div class="col2">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <button class="letter2" id="UpdateCity" style="margin-right: 10px;">Update Info</button>
-                </div>
-
-            </div>
-            <div class="col1">
-                <div class="" id="leftPanel">
-                    <button class="accordion" id="cityINFO">General City Information</button>
-                    <div class="panel pullLeft colInfo">
-                        <select style="margin: 10px;" id="selectGenInfo">
-                            <option value="">--Select--</option>
-                            <option  value="mostNorthern">Most Northern</option>
-                            <option  value="mostSouthern">Most Southern</option>
-                            <option  value="totalPopulation">Total Population</option>
-                        </select>
-                        <button class="letter2" style="margin: 10px;" id="getGenInfo">Get Info</button>
-                        <div class="pullLeft" style="margin: 10px;" id="genInfoText"> </div>
-                        <div class="pullLeft" style="margin: 10px;" id="genInfoAnswer"> </div>
-                        <hr>
-
-                    </div>
-                    <div class="cityContainer" id="cities" style="height: 445px;" style="overflow-y: auto;">
-                    </div>
-                </div>
-                <div class="mapouter">
-                    <div class="gmap_canvas"><iframe id="gmap_canvas1" width="600" height="500" id="gmap_canvas1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18876468.200307723!2d-113.72221585646199!3d54.72270517403909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b0d03d337cc6ad9%3A0x9968b72aa2438fa5!2sCanada!5e0!3m2!1sen!2sca!4v1584990289869!5m2!1sen!2sca"
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/">divi premade layouts preview</a></div>
-                </div>
-            </div>
+      <div class="taxContainer">
+        <button class="accordion">ADD A CITY</button>
+        <div class="panel" id="addCityParent">
+          <div class="col2">
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="cityName"
+              placeholder="Enter City Name"
+            />
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="cityLatitude"
+              placeholder="Enter City Latitude Here"
+            />
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="cityLongitude"
+              placeholder="Enter City Longitude Here"
+            />
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="cityPopulation"
+              placeholder="Enter City Population Here"
+            />
+          </div>
+          <div class="col2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <button class="letter2" id="addCity">Enter City</button>
+          </div>
         </div>
+        <div style="display: none;" class="pullLeft" id="editCityInfo">
+          <hr />
+          <div class="col0">
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="newCityName"
+              placeholder="Update Name"
+            />
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="newCityLatitude"
+              placeholder="Update Latitude"
+            />
+            <input
+              class="pullLeft letter2"
+              style="border: none;"
+              onfocus="this.value=''"
+              type="text"
+              id="newCityLongitude"
+              placeholder="Update Longitude"
+            />
+            <div class="col_2" style="display: inline-block;">
+              <input
+                class="pullLeft letter2"
+                size="10"
+                onfocus="this.value=''"
+                type="text"
+                id="newCityPopulation"
+                placeholder="Update Pop."
+              />
+              <select style="margin: 10px;" id="selectMove">
+                <option value="popUpdate">Update</option>
+                <option value="movedIn">Moved In</option>
+                <option value="movedOut">Moved Out</option>
+              </select>
+            </div>
+          </div>
+          <div class="col2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <button class="letter2" id="UpdateCity" style="margin-right: 10px;">
+              Update Info
+            </button>
+          </div>
+        </div>
+        <div class="col1">
+          <div class="" id="leftPanel">
+            <button class="accordion" id="cityINFO">
+              General City Information
+            </button>
+            <div class="panel pullLeft colInfo">
+              <select style="margin: 10px;" id="selectGenInfo">
+                <option value="">--Select--</option>
+                <option value="mostNorthern">Most Northern</option>
+                <option value="mostSouthern">Most Southern</option>
+                <option value="totalPopulation">Total Population</option>
+              </select>
+              <button class="letter2" style="margin: 10px;" id="getGenInfo">
+                Get Info
+              </button>
+              <div
+                class="pullLeft"
+                style="margin: 10px;"
+                id="genInfoText"
+              ></div>
+              <div
+                class="pullLeft"
+                style="margin: 10px;"
+                id="genInfoAnswer"
+              ></div>
+              <hr />
+            </div>
+            <div
+              class="cityContainer"
+              id="cities"
+              style="height: 445px;"
+              style="overflow-y: auto;"
+            ></div>
+          </div>
+          <div class="mapouter">
+            <div class="gmap_canvas">
+              <iframe
+                id="gmap_canvas1"
+                width="600"
+                height="500"
+                id="gmap_canvas1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18876468.200307723!2d-113.72221585646199!3d54.72270517403909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4b0d03d337cc6ad9%3A0x9968b72aa2438fa5!2sCanada!5e0!3m2!1sen!2sca!4v1584990289869!5m2!1sen!2sca"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+              ></iframe
+              ><a
+                href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/"
+                >divi premade layouts preview</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CITY SECTION 2 USING API'S letter2 -->
     <div class="bgimg-2 w3-display-container w3-opacity-min">
-        <div class="w3-display-middle">
-            <span class="w3-xxlarge w3-text-white ">WORKING WITH API's (CITIES/COUNTRIES)</span>
-        </div>
+      <div class="w3-display-middle">
+        <span class="w3-xxlarge w3-text-white"
+          >WORKING WITH API's (CITIES/COUNTRIES)</span
+        >
+      </div>
     </div>
 
-    <div class="w3-content  w3-container w3-padding-64 w3-center" id="idSize">
-        <div class="apiTaxContainer">
-            <div class="col1">
-                <div class="" id="leftPanel">
-                    <button class="accordion" id="apiCityINFO">Enter City Info</button>
-                    <div class="w3-content panel pullLeft colInfo w3-center">
-                        <input id="apiCityInput" class="" type="text" />
-                        <button class="" style="margin: 7px;" id="apiGetGenCityInfo">Get City Info</button>
-                    </div>
-                    <div class="cityContainer" id="apiCities" style="height: 445px;" style="overflow: auto;">
-                    </div>
-                </div>
-                <div class="mapouter">
-                    <div class="gmap_canvas"><iframe id="apiGmap_canvas1" width="600" height="500" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21826362.71734335!2d4.176574417919653!3d48.103465957001404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46ed8886cfadda85%3A0x72ef99e6b3fcf079!2sEurope!5e0!3m2!1sen!2sca!4v1585727376421!5m2!1sen!2sca"
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/">divi premade layouts preview</a></div>
-                </div>
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
+      <div class="apiTaxContainer">
+        <div class="col1">
+          <div class="" id="leftPanel">
+            <button class="accordion" id="apiCityINFO">Enter City Info</button>
+            <div class="w3-content panel pullLeft colInfo w3-center">
+              <input id="apiCityInput" class="" type="text" />
+              <button class="" style="margin: 7px;" id="apiGetGenCityInfo">
+                Get City Info
+              </button>
             </div>
+            <div
+              class="cityContainer"
+              id="apiCities"
+              style="height: 445px;"
+              style="overflow: auto;"
+            ></div>
+          </div>
+          <div class="mapouter">
+            <div class="gmap_canvas">
+              <iframe
+                id="apiGmap_canvas1"
+                width="600"
+                height="500"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21826362.71734335!2d4.176574417919653!3d48.103465957001404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46ed8886cfadda85%3A0x72ef99e6b3fcf079!2sEurope!5e0!3m2!1sen!2sca!4v1585727376421!5m2!1sen!2sca"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+              ></iframe
+              ><a
+                href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/"
+                >divi premade layouts preview</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
 
     <!-- Footer -->
-    <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-        <div class="w3-xlarge w3-section">
-            <i class="fa fa-facebook-official w3-hover-opacity"></i>
-            <i class="fa fa-instagram w3-hover-opacity"></i>
-            <i class="fa fa-snapchat w3-hover-opacity"></i>
-            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-            <i class="fa fa-twitter w3-hover-opacity"></i>
-            <i class="fa fa-linkedin w3-hover-opacity"></i>
-        </div>
-        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <footer
+      class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off"
+    >
+      <a href="#home" class="w3-button w3-light-grey"
+        ><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a
+      >
+      <div class="w3-xlarge w3-section">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </div>
+      <p>
+        Powered by
+        <a
+          href="https://www.w3schools.com/w3css/default.asp"
+          title="W3.CSS"
+          target="_blank"
+          class="w3-hover-text-green"
+          >w3.css</a
+        >
+      </p>
     </footer>
-
 
     <script type="module" src="./scripts/index_Cities.js"></script>
 
     <script>
-        // Change style of navbar on scroll
-        window.onscroll = function() {
-            myFunction()
-        };
+      // Change style of navbar on scroll
+      window.onscroll = function () {
+        myFunction();
+      };
 
-        function myFunction() {
-            var navbar = document.getElementById("myNavbar");
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-            } else {
-                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
-            }
+      function myFunction() {
+        var navbar = document.getElementById("myNavbar");
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          navbar.className =
+            "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+        } else {
+          navbar.className = navbar.className.replace(
+            " w3-card w3-animate-top w3-white",
+            ""
+          );
         }
+      }
 
-        // Used to toggle the menu on small screens when clicking on the menu button
-        function toggleFunction() {
-            var x = document.getElementById("navDemo");
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-            }
+      // Used to toggle the menu on small screens when clicking on the menu button
+      function toggleFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
         }
+      }
     </script>
     <script>
-        let acc = document.getElementsByClassName("accordion");
-        let i;
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-        ///===========================================////
+      let acc = document.getElementsByClassName("accordion");
+      let i;
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+      ///===========================================////
     </script>
-</body>
-
+  </body>
 </html>

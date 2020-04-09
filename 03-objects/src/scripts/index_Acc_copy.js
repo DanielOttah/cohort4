@@ -35,12 +35,22 @@ const openNewAccount = () => {
     }
 }
 const updatExistingAccount = () => {
-    new_Account.upDateCustomer(customers.value, new_Acc_Type.value);
-    // report.textContent = `'${new_Acc_Type.value}' account is opened`;
-    // report.style.backgroundColor = "lightgreen";
-
-    displayAccountDetails(customers.value)
-    console.log(new_Account.allCustomers);
+    try {
+        let index = new_Account.getAccountUser(customers.value);
+        let all_Accs = new_Account.returnAllAcc(index);
+        if (all_Accs.includes(new_Acc_Type.value)) {
+            throw "Account already exists. "
+        }
+        else {
+            new_Account.upDateCustomer(customers.value, new_Acc_Type.value);
+            report.textContent = `'${new_Acc_Type.value}' account is opened`;
+            report.style.backgroundColor = "lightgreen";
+            displayAccountDetails(customers.value)
+            console.log(new_Account.allCustomers);
+        }
+    } catch (err) {
+        alert(err);
+    }
 }
 const displayAccountDetails = () => {
     if (customers.value == "select") {
@@ -66,8 +76,7 @@ const displayAccountDetails = () => {
         for (let r = 5; r < accnos.length; r++) {
             appendCustomerDetail("account", accnos[r])
         }
-        totalAccountBalance.value = new_Account.accountTotal(customers.value);
-        console.log(new_Account.accountTotal(customers.value));
+        totalAccountBalance.value = `CAD$ ${new_Account.accountTotal(customers.value)}`;
 
     }
 
@@ -121,9 +130,16 @@ const showAccounts = () => {
     let userAccount = allCustomerAcc.value;
     let userName = customers.value;
     let index = new_Account.getAccountUser(userName);
-    initCash.value = new_Account.allCustomers[index][userAccount];
-    accountBalance.value = new_Account.allCustomers[index][userAccount];
+    initCash.value = `$CAD ${new_Account.allCustomers[index][userAccount]}`;
+    accountBalance.value = `$CAD ${new_Account.allCustomers[index][userAccount]}`;
     totalAccountBalance.value = `$CAD ${new_Account.accountTotal(userName)}`;
+}
+const deleteAccount = () => {
+    let userAccount = allCustomerAcc.value;
+    let userName = customers.value;
+    new_Account.removeAccount(userName, userAccount);
+    displayAccountDetails();
+
 }
 
 //========================== Event Handlers ================================= 
@@ -132,3 +148,4 @@ updateAccount.addEventListener('click', updatExistingAccount);
 customers.addEventListener('change', displayAccountDetails);
 btnTxnAcc1.addEventListener('click', calcTransaction);
 allCustomerAcc.addEventListener('change', showAccounts);
+btnDeleteAcc.addEventListener('click', deleteAccount);

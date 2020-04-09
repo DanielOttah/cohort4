@@ -20,10 +20,6 @@ export class AccountController {
     constructor() {
         this.customersCount = 0;
         this.allCustomers = [];
-        this.newAccTxn;
-        this.initialDepositSav;
-        this.initialDepositCheq;
-        this.initialDepositCar;
         this.acc_txn = new Account(0);
     }
     genAccNumber() {
@@ -82,28 +78,12 @@ export class AccountController {
         this.allCustomers[index][new_acc] = 0;
     }
     removeAccount(accName, accToRemove) {
-        let count;
-        for (let i = 0; i < this.allCustomers.length; i++) {
-            if (this.allCustomers[i].Name == accName) {
-                count = i;
-            }
-        }
-        if (accToRemove.includes('Sav')) {
-            delete this.allCustomers[count].Savings_Account;
-        }
-        if (accToRemove.includes('Cheq')) {
-            delete this.allCustomers[count].Chequeing_Account;
-        }
-        if (accToRemove.includes('Car')) {
-            delete this.allCustomers[count].CarFundAccount;
-        }
-        //return count;
-
+        let user = this.getAccountUser(accName);
+        delete this.allCustomers[user][accToRemove];
     }
     accountTotal(accName) {
         let ind = this.getAccountUser(accName);
-        let allKeys = Object.keys(this.allCustomers[ind])
-        let allAcc = allKeys.slice(5, allKeys.length);
+        let allAcc = this.returnAllAcc(ind);
         let totalCash = 0;
         for (i = 0; i < allAcc.length; i++) {
             totalCash += this.allCustomers[ind][allAcc[i]];
@@ -135,6 +115,11 @@ export class AccountController {
 
 
 
+    }
+    returnAllAcc(ind) {
+        let all_Acc = Object.keys(this.allCustomers[ind]);
+        let allAcc = all_Acc.slice(5, all_Acc.length);
+        return allAcc;
     }
 
 
