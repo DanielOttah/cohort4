@@ -1,0 +1,243 @@
+<!-- 
+
+    Insporation drawn from: https://www.w3schools.com/w3css/tryw3css_templates_parallax.htm#about
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>FSD</title>
+</head>
+
+<body id="body1">
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar" id="myNavbar">
+            <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="index.html" class="w3-bar-item w3-button">HOME</a>
+            <a href="about.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
+            <a href="#" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Account</a>
+            <a href="cities.html" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> Cities</a>
+            <a href="https://www.evolveu.ca" class="w3-bar-item w3-button w3-hide-small" target="_blank"><i class="fa fa-envelope"></i> CONTACT</a>
+            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+                <i class="fa fa-search"></i>
+            </a>
+        </div>
+
+        <!-- Navbar on small screens -->
+        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+            <a href="about.html" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
+            <a href="accounts.html" class="w3-bar-item w3-button" onclick="toggleFunction()">Account</a>
+            <a href="cities.html" class="w3-bar-item w3-button" onclick="toggleFunction()">Cities</a>
+            <a href="https://www.evolveu.ca" class="w3-bar-item w3-button" onclick="toggleFunction()" target="_blank">CONTACT</a>
+            <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+        </div>
+    </div>
+    <!-- ACCOUNT SECTION-->
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white">WORKING WITH CLASSES | ACCOUNTS</span>
+        </div>
+    </div>
+
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
+        <div class="taxContainer">
+
+            <button id='btnNewAcc' class="accordion">Open A New Account</button>
+            <div class="panel">
+                <div class="col2">
+                    <!-- <label class="pullLeft">Open Account:</label> -->
+                    <input class="pullLeft" onfocus="this.value=''" type="text" id="acc_Name" placeholder="Enter Name Here">
+                    <input class="pullLeft" onfocus="this.value=''" type="text" id="acc_Type" placeholder="Enter Account Name Here">
+                    <input class="pullLeft" onfocus="this.value=''" type="text" id="acc_Address" placeholder="Enter Address Here">
+                    <button id="openAccount" style="padding-left:15px;">Open Account</button>
+                    <!-- <div id="report"></div> -->
+                </div>
+            </div>
+            <!-- End Open Account Section-->
+            <!-- Account Card Section -->
+
+            <table>
+                <tr>
+                    <td>Select Customer: </td>
+                    <td><select id="customers">
+                                     <option value="select">--- Select Customer ---</option>           
+                    </select></td>
+                    <td> <input class="pullLeft" onfocus="this.value=''" type="text" id="new_Acc_Type" placeholder="New Account Name Here"></td>
+                    <td> <button id="updateAccount" style="padding-left:15px;">Update Account</button></td>
+                    <td id="report"></td>
+                </tr>
+            </table>
+            <hr>
+            <div id="parnt" style="display: none;">
+                <div class="pullLeft col2 ">
+                    <div class="topPadding">
+                        <span><img id="imgs"  alt="" width="180px" height="140px" /></span>
+                    </div>
+                    <div class="topPadding">
+                        <!-- <article> -->
+                        <h6> Name: </h6>
+                        <h6>Address: </h6>
+                        <h6>Account Number:</h6>
+                        <h6 id="showAllAccounts"></h6>
+                        <!-- </article> -->
+                    </div>
+                    <div class="topPadding">
+                        <!-- <article> -->
+                        <h6 id="fName"> </h6>
+                        <h6 id="address"> </h6>
+                        <h6 id="AccNumber"> </h6>
+                        <select id="allCustomerAcc">
+                                                        
+                           </select>
+                        <!-- </article> -->
+                    </div>
+                    <div class="topPadding"><span><img id="signs"  alt="" width="180px" height="140px" /></span>
+                    </div>
+
+                </div>
+                <hr>
+                <!-- Account 1-->
+                <div id="accountCard" class="">
+                    <!-- <div id="Acc1" class="pullLeft">
+                        <label>Account Balance: </label>
+                        <input class="pullRight" onfocus="this.value=''" type="text" id="accountBalance" placeholder="$CAD" readonly>
+                    </div>
+                    <div class="pullRight">
+                        <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD">
+                        <select id="txnAcc1">
+                         <option value="options">-- Select --</option>
+                        <option value="deposit">Deposit</option>
+                        <option value="withdraw">Withdraw</option>      
+                    </select>
+
+                    </div>
+                    <div>
+                        <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
+                        <button class="w3-hover-opacity" id="btnDeleteAcc">X</button>
+                    </div> -->
+                    <table>
+                        <tr>
+                            <td>Balance: </td>
+                            <td><input class="pullRight" onfocus="this.value=''" type="text" id="accountBalance" placeholder="$CAD" readonly></td>
+                            <td>Transaction: </td>
+                            <td> <select id="txnAcc1">
+                                <option value="options">-- Select --</option>
+                               <option value="deposit">Deposit</option>
+                               <option value="withdraw">Withdraw</option>      
+                           </select>
+                            </td>
+                            <td> <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD"></td>
+                            <td> <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
+
+                        </tr>
+                    </table>
+                    <tabele>
+                        <tr>
+
+                            <td>
+                                <button class="w3-hover-opacity" id="btnDeleteAcc">Delete Account</button></td>
+                        </tr>
+                        </table>
+                </div>
+                <hr>
+                <div id="" class="col4">
+                    <div>
+                        <div style="padding: 2px" id="acc1InitBal"></div>
+                        <div style="padding: 2px" id="acc1CurrBal"></div>
+                    </div>
+                    <div>
+                        <div style="padding: 2px" class="pullLeft" id="accHighest"></div>
+                        <div style="padding: 2px" class="pullLeft" id="accLowest"></div>
+                    </div>
+                    <div class="letter1">
+                        <div id="accTotal" style="font-weight: bold"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id=allAccountBox style="display:none">
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
+
+
+    <script type="module" src="./scripts/index_Acc_copy.js"></script>
+
+    <script>
+        // Change style of navbar on scroll
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        function myFunction() {
+            var navbar = document.getElementById("myNavbar");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+            } else {
+                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+            }
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
+    <script>
+        let acc = document.getElementsByClassName("accordion");
+        let i;
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+        ///===========================================////
+    </script>
+</body>
+
+</html>
+
+</html>
+
+</html>

@@ -6,10 +6,7 @@ const newTxn = new Account(0);
 //===== Event Listeners ======================
 window.addEventListener('load', () => {
     loadDetails();
-    // loadCities("Airdrie", 51.2369, 144.2546, 79000);
-    // loadCities("Calgary", 51.0236, 143.0056, 1200000);
-    // loadCities("British Columbia", 52.3654, 145.987, 600000);
-    // loadCities("Halifax", "50.9874", 143.2546, 500000);
+
 });
 btnTxnAcc1.addEventListener('click', calcTransaction);
 typeOfAcccountSelect.addEventListener('change', showAccount);
