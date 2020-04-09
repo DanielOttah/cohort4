@@ -1,7 +1,5 @@
 export class Account {
     constructor(prevBal) {
-        //  this.acctName = accName;
-        //  this.accType = accType;
         this.prevBal = prevBal;
         this.currentCash = prevBal;
     }
@@ -26,6 +24,7 @@ export class AccountController {
         this.initialDepositSav;
         this.initialDepositCheq;
         this.initialDepositCar;
+        this.acc_txn = new Account(0);
     }
     genAccNumber() {
         return `${Math.floor((Math.random() * 1000) + 1)}-${Math.floor((Math.random() * 1000) + 1)}`; //Generates Account Number
@@ -101,171 +100,41 @@ export class AccountController {
         //return count;
 
     }
-    addAccount(accName, accToAdd, deposit) {
-        let count;
-        for (let i = 0; i < this.allCustomers.length; i++) {
-            if (this.allCustomers[i].Name == accName) {
-                count = i;
-            }
-        }
-        if (accToAdd.includes('Sav')) {
-            this.allCustomers[count].initialSavCash = deposit;
-            this.allCustomers[count].Savings_Account = deposit;
-        }
-        if (accToAdd.includes('Cheq')) {
-            this.allCustomers[count].initialCheqCash = deposit;
-            this.allCustomers[count].Chequeing_Account = deposit;
-        }
-        if (accToAdd.includes('Car')) {
-            this.allCustomers[count].initialCarCash = deposit;
-            this.allCustomers[count].CarFundAccount = deposit;
-        }
-        //return count;
-
-    }
     accountTotal(accName) {
-        let count, accTotal, v1, v2, v3;
-        for (let i = 0; i < this.allCustomers.length; i++) {
-            if (this.allCustomers[i].Name == accName) {
-                count = i;
-            }
+        let ind = this.getAccountUser(accName);
+        let allKeys = Object.keys(this.allCustomers[ind])
+        let allAcc = allKeys.slice(5, allKeys.length);
+        let totalCash = 0;
+        for (i = 0; i < allAcc.length; i++) {
+            totalCash += this.allCustomers[ind][allAcc[i]];
         }
-        v1 = this.allCustomers[count].CarFundAccount;
-        v2 = this.allCustomers[count].Chequeing_Account;
-        v3 = this.allCustomers[count].Savings_Account;
 
-        if (v1 == undefined && v2 == undefined && v3 != undefined) {
-            accTotal = v3;
-        } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-            accTotal = v3 + v2;
-        } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
-            accTotal = v3 + v2 + v1;
-        } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
-            accTotal = v1;
-        } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-            accTotal = v1 + v2;
-        } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-            accTotal = v1 + v3;
-        } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
-            accTotal = v2;
-        } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
-            accTotal = 0;
-        }
-        return accTotal;
+        return totalCash;
     }
-    highestValueAccount(accName) {
-        let result = [];
-        let count, v1, v2, v3;
-        for (let i = 0; i < this.allCustomers.length; i++) {
-            if (this.allCustomers[i].Name == accName) {
-                count = i;
-            }
-        }
-        v1 = this.allCustomers[count].CarFundAccount;
-        v2 = this.allCustomers[count].Chequeing_Account;
-        v3 = this.allCustomers[count].Savings_Account;
-
-        if (v1 == undefined && v2 == undefined && v3 != undefined) {
-            result.push('Savings', v3);
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-            (v2 > v3 ? result.push('Chequeing', v2) : result.push('Savings', v3));
-            return result;
-        } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
-            if (v1 > v2 && v1 > v3) {
-                result.push('Car Fund', v1);
-                return result;
-            } else if (v2 > v1 && v2 > v3) {
-                result.push('Chequeing', v2);
-                return result;
-            } else if (v3 > v1 && v3 > v2) {
-                result.push('Savings', v3);
-                return result;
-            }
-        } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
-            result.push('Car Fund', v1);
-            return result;
-        } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-            (v1 > v2 ? result.push('Car Fund', v1) : result.push('Chequeing', v2));
-            return result;
-        } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-            (v1 > v3 ? result.push('Car Fund', v1) : result.push('Savings', v3));
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
-            result.push('Chequeing', v2);
-            return result;
-        } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
-            result.push('N/A', 0);
-            return result;
-        } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-            (v1 == v2 ? result.push(('Car Fund', v1), ('Chequeing', v2)) : "");
-            return result;
-        } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-            (v1 == v3 ? result.push(('Car Fund', v1), ('Savings', v3)) : "");
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-            (v2 == v3 ? result.push(('Chequeing', v2), ('Savings', v3)) : "");
-            return result;
-        } else if ((v1 != undefined && v2 != undefined && v3 != undefined) && v1 == v2 == v3) {
-            result.push(('Car Fund', v1), ('Chequeing', v2), ('Savings', v3));
-            return result;
-        }
+    deposit_Txn(nam, acc, amt) {
+        let cash = [];
+        let ind = this.getAccountUser(nam);
+        cash[0] = this.allCustomers[ind][acc];
+        this.allCustomers[ind][acc] += amt;
+        cash[1] = this.allCustomers[ind][acc];
+        return cash;
     }
-    lowestValueAccount(accName) {
-        let result = [];
-        let count, v1, v2, v3;
-        for (let i = 0; i < this.allCustomers.length; i++) {
-            if (this.allCustomers[i].Name == accName) {
-                count = i;
-            }
+    withdraw_Txn(nam, acc, amt) {
+        let cash = [];
+        let ind = this.getAccountUser(nam);
+        cash[0] = this.allCustomers[ind][acc];
+        if (cash[0] > amt) {
+            this.allCustomers[ind][acc] -= amt;
+            cash[1] = this.allCustomers[ind][acc];
+            return cash;
         }
-        v1 = this.allCustomers[count].CarFundAccount;
-        v2 = this.allCustomers[count].Chequeing_Account;
-        v3 = this.allCustomers[count].Savings_Account;
-
-        if (v1 == undefined && v2 == undefined && v3 != undefined) {
-            result.push('Savings', v3);
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-            (v2 > v3 ? result.push('Savings', v3) : result.push('Chequeing', v2));
-            return result;
-
-        } else if (v1 != undefined && v2 != undefined && v3 != undefined) {
-            if (v1 < v2 && v1 < v3) {
-                result.push('Car Fund', v1);
-                return result;
-            } else if (v2 < v1 && v2 < v3) {
-                result.push('Chequeing', v2);
-                return result;
-            } else if (v3 < v1 && v3 < v2) {
-                result.push('Savings', v1);
-                return result;
-            }
-        } else if (v1 != undefined && v2 == undefined && v3 == undefined) {
-            result.push('Car Fund', v1);
-            return result;
-        } else if (v1 != undefined && v2 != undefined && v3 == undefined) {
-            (v1 > v2 ? result.push('Chequeing', v2) : result.push('Car Fund', v1));
-            return result;
-        } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-            (v1 > v3 ? result.push('Savings', v3) : result.push('Car Fund', v1));
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 == undefined) {
-            result.push('Chequeing', v2);
-            return result;
-        } else if (v1 == undefined && v2 == undefined && v3 == undefined) {
-            result.push('N/A', 0);
-            return result;
-        } else if (v1 != undefined && v2 == undefined && v3 != undefined) {
-            (v1 == v3 ? result.push(('Car Fund', v1), ('Savings', v3)) : "");
-            return result;
-        } else if (v1 == undefined && v2 != undefined && v3 != undefined) {
-            (v2 == v3 ? result.push(('Chequeing', v2), ('Savings', v3)) : "");
-            return result;
-        } else if ((v1 != undefined && v2 != undefined && v3 != undefined) && v1 == v2 == v3) {
-            result.push(('Car Fund', v1), ('Chequeing', v2), ('Savings', v3));
-            return result;
+        else if (cash[0] < amt) {
+            return false;
         }
+
+
+
+
     }
 
 

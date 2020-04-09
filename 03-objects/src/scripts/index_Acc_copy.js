@@ -1,6 +1,5 @@
 // import { Account } from './account.js';
 import { AccountController } from './account_copy.js';
-// const dan = new AccountController(); //Create an Instance
 const new_Account = new AccountController();
 
 
@@ -9,9 +8,7 @@ const new_Account = new AccountController();
 //     loadDetails();
 
 // });
-// btnTxnAcc1.addEventListener('click', calcTransaction);
-// typeOfAcccountSelect.addEventListener('change', showAccount);
-
+// 
 
 //=================== Account Functions =====================================
 
@@ -69,6 +66,9 @@ const displayAccountDetails = () => {
         for (let r = 5; r < accnos.length; r++) {
             appendCustomerDetail("account", accnos[r])
         }
+        totalAccountBalance.value = new_Account.accountTotal(customers.value);
+        console.log(new_Account.accountTotal(customers.value));
+
     }
 
 }
@@ -91,8 +91,44 @@ const appendCustomerDetail = (nam, acc_detail) => {
     }
 
 }
+const calcTransaction = () => {
+    try {
+        let userAccount = allCustomerAcc.value;
+        let userName = customers.value;
+        let amount = parseFloat(cashInputAcc1.value);
+
+        if (txnAcc1.value == "deposit") {
+            let txn = new_Account.deposit_Txn(userName, userAccount, amount)
+            initCash.value = `$CAD ${txn[0]}`;
+            accountBalance.value = `$CAD ${txn[1]}`;
+        } else if (txnAcc1.value == "withdraw") {
+            let txn = new_Account.withdraw_Txn(userName, userAccount, amount);
+            if (txn == false) {
+                throw "Invalid transaction. Not enough funds";
+            } else {
+                initCash.value = `$CAD ${txn[0]}`;
+                accountBalance.value = `$CAD ${txn[1]}`;
+            }
+        }
+        totalAccountBalance.value = `$CAD ${new_Account.accountTotal(userName)}`;
+
+    } catch (err) {
+        alert(err);
+    }
+
+}
+const showAccounts = () => {
+    let userAccount = allCustomerAcc.value;
+    let userName = customers.value;
+    let index = new_Account.getAccountUser(userName);
+    initCash.value = new_Account.allCustomers[index][userAccount];
+    accountBalance.value = new_Account.allCustomers[index][userAccount];
+    totalAccountBalance.value = `$CAD ${new_Account.accountTotal(userName)}`;
+}
 
 //========================== Event Handlers ================================= 
 openAccount.addEventListener('click', openNewAccount);
 updateAccount.addEventListener('click', updatExistingAccount);
 customers.addEventListener('change', displayAccountDetails);
+btnTxnAcc1.addEventListener('click', calcTransaction);
+allCustomerAcc.addEventListener('change', showAccounts);
