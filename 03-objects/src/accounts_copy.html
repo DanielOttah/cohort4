@@ -83,29 +83,64 @@
             </table>
             <hr>
             <div id="parnt" style="display: none;">
-                <div class="pullLeft col2 ">
+                <div class="pullLeft col3 ">
                     <div class="topPadding">
                         <span><img id="imgs"  alt="" width="180px" height="140px" /></span>
                     </div>
+                    <!-- <article> -->
                     <div class="topPadding">
-                        <!-- <article> -->
+                        <!-- 
                         <h6> Name: </h6>
                         <h6>Address: </h6>
                         <h6>Account Number:</h6>
                         <h6 id="showAllAccounts"></h6>
-                        <!-- </article> -->
+                        
                     </div>
                     <div class="topPadding">
-                        <!-- <article> -->
+                        
                         <h6 id="fName"> </h6>
                         <h6 id="address"> </h6>
                         <h6 id="AccNumber"> </h6>
-                        <select id="allCustomerAcc">
-                                                        
+                        <select id="allCustomerAcc">                                                       
                            </select>
-                        <!-- </article> -->
+                        <button class="w3-hover-opacity" id="btnShowAllAcc">+</button></td>
+                        -->
+                        <table>
+                            <tr>
+                                <th>
+                                    Customer Name
+                                </th>
+                                <td id="fName">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Customer Address
+                                </th>
+                                <td id="address">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Account Number
+                                </th>
+                                <td id="AccNumber">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th id="showAllUserAccounts">
+                                </th>
+                                <td id=""><select id="allCustomerAcc">                                                       
+                                </select>
+                                    <button class="w3-hover-opacity" id="btnShowAllAcc">+</button>
+                                    <button class="w3-hover-opacity" id="btnDeleteAcc">Delete Account</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="topPadding"><span><img id="signs"  alt="" width="180px" height="140px" /></span>
+                    <!-- </article> -->
+
+                    <div class="topPadding pullRight"><span><img id="signs"  alt="" width="180px" height="140px" /></span>
                     </div>
 
                 </div>
@@ -118,6 +153,8 @@
                             <th><input class="pullRight" onfocus="this.value=''" type="text" id="initCash" placeholder="$CAD 0" readonly></th>
                             <th>Current Balance: </th>
                             <th><input class="pullRight" onfocus="this.value=''" type="text" id="accountBalance" placeholder="$CAD 0" readonly></th>
+                        </tr>
+                        <tr>
                             <th>Total Cash: </th>
                             <th><input class="pullRight" onfocus="this.value=''" type="text" id="totalAccountBalance" placeholder="$CAD" readonly></th>
                         </tr>
@@ -135,10 +172,22 @@
                             <td style="padding-right:30px;"> <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD"></td>
                             <td style="padding-left:50px;"> <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
 
-                                <td style="padding-left:10px;"> <button class="w3-hover-opacity" id="btnDeleteAcc">Delete Account</button></td>
+
                         </tr>
                     </table>
                 </div>
+            </div>
+            <div id="allAccounts" class="" style="display:none">
+                <table id="table">
+                    <tr>
+                        <th>Account</th>
+                        <th>Current Balance ($CAD)</th>
+                    </tr>
+                    <!-- <tr>
+                        <td>Account</td>
+                        <td>Current Balance</td>
+                    </tr> -->
+                </table>
             </div>
         </div>
 

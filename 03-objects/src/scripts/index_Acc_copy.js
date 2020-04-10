@@ -26,8 +26,7 @@ const openNewAccount = () => {
             new_Account.createNewAccount(name_Acc, address_Acc, type_Acc);
             clearNewAccFields();
             appendCustomerDetail("name", name_Acc);
-            // displayAccountDetails(name_Acc);
-            console.log(new_Account.allCustomers);
+
         }
     }
     catch (err) {
@@ -46,7 +45,7 @@ const updatExistingAccount = () => {
             report.textContent = `'${new_Acc_Type.value}' account is opened`;
             report.style.backgroundColor = "lightgreen";
             displayAccountDetails(customers.value)
-            console.log(new_Account.allCustomers);
+
         }
     } catch (err) {
         alert(err);
@@ -67,7 +66,7 @@ const displayAccountDetails = () => {
         signs.src = `${new_Account.allCustomers[index].signature}`;
         AccNumber.textContent = new_Account.allCustomers[index].Account_Number;
         let accnos = Object.keys(new_Account.allCustomers[index]);
-        showAllAccounts.textContent = `Accounts: ${accnos.length - 5}`;
+        showAllUserAccounts.textContent = `Accounts: ${accnos.length - 5}`;
 
         while (accDropDown) {
             accDropDown.remove();
@@ -141,6 +140,41 @@ const deleteAccount = () => {
     displayAccountDetails();
 
 }
+const showAllAccounts = () => {
+    let index = new_Account.getAccountUser(customers.value);
+    let allAcc = new_Account.returnAllAcc(index);
+    let divShowAcc = table.firstElementChild;
+    while (divShowAcc) {
+        divShowAcc.remove();
+        divShowAcc = table.firstElementChild;
+    }
+    if (btnShowAllAcc.textContent == "+") {
+        allAccounts.style.display = "block";
+        btnShowAllAcc.textContent = "-";
+
+        for (let i = 0; i < allAcc.length; i++) {
+            createTableRow(index, allAcc[i]);
+        }
+
+    }
+    else if (btnShowAllAcc.textContent == "-") {
+        allAccounts.style.display = "none";
+        btnShowAllAcc.textContent = "+";
+
+    }
+}
+const createTableRow = (ind, acc) => {
+    let tr = document.createElement("tr");
+    let tdAcc = document.createElement("td");
+    let tdBal = document.createElement("td");
+    let accBal = new_Account.allCustomers[ind][acc];
+    tdAcc.appendChild(document.createTextNode(acc));
+    tdBal.appendChild(document.createTextNode(accBal));
+    tr.appendChild(tdAcc);
+    tr.appendChild(tdBal);
+    table.appendChild(tr);
+
+}
 
 //========================== Event Handlers ================================= 
 openAccount.addEventListener('click', openNewAccount);
@@ -149,3 +183,4 @@ customers.addEventListener('change', displayAccountDetails);
 btnTxnAcc1.addEventListener('click', calcTransaction);
 allCustomerAcc.addEventListener('change', showAccounts);
 btnDeleteAcc.addEventListener('click', deleteAccount);
+btnShowAllAcc.addEventListener('click', showAllAccounts);
