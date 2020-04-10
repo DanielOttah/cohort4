@@ -1,14 +1,5 @@
-// import { Account } from './account.js';
 import { AccountController } from './account_copy.js';
 const new_Account = new AccountController();
-
-
-//===== Event Listeners ======================
-// window.addEventListener('load', () => {
-//     loadDetails();
-
-// });
-// 
 
 //=================== Account Functions =====================================
 
