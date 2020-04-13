@@ -121,6 +121,24 @@ export class AccountController {
         let allAcc = all_Acc.slice(5, all_Acc.length);
         return allAcc;
     }
+    transferFunds(accName, accFrom, accTo, amt) {
+        try {
+            let user = this.getAccountUser(accName);
+            // if (!isNaN(amt)) {
+            //     throw "Enter valid amount to transfer";
+            // }
+            // else if (amt > this.allCustomers[user][accFrom]) {
+            //     throw "Cannot complete transaction - Insufficient funds."
+            // } else {
+            this.allCustomers[user][accFrom] -= amt;
+            this.allCustomers[user][accTo] += amt;
+            // }
+            // return ;
+        } catch (err) {
+            return err;
+        }
+
+    }
 
 
 }

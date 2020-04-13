@@ -74,7 +74,7 @@
                 <tr>
                     <td>Select Customer: </td>
                     <td><select id="customers">
-                                     <option value="select">--- Select Customer ---</option>           
+                                     <option value="select">--Select--</option>           
                     </select></td>
                     <td> <input class="pullLeft" onfocus="this.value=''" type="text" id="new_Acc_Type" placeholder="New Account Name Here"></td>
                     <td> <button id="updateAccount" style="padding-left:15px;">Update Account</button></td>
@@ -89,22 +89,7 @@
                     </div>
                     <!-- <article> -->
                     <div class="topPadding">
-                        <!-- 
-                        <h6> Name: </h6>
-                        <h6>Address: </h6>
-                        <h6>Account Number:</h6>
-                        <h6 id="showAllAccounts"></h6>
-                        
-                    </div>
-                    <div class="topPadding">
-                        
-                        <h6 id="fName"> </h6>
-                        <h6 id="address"> </h6>
-                        <h6 id="AccNumber"> </h6>
-                        <select id="allCustomerAcc">                                                       
-                           </select>
-                        <button class="w3-hover-opacity" id="btnShowAllAcc">+</button></td>
-                        -->
+
                         <table>
                             <tr>
                                 <th>
@@ -136,6 +121,10 @@
                                     <button class="w3-hover-opacity" id="btnDeleteAcc">Delete Account</button>
                                 </td>
                             </tr>
+                            <tr>
+                                <th>Total Cash: </th>
+                                <th><input class="pullLeft" onfocus="this.value=''" type="text" id="totalAccountBalance" placeholder="$CAD" readonly></th>
+                            </tr>
                         </table>
                     </div>
                     <!-- </article> -->
@@ -154,25 +143,30 @@
                             <th>Current Balance: </th>
                             <th><input class="pullRight" onfocus="this.value=''" type="text" id="accountBalance" placeholder="$CAD 0" readonly></th>
                         </tr>
-                        <tr>
-                            <th>Total Cash: </th>
-                            <th><input class="pullRight" onfocus="this.value=''" type="text" id="totalAccountBalance" placeholder="$CAD" readonly></th>
-                        </tr>
+
                     </table>
-                    <hr>
+
                     <table>
+
                         <tr>
                             <td style="padding-right:5px;">Select Transaction: </td>
                             <td style="padding-right:60px;"> <select id="txnAcc1">
                                 <option value="options">-- Select --</option>
                                <option value="deposit">Deposit</option>
-                               <option value="withdraw">Withdraw</option>      
+                               <option value="withdraw">Withdraw</option>    
+                               <option value="transfer">Transfer</option>    
                            </select>
                             </td>
                             <td style="padding-right:30px;"> <input class="pullRight" onfocus="this.value=''" type="text" id="cashInputAcc1" placeholder="$CAD"></td>
                             <td style="padding-left:50px;"> <button class="w3-hover-opacity" id="btnTxnAcc1">Complete Transaction</button>
-
-
+                        </tr>
+                    </table>
+                    <table id="tableTransfer" style="display: none;">
+                        <tr>
+                            <td style="padding-right:30px;"> Transfer <input class="pullRight" onfocus="this.value=''" type="text" id="inputTransfer" placeholder="$CAD"></td>
+                            <td style="padding-right:40px"> From: <select id="selectFromTransfer"></select></td>
+                            <td style="padding-right:40px;">To: <select id="selectToTransfer"></select></td>
+                            <td style="padding-right:60px; padding-left:60px;"> <button class="w3-hover-opacity " id="btnTransfer">Transfer Funds</button>
                         </tr>
                     </table>
                 </div>

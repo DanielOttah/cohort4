@@ -9,16 +9,24 @@ const openNewAccount = () => {
         let type_Acc = acc_Type.value;
         let address_Acc = acc_Address.value;
 
-        let index = new_Account.getAccountUser(name_Acc);
-        if (index != undefined) {
-            throw "Account user already exist! You may want to update your account instead";
+        if (name_Acc == "" || type_Acc == "" || address_Acc == "") {
+
+            throw "All fields must be complete to open an account."
         }
-        else if (index == undefined) {
-            new_Account.createNewAccount(name_Acc, address_Acc, type_Acc);
-            clearNewAccFields();
-            appendCustomerDetail("name", name_Acc);
+        else {
+            let index = new_Account.getAccountUser(name_Acc);
+            if (index != undefined) {
+                throw "Account user already exist! You may want to update your account instead";
+            }
+            else if (index == undefined) {
+                new_Account.createNewAccount(name_Acc, address_Acc, type_Acc);
+                clearNewAccFields();
+                appendCustomerDetail("name", name_Acc);
+
+            }
 
         }
+
     }
     catch (err) {
         alert(err)
@@ -26,18 +34,25 @@ const openNewAccount = () => {
 }
 const updatExistingAccount = () => {
     try {
-        let index = new_Account.getAccountUser(customers.value);
-        let all_Accs = new_Account.returnAllAcc(index);
-        if (all_Accs.includes(new_Acc_Type.value)) {
-            throw "Account already exists. "
+        if (customers.value === customers.firstElementChild.textContent || new_Acc_Type.value == "") {
+            throw "A customer must be selected and name of account entered before update can be executed."
         }
         else {
-            new_Account.upDateCustomer(customers.value, new_Acc_Type.value);
-            report.textContent = `'${new_Acc_Type.value}' account is opened`;
-            report.style.backgroundColor = "lightgreen";
-            displayAccountDetails(customers.value)
+            let index = new_Account.getAccountUser(customers.value);
+            let all_Accs = new_Account.returnAllAcc(index);
 
+            if (all_Accs.includes(new_Acc_Type.value)) {
+                throw "Account already exists. "
+            }
+            else {
+                new_Account.upDateCustomer(customers.value, new_Acc_Type.value);
+                report.textContent = `'${new_Acc_Type.value}' account is opened`;
+                report.style.backgroundColor = "lightgreen";
+                displayAccountDetails(customers.value)
+
+            }
         }
+
     } catch (err) {
         alert(err);
     }
@@ -48,6 +63,9 @@ const displayAccountDetails = () => {
     }
     else {
         let accDropDown = allCustomerAcc.firstElementChild;
+        let accDropDown1 = selectFromTransfer.firstElementChild;
+        let accDropDown2 = selectToTransfer.firstElementChild;
+
         let index = new_Account.getAccountUser(customers.value);
         parnt.style.display = "block";
         fName.textContent = new_Account.allCustomers[index].Name;
@@ -61,7 +79,11 @@ const displayAccountDetails = () => {
 
         while (accDropDown) {
             accDropDown.remove();
+            accDropDown1.remove();
+            accDropDown2.remove();
             accDropDown = allCustomerAcc.firstElementChild;
+            accDropDown1 = selectFromTransfer.firstElementChild;
+            accDropDown2 = selectToTransfer.firstElementChild;
         }
         for (let r = 5; r < accnos.length; r++) {
             appendCustomerDetail("account", accnos[r])
@@ -79,14 +101,19 @@ const clearNewAccFields = () => {
 }
 const appendCustomerDetail = (nam, acc_detail) => {
     let opt = document.createElement('Option');
+    let opt1 = document.createElement('Option');
+    let opt2 = document.createElement('Option');
     if (nam == "name") {
         opt.appendChild(document.createTextNode(acc_detail));
-        // existingCustomers.appendChild(opt);
         customers.appendChild(opt);
 
     } else if (nam == "account") {
         opt.appendChild(document.createTextNode(acc_detail));
+        opt1.appendChild(document.createTextNode(acc_detail));
+        opt2.appendChild(document.createTextNode(acc_detail));
         allCustomerAcc.appendChild(opt);
+        selectFromTransfer.appendChild(opt1);
+        selectToTransfer.appendChild(opt2);
     }
 
 }
@@ -166,6 +193,41 @@ const createTableRow = (ind, acc) => {
     table.appendChild(tr);
 
 }
+const openTransferWindow = () => {
+    if (txnAcc1.value == "transfer") {
+        if (tableTransfer.style.display == "none") {
+            tableTransfer.style.display = "block";
+        }
+    }
+    else {
+        tableTransfer.style.display = "none"
+    }
+}
+const transferCash = () => {
+    try {
+        let transferFrom = selectFromTransfer.value
+        let transferTo = selectToTransfer.value;
+        let amt = parseFloat(inputTransfer.value);
+        let index = new_Account.getAccountUser(customers.value);
+        if (transferFrom == transferTo) {
+            throw "You cannot transfer funds within thesame account";
+        }
+        if (isNaN(amt)) {
+            throw "Enter valid amount to transfer";
+        }
+        if (amt > new_Account.allCustomers[index][transferFrom]) {
+            throw "Cannot complete transaction - Insufficient funds."
+        }
+        else {
+            new_Account.transferFunds(customers.value, transferFrom, transferTo, amt);
+            showAllAccounts();
+
+        }
+    }
+    catch (err) {
+        alert(err);
+    }
+}
 
 //========================== Event Handlers ================================= 
 openAccount.addEventListener('click', openNewAccount);
@@ -175,3 +237,5 @@ btnTxnAcc1.addEventListener('click', calcTransaction);
 allCustomerAcc.addEventListener('change', showAccounts);
 btnDeleteAcc.addEventListener('click', deleteAccount);
 btnShowAllAcc.addEventListener('click', showAllAccounts);
+txnAcc1.addEventListener('change', openTransferWindow);
+btnTransfer.addEventListener('click', transferCash);
