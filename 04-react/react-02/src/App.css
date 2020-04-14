@@ -3,17 +3,17 @@
 }
 
 .App-logo {
-    height: 40vmin;
+    height: 20vmin;
     pointer-events: none;
 }
 
 .Svg-logo {
-    height: 15vmin;
+    height: 5vmin;
     pointer-events: none;
 }
 
 .Svg-alt-logo {
-    height: 10vmin;
+    height: 5vmin;
     pointer-events: none;
 }
 
@@ -71,6 +71,8 @@
     }
 }
 
+
+/* 
 .board-row:after {
     clear: both;
     content: "";
@@ -84,7 +86,7 @@
 .square {
     background: #fff;
     border: 1px solid #999;
-    /* float: left; */
+    float: left;
     font-size: 14px;
     font-weight: bold;
     line-height: 34px;
@@ -107,4 +109,4 @@
 
 .game-info {
     margin-left: 20px;
-}
+} */

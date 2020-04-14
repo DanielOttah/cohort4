@@ -11,27 +11,33 @@
 .square {
     background: #fff;
     border: 1px solid #999;
-    /* float: left; */
-    font-size: 14px;
+    float: left;
+    font-size: 90px;
     font-weight: bold;
-    line-height: 34px;
-    height: 34px;
+    line-height: 110px;
+    height: 110px;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 34px;
+    width: 110px;
 }
 
 .square:focus {
     outline: none;
 }
 
+.kbd-navigation .square:focus {
+    background: #ddd;
+}
+
 .game {
-    display: flex;
+    display: grid;
+    justify-content: center;
     flex-direction: row;
+    padding-top: 80px;
 }
 
 .game-info {
-    margin-left: 20px;
+    margin-left: 30px;
 }
