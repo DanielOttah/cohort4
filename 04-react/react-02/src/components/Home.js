@@ -14,17 +14,17 @@ class Home extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             React Project Experimentation
-            <p>
-              Click on <code>svg files</code> to navigate to other pages.
-              <ul style={{ textAlign: "left" }}>
-                <li>1st icon - Home</li>
-                <li>2nd icon - Tic-Tac-Toe</li>
-                <li>3rd icon - Account</li>
-                <li>4th icon - Cities</li>
-              </ul>
-
             </p>
-          </p>
+          <p>
+            Click on <code>svg files</code> to navigate to other pages.
+              </p>
+          <ul style={{ textAlign: "left" }}>
+            <li>1st icon - Home</li>
+            <li>2nd icon - Tic-Tac-Toe</li>
+            <li>3rd icon - Account</li>
+            <li>4th icon - Cities</li>
+          </ul>
+
         </header>
       </div>
     );
