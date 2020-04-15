@@ -101,7 +101,7 @@ export class Community {
             northLat[i] = parseFloat(this.newCt.allCities[i].latitude);
 
         }
-        cnt = northLat.indexOf(Math.max(...northLat));
+        let cnt = northLat.indexOf(Math.max(...northLat));
         returnVal.push(northName[cnt], northLat[cnt])
 
         return returnVal;
@@ -167,27 +167,28 @@ export class Community {
         return count;
     }
     async loadAPICity() {
-        let apiData = await this.postData(this.url + 'clear');
-        apiData = await this.postData(this.url + 'all');
-        apiData = await this.getData(this.url + 'load');
+        // let apiData = await this.postData(this.url + 'clear');
+        let apiDat = await fetch(this.url + 'clear');
+        apiDat = await fetch(this.url + 'load');
+        let apiData = await apiDat.json();
+        // apiData = await this.postData(this.url + 'all');
+        // apiData = await this.getData(this.url + 'load');
         for (let r = 0; r < apiData.length; r++) {
             this.newCt.allCities.push(apiData[r]);
         }
         console.log(this.newCt.allCities);
-
         return apiData;
-
     }
-    async getData(URL = '') {
-        let json;
-        const response = await fetch(URL);
-        if (response.ok) { // if HTTP-status is 200-299            
-            json = await response.json(); // get the response body (the method explained below)
-        } else {
-            alert("HTTP-Error: " + response.status);
-        }
-        return json;
-    }
+    // async getData(URL = '') {
+    //     let json;
+    //     const response = await fetch(URL);
+    //     if (response.ok) { // if HTTP-status is 200-299            
+    //         json = await response.json(); // get the response body (the method explained below)
+    //     } else {
+    //         alert("HTTP-Error: " + response.status);
+    //     }
+    //     return json;
+    // }
 
     async upDateData(ct, upDateIten, upDatData) {
         // let cnt = this.getindexOfCity(this.newCt.allCities[0].name);
@@ -268,7 +269,7 @@ export class Community {
     }
     apiPostData = async () => {
         let apiData = await this.postData(this.url + 'all');
-        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 4])
+        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
         apiData = await this.postData(this.url + 'all');
         console.log(apiData);
 
