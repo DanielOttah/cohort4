@@ -98,4 +98,6 @@ export default React_Main_Concepts;
         // componentWillUnmount - the method runs code to 'unmounts' components or elements that have been removed from the code 
 
 //=========== CONDITIONAL RENDERING ==============
-//What is conditional rendering? How can you prevent a component from rendering?
+//What is conditional rendering? Rendering a component based on one or multiple conditions
+// How can you prevent a component from rendering? the render method in the cpomponent should return 'null'
+//How can you render an array of components in React? 
