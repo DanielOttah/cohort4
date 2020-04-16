@@ -72,9 +72,9 @@ export class City {
 export class Community {
     constructor() {
         this.newCt = new City();
-        this.cityKey = 3;
-        // this.url = 'http://localhost:5000/';
-        this.url = 'http://127.0.0.1:5000/';
+        this.cityKey;
+        this.url = 'http://localhost:5000/';
+        //  this.url = 'http://127.0.0.1:5000/';
     }
 
     whichSphere(ct) {
@@ -137,7 +137,7 @@ export class Community {
         return this.newCt.allCities[count].population;
     }
     createCity(nam, lat, lon, popul) {
-
+        this.cityKey = this.newCt.allCities.length;
         let cityObj = {};
         cityObj.key = ++this.cityKey;
         cityObj.name = nam;
@@ -148,11 +148,14 @@ export class Community {
         //======================================
         this.apiPostData();
     }
+
     async deleteCity(ct) {
-        let count = this.getindexOfCity(ct);
+        let cityNm = ct.substr(1, ct.length);//Using this because a white space was added to the name so the caret arrows can be used in the accordion button 
+        let count = this.getindexOfCity(cityNm);
+        const getKey = this.newCt.allCities[count].key.toString();
         this.newCt.allCities.splice(count, 1);
-        const getKey = this.newCt.allCities[count].key;
-        let apiData = await this.postData(this.url + 'delete', { key: `${getKey - 1}` });
+
+        let apiData = await this.postData(this.url + 'delete', { key: getKey });
         apiData = await this.postData(this.url + 'all');
         console.log(apiData);
 
@@ -167,28 +170,18 @@ export class Community {
         return count;
     }
     async loadAPICity() {
-        // let apiData = await this.postData(this.url + 'clear');
-        let apiDat = await fetch(this.url + 'clear');
-        apiDat = await fetch(this.url + 'load');
-        let apiData = await apiDat.json();
-        // apiData = await this.postData(this.url + 'all');
-        // apiData = await this.getData(this.url + 'load');
+        let apiData;
+        let apiCity = await fetch(this.url + 'clear');
+        apiCity = await fetch(this.url + 'load');
+        apiCity = await fetch(this.url + 'all');
+        apiData = await apiCity.json();
+
         for (let r = 0; r < apiData.length; r++) {
             this.newCt.allCities.push(apiData[r]);
         }
         console.log(this.newCt.allCities);
         return apiData;
     }
-    // async getData(URL = '') {
-    //     let json;
-    //     const response = await fetch(URL);
-    //     if (response.ok) { // if HTTP-status is 200-299            
-    //         json = await response.json(); // get the response body (the method explained below)
-    //     } else {
-    //         alert("HTTP-Error: " + response.status);
-    //     }
-    //     return json;
-    // }
 
     async upDateData(ct, upDateIten, upDatData) {
         // let cnt = this.getindexOfCity(this.newCt.allCities[0].name);
@@ -199,9 +192,8 @@ export class Community {
             let lat = parseFloat(this.newCt.allCities[ct].latitude);
             let lon = parseFloat(this.newCt.allCities[ct].longitude);
             let popul = parseInt(this.newCt.allCities[ct].population);
-
             apiDataUpdate = await this.postData(this.url + 'update', {
-                key: `${getKey}`,
+                key: getKey,
                 latitude: lat,
                 longitude: lon,
                 name: `${upDatData}`,
@@ -214,7 +206,7 @@ export class Community {
             let popul = parseInt(this.newCt.allCities[ct].population);
 
             apiDataUpdate = await this.postData(this.url + 'update', {
-                key: `${getKey}`, latitude: lat,
+                key: getKey, latitude: lat,
                 longitude: lon, name: this.newCt.allCities[ct].name,
                 population: popul
             });
@@ -225,7 +217,7 @@ export class Community {
             let popul = parseInt(this.newCt.allCities[ct].population);
 
             apiDataUpdate = await this.postData(this.url + 'update', {
-                key: `${getKey}`, latitude: lat,
+                key: getKey, latitude: lat,
                 longitude: lon, name: this.newCt.allCities[ct].name,
                 population: popul
             });
@@ -236,18 +228,19 @@ export class Community {
             let popul = parseInt(upDatData);
 
             apiDataUpdate = await this.postData(this.url + 'update', {
-                key: `${getKey}`, latitude: lat,
+                key: getKey, latitude: lat,
                 longitude: lon, name: this.newCt.allCities[ct].name, population: popul
             });
         }
-        apiDataUpdate = await this.postData(this.url + 'all');
-        console.log(apiDataUpdate);
+        apiDataUpdate = await fetch(this.url + 'all');
+        let updatedCity = await apiDataUpdate.json();
+        console.log(updatedCity);
 
     }
-    async postData(URL = '', data = {}) {
+    async postData(link = '', data = {}) {
 
         // Default options are marked with *
-        const response = await fetch(URL, {
+        const response = await fetch(link, {
             method: 'POST',     // *GET, POST, PUT, DELETE, etc.
             mode: 'cors',       // no-cors, *cors, same-origin
             cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
@@ -268,16 +261,12 @@ export class Community {
         return json;
     }
     apiPostData = async () => {
-        let apiData = await this.postData(this.url + 'all');
-        apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
-        apiData = await this.postData(this.url + 'all');
-        console.log(apiData);
+        let apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
+        apiData = await this.postData(this.url + 'save', this.newCt.allCities[this.cityKey - 1]);//
 
-
-    }
-    apiSaveData = async () => {
-        let apiData = await this.postData(this.url + 'save');
-        console.log("Save status: ", apiData.status);
+        // apiData = await fetch(this.url + 'all');
+        // let updatedCity = await apiData.json();
+        // console.log(updatedCity);
 
     }
 

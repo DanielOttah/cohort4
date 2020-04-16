@@ -17,14 +17,16 @@ window.addEventListener('load', loadCities);
 const createCityCard = (cnt) => {
     let btnCity = document.createElement("button"); //Create Accordion Button
     btnCity.className = "accordion1"; //Give button class
-    btnCity.id = `btnCity${cnt}`; //Give button id
-    let city = ct.newCt.allCities[cnt].name; //get text that will be on button
+    btnCity.classList.add("fa", "fa-angle-double-right");
+    let city = " " + ct.newCt.allCities[cnt].name; //get text that will be on button | a space was added to give room for the caret arrow
+    btnCity.id = `btnCity${city}`; //Give button id
     btnCity.appendChild(document.createTextNode(city)); //place text on button
+
     cities.appendChild(btnCity); //add accordion button to page
     let div1 = document.createElement('div'); //Container holding all the infoirmation
     div1.className = "pullLeft";
     div1.classList.add("panelShow");
-    div1.id = `infoContainer${cnt}`;
+    div1.id = `infoContainer ${city}`; // A space was added so it will match with the btnCity Id
     div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(city)}`));
     div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(city)}`));
     div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[cnt].latitude}`));
@@ -69,7 +71,6 @@ function addNewCity() {
             ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
             alert(`${cityName.value} has been entered succesfully.`);
             count = ct.newCt.allCities.length;
-            console.log(count);
             createCityCard(count - 1);
             clearAllEntries();
         }
@@ -125,12 +126,16 @@ function cityButtons() {
     let elId = getElementClicked(event); //get element
     let num = elId.id.substring(7, elId.length); //get id number
     if (elId.id.includes("btnCity")) {
-        let cont = document.getElementById(`infoContainer${num}`);
+        let cont = document.getElementById(`infoContainer ${num}`);
         if (cont.style.display == "block") {
+            elId.classList.remove("fa-angle-double-down");
             cont.style.display = "none";
+            elId.classList.add("fa", "fa-angle-double-right");
         } else {
+            elId.classList.remove("fa-angle-double-right");
             cont.style.display = "block";
             document.querySelector("#gmap_canvas1").src = `https://maps.google.com/maps?q=${(elId.textContent).toLowerCase()}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+            elId.classList.add("fa", "fa-angle-double-down");
         }
     } else if (elId.id.includes("delete")) {
         let cityToDelete = elId.parentNode.previousElementSibling.textContent; //get name of city to delete
@@ -252,13 +257,14 @@ const getCityInformation = async () => {
             myAPICity.allAPICities.push(myCity[0]);//push the object inside the array retieved above to the 'myAPICity.allAPICities' that stores all the cities
             let btnCity = document.createElement("button"); //Create Accordion Button
             btnCity.className = "accordion1"; //Give button class
+            btnCity.classList.add("fa", "fa-angle-double-right");
             btnCity.id = `btnCity${apiCityInput.value}`; //Give button id
-            btnCity.appendChild(document.createTextNode(apiCityInput.value.toUpperCase())); //place text on button
+            btnCity.appendChild(document.createTextNode(` ${apiCityInput.value.toUpperCase()}`)); //place text on button
             apiCities.appendChild(btnCity); //add accordion button to page
             let apidiv1 = document.createElement('div'); //Container holding all city information
             apidiv1.className = "pullLeft"; // assign className
             apidiv1.classList.add("panelShow"); //add another class to div
-            apidiv1.id = `infoContainer ${apiCityInput.value}`; // give div an id
+            apidiv1.id = `infoContainer  ${(apiCityInput.value).toLowerCase()}`; // give div an id
 
             apidiv1.appendChild(createPElement(`Country of City: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].name}`)); // display name nb accessed the info direclty by getting the index from the array and retrieving the value using the keys
             apidiv1.appendChild(createPElement(`Calling Codes: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].callingCodes[0]}`)); // display calling code
@@ -282,6 +288,7 @@ const getCityInformation = async () => {
             apidiv1.appendChild(createButtonElement(`Delete City`)); //append button delete
             apidiv1.appendChild(createButtonElement(`Learn More`)); // append button learn more
             apiCities.appendChild(apidiv1);
+
         }
     } catch (error) {
         alert(error);
@@ -292,13 +299,19 @@ const apiCityButton = () => {
     // try {
     let elId = getElementClicked(event); //get element
     if (elId.id.includes("btnCity")) {
+
+
         let cont = document.getElementById(`infoContainer ${elId.textContent.toLowerCase()}`); // open info div if button is clicked
 
         if (cont.style.display == "block") {
+            elId.classList.remove("fa-angle-double-down");
             cont.style.display = "none";
+            elId.classList.add("fa", "fa-angle-double-right");
         } else {
+            elId.classList.remove("fa-angle-double-right");
             cont.style.display = "block";
             document.querySelector("#apiGmap_canvas1").src = `https://maps.google.com/maps?q=${(elId.textContent).toLowerCase()}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+            elId.classList.add("fa", "fa-angle-double-down");
         }
     } else if (elId.id.includes("delete")) { // if delete is clicked, delete the city
         let cityToDelete = elId.parentNode.previousElementSibling.textContent.toLowerCase(); //get name of city to delete
