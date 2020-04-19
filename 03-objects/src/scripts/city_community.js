@@ -136,7 +136,17 @@ export class Community {
         }
         return this.newCt.allCities[count].population;
     }
-    createCity(nam, lat, lon, popul) {
+    async getCityTemp(city) {
+        let temp = [];
+        let city_temp = await fetch(`http://api.weatherapi.com/v1/current.json?key=f9eb724cfbe348d5a00114754201904&q=${city}`);
+        const json = await city_temp.json();
+        temp.push(parseFloat(json.current.temp_c).toFixed(2));
+        temp.push(parseFloat(json.current.feelslike_c).toFixed(2));
+        return temp;
+
+    }
+    async createCity(nam, lat, lon, popul, saveCity) {
+        let city_temp = await this.getCityTemp(nam);
         this.cityKey = this.newCt.allCities.length;
         let cityObj = {};
         cityObj.key = ++this.cityKey;
@@ -144,9 +154,10 @@ export class Community {
         cityObj.latitude = parseFloat(lat);
         cityObj.longitude = parseFloat(lon);
         cityObj.population = parseInt(popul);
+        cityObj.temp = city_temp;
         this.newCt.allCities.push(cityObj);
         //======================================
-        this.apiPostData();
+        this.apiPostData(saveCity);
     }
 
     async deleteCity(ct) {
@@ -176,6 +187,11 @@ export class Community {
         apiCity = await fetch(this.url + 'all');
         apiData = await apiCity.json();
 
+        for (let r = 0; r < apiData.length; r++) {
+            let temp = [];
+            temp = await this.getCityTemp(apiData[r].name);
+            apiData[r].temp = temp; // Assign temperature values to the cities retireved from the server
+        }
         for (let r = 0; r < apiData.length; r++) {
             this.newCt.allCities.push(apiData[r]);
         }
@@ -259,13 +275,23 @@ export class Community {
         // console.log(json, typeof(json));
         return json;
     }
-    apiPostData = async () => {
-        let apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
-        apiData = await this.postData(this.url + 'save', this.newCt.allCities[this.cityKey - 1]);//
+    apiPostData = async (saveCity_q) => {
 
-        // apiData = await fetch(this.url + 'all');
-        // let updatedCity = await apiData.json();
-        // console.log(updatedCity);
+        if (saveCity_q == true) {
+            let apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1]);
+            apiData = await this.postData(this.url + 'save', this.newCt.allCities[this.cityKey - 1]);// save city cos checkbox was clicked
+            apiData = await fetch(this.url + 'all');
+            const res = await apiData.json();
+            console.log(res);
+        } else {
+            let apiData = await this.postData(this.url + 'add', this.newCt.allCities[this.cityKey - 1])
+            apiData = await fetch(this.url + 'all');
+            const res = await apiData.json();
+            console.log(res);
+        }
+
+
+
 
     }
 

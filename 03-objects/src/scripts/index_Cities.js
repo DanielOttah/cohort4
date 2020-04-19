@@ -10,6 +10,7 @@ addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
 getGenInfo.addEventListener('click', genCityInformation);
+// saveCity.addEventListener("click", saveCityToServer);
 
 window.addEventListener('load', loadCities);
 
@@ -27,6 +28,8 @@ const createCityCard = (cnt) => {
     div1.className = "pullLeft";
     div1.classList.add("panelShow");
     div1.id = `infoContainer ${city}`; // A space was added so it will match with the btnCity Id
+    div1.appendChild(createPElement(`Current Temperature (°Cdeg): ${ct.newCt.allCities[cnt].temp[0]}`));
+    div1.appendChild(createPElement(`Temperature feels like (°Cdeg): ${ct.newCt.allCities[cnt].temp[1]}`));
     div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(city)}`));
     div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(city)}`));
     div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[cnt].latitude}`));
@@ -53,14 +56,23 @@ async function loadCities() {
         alert("Failed to load cities from server! Please confirm the server is running", err)
     }
 }
+function saveCityToServer() {
+    if (saveCity.checked) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
-function addNewCity() {
+async function addNewCity() {
 
     try {
         let cityLat = parseFloat(cityLatitude.value);
         let cityLon = parseFloat(cityLongitude.value);
         let cityPop = parseFloat(cityPopulation.value);
         let cityNam = cityName.value;
+
         if (cityLatitude.value == "" || cityLongitude.value == "" || cityPopulation.value == "" || cityName.value == "") {
             throw "Error! Please check your input values again - No entries in one or more fields.";
         } else if (cityLat < 0 || cityLon < 0 || cityPop < 0) {
@@ -68,7 +80,8 @@ function addNewCity() {
         } else if (isNaN(cityLatitude.value - 1) || isNaN(cityLongitude.value - 1) || isNaN(cityPopulation.value - 1)) {
             throw "Error! Please check your input values again - invalid entries entered."
         } else {
-            ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value);
+            ct.getCityTemp(cityName.value);
+            await ct.createCity(cityName.value, cityLatitude.value, cityLongitude.value, cityPopulation.value, saveCityToServer());
             alert(`${cityName.value} has been entered succesfully.`);
             count = ct.newCt.allCities.length;
             createCityCard(count - 1);
@@ -255,10 +268,15 @@ const getCityInformation = async () => {
         }
         else {
             let myCity = await myAPICity.getRealCityData(findCity) //Call getRealCityData() passing city name as argument and Get city data from api (nb data comes back as an array)
-
-            myAPICity.allAPICities.push(myCity[0]);//push the object inside the array retieved above to the 'myAPICity.allAPICities' that stores all the cities
-            createCard(findCity)
-            console.log(myCity);
+            if (myCity.length > 1) {//Used the if because of Rome
+                myAPICity.allAPICities.push(myCity[1]);//push the object inside the array retieved above to the 'myAPICity.allAPICities' that stores all the cities
+                createCard(findCity)
+                console.log(myCity);
+            } else if (myCity.length == 1) {
+                myAPICity.allAPICities.push(myCity[0]);//push the object inside the array retieved above to the 'myAPICity.allAPICities' that stores all the cities
+                createCard(findCity)
+                console.log(myCity);
+            }
 
         }
     } catch (error) {
@@ -313,22 +331,30 @@ const createCard = (_FindCtiy) => {
     apidiv1.className = "pullLeft"; // assign className
     apidiv1.classList.add("panelShow"); //add another class to div
     apidiv1.id = `infoContainer  ${(fc).toLowerCase()}`; // give div an id   
+    apidiv1.appendChild(createPElement(`Native Name: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].nativeName}`)); //Namtive Name
     apidiv1.appendChild(createPElement(`Country of City: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].name}`)); // display name nb accessed the info direclty by getting the index from the array and retrieving the value using the keys
     apidiv1.appendChild(createPElement(`Calling Codes: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].callingCodes[0]}`)); // display calling code
     apidiv1.appendChild(createPElement(`Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].region}`)); // display region
     apidiv1.appendChild(createPElement(`Sub-Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].subregion}`)); // display subregion
+    apidiv1.appendChild(createPElement(`Time-Zone: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].timezones[0]}`)); // display time zone
     apidiv1.appendChild(createPElement(`Population: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].population}`)); // display population
     let latitude = myAPICity.allAPICities[myAPICity.getCityIndex(fc)].latlng[0]; //get latitude
     let longitude = myAPICity.allAPICities[myAPICity.getCityIndex(fc)].latlng[1]; // get longitude
     apidiv1.appendChild(createPElement(`Location (Lat|Lon): ${latitude}° | ${longitude}°`)); // display latitude and longitude
     apidiv1.appendChild(createPElement(`Land Area: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].area}`)); // display area
+    let cntry_boarders = myAPICity.allAPICities[myAPICity.getCityIndex(fc)].borders; // Get all country borders
+    let boarder = "";
+    for (let i = 0; i < cntry_boarders.length - 1; i++) {
+        boarder += `${cntry_boarders[i]} | `; // concatenate all borders into single string except the last country hence the 'cntry_boarders.length - 1'
+    }
+    apidiv1.appendChild(createPElement(`Border Country(s): ${boarder} ${cntry_boarders[cntry_boarders.length - 1]}`)); // add last country & display borders
 
     let link = document.createElement('a'); // create a tag for links
     link.setAttribute("href", `${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].flag}`); //set attribute for a tag
     link.setAttribute("target", "_blank");//set attribute for a tag
     link.setAttribute("style", "color:blue");//set attribute for a tag
     link.appendChild(document.createTextNode("Country Flag")); //append text to a tag
-    apidiv1.appendChild(link); // append a tag to div
+    apidiv1.appendChild(link); // append 'a' tag to div
 
     let h = document.createElement("hr"); // create horizontal line
     apidiv1.appendChild(h);// append horizontal line
