@@ -8,7 +8,7 @@ export class getAPICities {
         try {
             let count = 0;
             for (let i = 0; i < this.allAPICities.length; i++) {
-                if (ctName == this.allAPICities[i].capital.toLowerCase()) {
+                if (ctName === this.allAPICities[i].capital.toLowerCase()) {
                     count = i;
                 }
             }
@@ -36,6 +36,7 @@ export class getAPICities {
     getRealCityData = async (ct) => {
         try {
             let data = await this.getCity(ct); //get the parsed data
+            // this.allAPICities.push(data[0]);
             return data; //return the data           
         } catch (error) {
             // alert(`${cityName} is not a capital city.`, error);

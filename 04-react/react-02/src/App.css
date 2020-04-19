@@ -12,9 +12,17 @@
     pointer-events: none;
 }
 
+.Svg-logo:hover {
+    /* filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%); */
+}
+
 .Svg-alt-logo {
     height: 5vmin;
     pointer-events: none;
+}
+
+.Svg-alt-logo:hover {
+    /* filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%); */
 }
 
 @media (prefers-reduced-motion: no-preference) {

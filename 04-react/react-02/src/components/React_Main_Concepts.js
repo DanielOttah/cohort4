@@ -92,6 +92,7 @@ export default React_Main_Concepts;
 // Why are they such? 
         // If modified directly, React-Dom wouldn't render it;
 
+
 //======= LIFE-CYCLE METHODS ===================
 //What are some of the common life cycle methods in React? When would you use them?
         // componentDidMount - The method is called after render() and used to 'mount' codes that need to be ran
@@ -101,3 +102,17 @@ export default React_Main_Concepts;
 //What is conditional rendering? Rendering a component based on one or multiple conditions
 // How can you prevent a component from rendering? the render method in the cpomponent should return 'null'
 //How can you render an array of components in React? 
+        // It can be rendered using curly braces and 'mapped' through e.g. 
+        // if we have an array - const numbers = [1, 2, 3, 4, 5];
+        //nb 'Keys' are important when working with list/array of components 'cos it helps React identify which items have changed, are added, or are removed
+        // We map through to create a list of element - const listItems = numbers.map((number) => <li keys={number.toString()}>{number}</li>); 
+        // Render listItems in the React-DOM unfer <ul> tag - ReactDOM.render(<ul>{listItems}</ul>,document.getElementById('root'));
+
+// How can you extract components with keys? Since the 'key' attribute cannot be accessed, the component is given thesame value as the 'key' so that
+    //the key can be accessed through the id
+
+
+//What are special considerations for forms in React? 
+//What are controlled and uncontrolled components? 
+//What are the benefits and drawbacks of either?
+

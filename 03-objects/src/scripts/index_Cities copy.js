@@ -5,7 +5,7 @@ import { getAPICities } from './fetchcityAPI.js';
 
 let ct = new Community();
 let count = ct.newCt.allCities.length; //Get number of cities
-let cityToEdit, cityTabToEdit;
+let cityToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);

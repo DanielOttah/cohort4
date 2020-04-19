@@ -5,7 +5,7 @@ import { getAPICities } from './fetchcityAPI.js';
 
 let ct = new Community();
 let count; //Get number of cities
-let cityToEdit, cityTabToEdit;
+let cityToEdit;
 addCity.addEventListener('click', addNewCity);
 cities.addEventListener('click', cityButtons);
 UpdateCity.addEventListener('click', editCityInformation);
@@ -249,45 +249,16 @@ const myAPICity = new getAPICities();
 
 const getCityInformation = async () => {
     try {
-        if ((await myAPICity.getRealCityData(apiCityInput.value)).status == 404) {
-            throw `An error occured, ${apiCityInput.value} is not a capital city in Europe.`;
+        let findCity = apiCityInput.value
+        if ((await myAPICity.getRealCityData(findCity)).status == 404) {
+            throw `An error occured, ${findCity} is not a capital city in Europe.`;
         }
         else {
-            let myCity = await myAPICity.getRealCityData(apiCityInput.value) //Call getRealCityData() passing city name as argument and Get city data from api (nb data comes back as an array)
+            let myCity = await myAPICity.getRealCityData(findCity) //Call getRealCityData() passing city name as argument and Get city data from api (nb data comes back as an array)
+
             myAPICity.allAPICities.push(myCity[0]);//push the object inside the array retieved above to the 'myAPICity.allAPICities' that stores all the cities
-            let btnCity = document.createElement("button"); //Create Accordion Button
-            btnCity.className = "accordion1"; //Give button class
-            btnCity.classList.add("fa", "fa-angle-double-right");
-            btnCity.id = `btnCity${apiCityInput.value}`; //Give button id
-            btnCity.appendChild(document.createTextNode(` ${apiCityInput.value.toUpperCase()}`)); //place text on button
-            apiCities.appendChild(btnCity); //add accordion button to page
-            let apidiv1 = document.createElement('div'); //Container holding all city information
-            apidiv1.className = "pullLeft"; // assign className
-            apidiv1.classList.add("panelShow"); //add another class to div
-            apidiv1.id = `infoContainer  ${(apiCityInput.value).toLowerCase()}`; // give div an id
-
-            apidiv1.appendChild(createPElement(`Country of City: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].name}`)); // display name nb accessed the info direclty by getting the index from the array and retrieving the value using the keys
-            apidiv1.appendChild(createPElement(`Calling Codes: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].callingCodes[0]}`)); // display calling code
-            apidiv1.appendChild(createPElement(`Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].region}`)); // display region
-            apidiv1.appendChild(createPElement(`Sub-Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].subregion}`)); // display subregion
-            apidiv1.appendChild(createPElement(`Population: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].population}`)); // display population
-            let latitude = myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].latlng[0]; //get latitude
-            let longitude = myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].latlng[1]; // get longitude
-            apidiv1.appendChild(createPElement(`Location (Lat|Lon): ${latitude}° | ${longitude}°`)); // display latitude and longitude
-            apidiv1.appendChild(createPElement(`Land Area: ${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].area}`)); // display area
-
-            let link = document.createElement('a'); // create a tag for links
-            link.setAttribute("href", `${myAPICity.allAPICities[myAPICity.getCityIndex(apiCityInput.value)].flag}`); //set attribute for a tag
-            link.setAttribute("target", "_blank");//set attribute for a tag
-            link.setAttribute("style", "color:blue");//set attribute for a tag
-            link.appendChild(document.createTextNode("Country Flag")); //append text to a tag
-            apidiv1.appendChild(link); // append a tag to div
-
-            let h = document.createElement("hr"); // create horizontal line
-            apidiv1.appendChild(h);// append horizontal line
-            apidiv1.appendChild(createButtonElement(`Delete City`)); //append button delete
-            apidiv1.appendChild(createButtonElement(`Learn More`)); // append button learn more
-            apiCities.appendChild(apidiv1);
+            createCard(findCity)
+            console.log(myCity);
 
         }
     } catch (error) {
@@ -328,6 +299,42 @@ const apiCityButton = () => {
     // } catch (error) {
     //     alert('An error occured! Can not complete operation.', error);
     // }
+}
+
+const createCard = (_FindCtiy) => {
+    let fc = _FindCtiy.toLowerCase();
+    let btnCity = document.createElement("button"); //Create Accordion Button
+    btnCity.className = "accordion1"; //Give button class
+    btnCity.classList.add("fa", "fa-angle-double-right");
+    btnCity.id = `btnCity${fc}`; //Give button id
+    btnCity.appendChild(document.createTextNode(` ${fc.toUpperCase()}`)); //place text on button
+    apiCities.appendChild(btnCity); //add accordion button to page
+    let apidiv1 = document.createElement('div'); //Container holding all city information
+    apidiv1.className = "pullLeft"; // assign className
+    apidiv1.classList.add("panelShow"); //add another class to div
+    apidiv1.id = `infoContainer  ${(fc).toLowerCase()}`; // give div an id   
+    apidiv1.appendChild(createPElement(`Country of City: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].name}`)); // display name nb accessed the info direclty by getting the index from the array and retrieving the value using the keys
+    apidiv1.appendChild(createPElement(`Calling Codes: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].callingCodes[0]}`)); // display calling code
+    apidiv1.appendChild(createPElement(`Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].region}`)); // display region
+    apidiv1.appendChild(createPElement(`Sub-Region: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].subregion}`)); // display subregion
+    apidiv1.appendChild(createPElement(`Population: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].population}`)); // display population
+    let latitude = myAPICity.allAPICities[myAPICity.getCityIndex(fc)].latlng[0]; //get latitude
+    let longitude = myAPICity.allAPICities[myAPICity.getCityIndex(fc)].latlng[1]; // get longitude
+    apidiv1.appendChild(createPElement(`Location (Lat|Lon): ${latitude}° | ${longitude}°`)); // display latitude and longitude
+    apidiv1.appendChild(createPElement(`Land Area: ${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].area}`)); // display area
+
+    let link = document.createElement('a'); // create a tag for links
+    link.setAttribute("href", `${myAPICity.allAPICities[myAPICity.getCityIndex(fc)].flag}`); //set attribute for a tag
+    link.setAttribute("target", "_blank");//set attribute for a tag
+    link.setAttribute("style", "color:blue");//set attribute for a tag
+    link.appendChild(document.createTextNode("Country Flag")); //append text to a tag
+    apidiv1.appendChild(link); // append a tag to div
+
+    let h = document.createElement("hr"); // create horizontal line
+    apidiv1.appendChild(h);// append horizontal line
+    apidiv1.appendChild(createButtonElement(`Delete City`)); //append button delete
+    apidiv1.appendChild(createButtonElement(`Learn More`)); // append button learn more
+    apiCities.appendChild(apidiv1);
 }
 
 

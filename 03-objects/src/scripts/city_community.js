@@ -184,8 +184,7 @@ export class Community {
     }
 
     async upDateData(ct, upDateIten, upDatData) {
-        // let cnt = this.getindexOfCity(this.newCt.allCities[0].name);
-        const getKey = this.newCt.allCities[ct].key;
+        const getKey = this.newCt.allCities[ct].key.toString();
         let apiDataUpdate;
 
         if (upDateIten == "name") {

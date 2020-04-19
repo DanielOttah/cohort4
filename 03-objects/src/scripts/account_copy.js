@@ -37,14 +37,14 @@ export class AccountController {
     returnImageAndSignature() {
         let imgSing = [];
         let img = ["./scripts/pictures/img1.jpg",
+            "./scripts/pictures/img9.jpg",
+            "./scripts/pictures/img7.jpg",
+            "./scripts/pictures/img5.jpg",
             "./scripts/pictures/img2.jpg",
             "./scripts/pictures/img3.jpg",
             "./scripts/pictures/img4.jpg",
-            "./scripts/pictures/img5.jpg",
             "./scripts/pictures/img6.jpg",
-            "./scripts/pictures/img7.jpg",
             "./scripts/pictures/img8.jpg",
-            "./scripts/pictures/img9.jpg",
             "./scripts/pictures/img10.jpg",];
         let sign = ["./scripts/pictures/sign1.png",
             "./scripts/pictures/sign2.png",
