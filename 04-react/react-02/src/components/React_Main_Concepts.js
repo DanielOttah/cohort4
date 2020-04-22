@@ -112,7 +112,22 @@ export default React_Main_Concepts;
     //the key can be accessed through the id
 
 
-//What are special considerations for forms in React? 
-//What are controlled and uncontrolled components? 
-//What are the benefits and drawbacks of either?
+//What are special considerations for forms in React? Forms naturally keep an internal state and as such will work differently in React.
+//What are controlled and uncontrolled components? Controlled components are components that contain elements that naturally have a state  
+                                                    //(this state is updated on user input e.g. <input>, <textArea>, <select> ) but this 
+                                                    //state is now solely controlled by React. 
+                                                    //Uncontrolled components are components that conatin elements where React is not in full control of
+                                                    //the states of those elements.
+//What are the benefits and drawbacks of either?Pros: The iput value is always driven by React and react can keep track of any changes
+                                                    // It's value can be 'passed' to other elements and reset fro other event handlers
+                                                    // Con: A bit more code typing is required i.e. an event handler.
+//What is React recommendation on composition, inheritance and specialization? 1. There isn't any real need for use of inheritance as component composition is flexible enough 
+                                                    //to achieve the desired result
+
+//Discuss minimal representation of state - This is the smallest presentattion and identifying the element taht have states i.e. if an array is created, 
+                                            // the count which is bound to change should not be stored in a separate variable, instaed the length property of the array should be used if the count has to be computed
+//Where the state is suggested to live - The closest parent component is suggested to have the state so it can keep track of any changes
+                                            // and be in sync with the elements that mutates
+//inverse data flow - Since the state of the child component is controlled by the parent component, a call-back is necessary from the child component to the parent 
+                                            //component so the state is updated and React updates the app.
 

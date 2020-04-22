@@ -1,3 +1,8 @@
+.home {
+    width: auto;
+    display: block;
+}
+
 .App {
     text-align: center;
 }
@@ -9,20 +14,24 @@
 
 .Svg-logo {
     height: 5vmin;
-    pointer-events: none;
+    padding: 5px;
 }
 
 .Svg-logo:hover {
-    /* filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%); */
+    filter: invert(90%) sepia(6%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
 }
 
 .Svg-alt-logo {
     height: 5vmin;
-    pointer-events: none;
+    padding: 5px;
 }
 
 .Svg-alt-logo:hover {
-    /* filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%); */
+    filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%);
+}
+
+.Svg-alt-logo:active {
+    filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -80,41 +89,4 @@
 }
 
 
-/* 
-.board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-}
-
-.status {
-    margin-bottom: 10px;
-}
-
-.square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-}
-
-.square:focus {
-    outline: none;
-}
-
-.game {
-    display: flex;
-    flex-direction: row;
-}
-
-.game-info {
-    margin-left: 20px;
-} */
+/* Account*/

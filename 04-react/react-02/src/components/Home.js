@@ -2,22 +2,13 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 
-// import { Game } from './components/Game';
-
-
-
 class Home extends React.Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            React Project Experimentation
-            </p>
-          <p>
-            Click on <code>svg files</code> to navigate to other pages.
-              </p>
+          <code>Click on svg files to navigate to other pages.</code>
           <ul style={{ textAlign: "left" }}>
             <li>1st icon - Home</li>
             <li>2nd icon - Tic-Tac-Toe</li>
@@ -27,8 +18,8 @@ class Home extends React.Component {
 
         </header>
       </div>
+
     );
   }
 }
-
 export default Home;

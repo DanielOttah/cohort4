@@ -163,12 +163,13 @@ export class Community {
     async deleteCity(ct) {
         let cityNm = ct.substr(1, ct.length);//Using this because a white space was added to the name so the caret arrows can be used in the accordion button 
         let count = this.getindexOfCity(cityNm);
-        const getKey = this.newCt.allCities[count].key.toString();
+        const getKey = this.newCt.allCities[count];//.key.toString();
         this.newCt.allCities.splice(count, 1);
 
-        let apiData = await this.postData(this.url + 'delete', { key: getKey });
-        apiData = await this.postData(this.url + 'all');
-        console.log(apiData);
+        let apiData = await this.postData(this.url + 'delete', getKey);
+        apiData = await fetch(this.url + 'all');
+        let response = await apiData.json();
+        console.log(response);
 
     }
     getindexOfCity(CtNam) {
