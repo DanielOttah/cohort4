@@ -46,19 +46,30 @@ export class AccountController extends React.Component {
         }
         return counter;
     }
+    deposit_Txn(acc, amt) {
+        let bal = acc + amt;
+        return bal.toFixed(2);
+    }
+    withdraw_Txn(acc, amt) {
+        if (parseFloat(amt) > parseFloat(acc)) {
+            return false;
+        } else {
+            let bal = acc - amt;
+            return bal.toFixed(2);
+        }
+    }
     createNewAccount(name, typeOfAccount, address) {
         let newAccount = {};
-        let acc_Type = typeOfAccount;
         newAccount.Key = ++this.customerCount;
         newAccount.Name = name;
         newAccount.Account_Number = this.genAccNumber();
         newAccount.Address = address;
         newAccount.passport = this.returnImageAndSignature()[0];
         newAccount.signature = this.returnImageAndSignature()[1];
-        newAccount[acc_Type] = 0;
+        newAccount.Accounts = [];
+        newAccount.Accounts.push({ [typeOfAccount]: 0 });
+        // Object.assign(newAccount.Accounts, )
         this.allCustomers.push(newAccount);
-
-        console.log(this.allCustomers);
     }
     render() {
         return null;
@@ -68,21 +79,5 @@ export class AccountController extends React.Component {
 export class AccountCalculator {
 
 }
-export function createNewAccount(props) {
-    // let newAccount = {};
-    // let acc_Type = typeOfAccount;
 
-    // newAccount.Key = ++this.customersCount;
-    // newAccount.Name = name;
-    // newAccount.Account_Number = this.genAccNumber();
-    // newAccount.Address = address;
-    // newAccount.passport = this.returnImageAndSignature()[0];
-    // newAccount.signature = this.returnImageAndSignature()[1];
-    // newAccount[acc_Type] = 0;
-    // this.allCustomers.push(newAccount);
-
-    return console.log("seeing", props.name, props.address, props.typeOfAccount);
-
-
-}
 

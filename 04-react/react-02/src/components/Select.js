@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-export class SelectCustomer extends Component {
+export class Select extends Component {
     render() {
-        const listItem = this.props.customerList.map((items, index) =>
+
+        const listItem = this.props.list.map((items, index) =>
             <ListItem key={index.toString()} value={items} />
         )
         return (
-            <select value={this.props.selectedValue} id={this.props.id} onChange={this.props.onChange}>
+            <select className={this.props.class} value={this.props.selectedValue} id={this.props.id} onChange={this.props.onChange}>
                 <option>Select</option>
                 {listItem}
             </select>
@@ -16,7 +17,7 @@ export class SelectCustomer extends Component {
 }
 
 function ListItem(props) {
-    return <option>{props.value.Name}</option>
+    return <option>{props.value}</option>
 }
 
 

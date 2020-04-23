@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import Img from 'react-image';
+
 
 class ImageComponent extends Component {
     render() {
         return (
-            <span><Img src={this.props.customerPicture} id="imgs" alt="CustomerImage" width="180px" height="140px" /></span>
-            // <img src="./src/pictures/img9.jpg" id="imgs" alt="" width="180px" height="140px" />
+            <div style={this.props.style}>
+                {/* <span ><img className="displayed" src={this.props.customerPicture} id="imgs" alt="CustomerImage" width={this.props.width} height={this.props.height} decode="false" /></span> */}
+                <span ><img className="displayed" src={this.props.customerPicture} id="imgs" alt="CustomerImage" width={this.props.width} height={this.props.height} /></span>
+
+            </div>
         );
     }
 }

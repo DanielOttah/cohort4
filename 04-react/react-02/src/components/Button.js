@@ -3,7 +3,7 @@ import './Account.css'
 
 function ButtonAccordion(props) {
     return (
-        <button className={props.accordion} onClick={props.onClick}>
+        <button className={props.class} onClick={props.onClick} style={props.style}>
             {props.name}
         </button>
     )

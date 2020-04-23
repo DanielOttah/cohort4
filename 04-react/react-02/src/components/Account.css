@@ -7,7 +7,6 @@
     color: rgb(10, 9, 9);
     border-style: outset;
     width: auto;
-    min-height: 100vh;
     padding-top: 10px;
 }
 
@@ -22,6 +21,7 @@
     outline: none;
     font-size: 15px;
     transition: 0.4s;
+    font-weight: bold;
 }
 
 .active,
@@ -39,7 +39,7 @@
 
 .panel {
     padding: 0 18px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
@@ -52,57 +52,92 @@
     }
 }
 
-
-/* SplitPane CSS Style*/
-
-.SplitPane {
-    width: 100%;
-    height: 100%;
-}
-
-.SplitPane-left {
-    float: left;
-    width: 40%;
-    height: 100%;
-}
-
-.SplitPane-right {
-    float: left;
-    width: 60%;
-    height: 100%;
-}
-
-.Left {
-    width: 100%;
-    height: 100%;
-    background: lightblue;
-}
-
-.Right {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    background: rgb(255, 255, 255);
-    align-items: center;
-    justify-content: center;
-    text-justify: auto;
-    background: pink;
-}
-
 .col1_1_1_1 {
     display: grid;
-    grid-template-columns: 1.5fr 0.5fr 1fr 1fr;
+    grid-template-columns: 30% 25% 20% 25%;
+}
+
+.col_1_4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .col1_2_1 {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 20% 45% 35%;
+}
+
+.col_2_2 {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+}
+
+.col40_60 {
+    display: grid;
+    grid-template-columns: 40% 60%;
 }
 
 .padRight {
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
 .padLeft {
+    margin-left: 10px;
+}
+
+.padTop {
+    padding-top: 5px;
+}
+
+.padBottom {
+    padding-bottom: 5px;
+}
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row_4 {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.boder_OutSet {
+    border-style: outset;
+}
+
+.boder_line {
+    border: 1px solid #eee;
+}
+
+.center_text {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 15px;
     padding-left: 10px;
+}
+
+.button_NoBorder {
+    border: none;
+    /* style={{ width: "10px", height: "10px" }} */
+}
+
+table {
+    margin: 5px 5px 5px 5px;
+    border-collapse: collapse;
+    width: 100%;
+    /* height: 100px */
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
