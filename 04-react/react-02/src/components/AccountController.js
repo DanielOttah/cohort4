@@ -14,26 +14,26 @@ export class AccountController extends React.Component {
     }
     returnImageAndSignature() {
         let imgSign = [];
-        let img = ["./src/pictures/img1.jpg",
-            "./src/pictures/img9.jpg",
-            "./src/pictures/img7.jpg",
-            "./src/pictures/img5.jpg",
-            "./src/pictures/img2.jpg",
-            "./src/pictures/img3.jpg",
-            "./src/pictures/img4.jpg",
-            "./src/pictures/img6.jpg",
-            "./src/pictures/img8.jpg",
-            "./src/pictures/img10.jpg",];
-        let sign = ["./src/pictures/sign1.png",
-            "./src/pictures/sign2.png",
-            "./src/pictures/sign3.png",
-            "./src/pictures/sign4.jpg",
-            "./src/pictures/sign5.png",
-            "./src/pictures/sign6.jpg",
-            "./src/pictures/sign7.png",
-            "./src/pictures/sign8.jpg",
-            "./src/pictures/sign9.png",
-            "./src/pictures/sign10.png",];
+        let img = ["/pictures/img1.jpg",
+            "/pictures/img3.jpg",
+            "/pictures/img7.jpg",
+            "/pictures/img2.jpg",
+            "/pictures/img4.jpg",
+            "/pictures/img5.png",
+            "/pictures/img6.jpg",
+            "/pictures/img8.jpg",
+            "/pictures/img9.jpg",
+            "/pictures/img10.jpg",];
+        let sign = ["/pictures/sign1.png",
+            "/pictures/sign2.png",
+            "/pictures/sign3.png",
+            "/pictures/sign4.jpg",
+            "/pictures/sign5.png",
+            "/pictures/sign6.jpg",
+            "/pictures/sign7.png",
+            "/pictures/sign8.jpg",
+            "/pictures/sign9.png",
+            "/pictures/sign10.png",];
         imgSign.push(img[this.customerCount], sign[this.customerCount]);
         return imgSign;
     }

@@ -7,18 +7,8 @@ import { Select } from './Select.js';
 import { Table } from './Table.js';
 import ImageComponent from './ImageComponent.js';
 import DisplayContent from './DisplayContent.js';
-import avatar from '../pictures/avatar.png'
-// import sign from '../pictures/sign.png';
-// import sign1 from '../pictures/sign1.png';
-// import sign2 from '../pictures/sign2.png';
-// import sign3 from '../pictures/sign3.png';
-// import sign4 from '../pictures/sign4.jpg';
-import sign5 from '../pictures/sign5.png';
-// import sign6 from '../pictures/sign6.jpg';
-// import sign7 from '../pictures/sign7.png';
-// import sign8 from '../pictures/sign8.jpg';
-// import sign9 from '../pictures/sign9.png';
-// import sign10 from '../pictures/sign10.png';
+import avatar from '../avatar.png'
+import sign5 from '../sign5.png';
 
 class Account extends Component {
     constructor(props) {
@@ -119,8 +109,6 @@ class Account extends Component {
 
         }
         console.log(accounts)
-        console.log(typeof (sum));
-
         this.setState({ allAccountList: accounts, totalCash: sum });
 
     }
@@ -203,16 +191,28 @@ class Account extends Component {
         let currentUser = this.state.currentUserIndex;
         let userAccounts = this.newCustomer.allCustomers[currentUser].Accounts;
 
-        userAccounts.push({ [this.state.newAccountName]: 0 });
         let allCustomerAccounts = this.getAllAccountOfCustomer(this.newCustomer.allCustomers[currentUser].Accounts)
+        let doesAccountExist;
 
-        this.setState({
-            customerAccounts: this.newCustomer.allCustomers[currentUser].Accounts.length,
-            accountList: allCustomerAccounts
-        })
-        this.getAllAccountList();
-        enterNewAccName.style.maxHeight = null;
-        console.log(this.newCustomer.allCustomers);
+        for (let i = 0; i < allCustomerAccounts.length; i++) {
+            if (allCustomerAccounts[i].includes(this.state.newAccountName)) {
+                doesAccountExist = true;
+            }
+        }
+        if (doesAccountExist === true) {
+            alert('Error, Account already exist!')
+        } else {
+            userAccounts.push({ [this.state.newAccountName]: 0 });
+
+            this.setState({
+                customerAccounts: this.newCustomer.allCustomers[currentUser].Accounts.length,
+                accountList: allCustomerAccounts
+            })
+            this.getAllAccountList();
+            enterNewAccName.style.maxHeight = null;
+            console.log(this.newCustomer.allCustomers);
+        }
+
     }
     handleDisplayAllAccounts(e) {      // Display all accounts of customer
         let selectCustomer = document.getElementById("selectCustomer");
