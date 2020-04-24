@@ -48,14 +48,14 @@ export class AccountController extends React.Component {
     }
     deposit_Txn(acc, amt) {
         let bal = acc + amt;
-        return bal.toFixed(2);
+        return bal;
     }
     withdraw_Txn(acc, amt) {
         if (parseFloat(amt) > parseFloat(acc)) {
             return false;
         } else {
             let bal = acc - amt;
-            return bal.toFixed(2);
+            return bal;
         }
     }
     createNewAccount(name, typeOfAccount, address) {
@@ -68,7 +68,6 @@ export class AccountController extends React.Component {
         newAccount.signature = this.returnImageAndSignature()[1];
         newAccount.Accounts = [];
         newAccount.Accounts.push({ [typeOfAccount]: 0 });
-        // Object.assign(newAccount.Accounts, )
         this.allCustomers.push(newAccount);
     }
     render() {

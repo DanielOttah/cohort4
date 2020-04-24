@@ -73,6 +73,7 @@ class Account extends Component {
                     }
 
                     this.setState({ customerList: customers });
+
                 }
                 enterAccDetails.style.maxHeight = null;
                 console.log(this.newCustomer.allCustomers);
@@ -136,6 +137,8 @@ class Account extends Component {
             for (let i = 0; i < accArray.length; i++) {
                 totalBalance += parseFloat(accArray[i][Object.keys(accArray[i])]);
             }
+            // console.log(accArray[index][Object.keys(accArray[index])]);
+
             this.setState({
                 selectedCustomer: elID,
                 currentUserIndex: index,
@@ -147,7 +150,13 @@ class Account extends Component {
                 customerAccounts: this.newCustomer.allCustomers[index].Accounts.length,
                 accountList: allCustomerAccounts,
                 totalCash: totalBalance
+
             });
+            let displayAllAccounts = document.getElementById("displayAllAccounts");
+            if (displayAllAccounts.style.overflow === "visible") {
+                displayAllAccounts.style.maxHeight = null;
+                displayAllAccounts.style.overflow = "hidden";
+            }
         }
     }
     handleSelectCustomerAccount(e) {        //Display current balance on a selected account
@@ -203,6 +212,7 @@ class Account extends Component {
             alert('Error, Account already exist!')
         } else {
             userAccounts.push({ [this.state.newAccountName]: 0 });
+            allCustomerAccounts = this.getAllAccountOfCustomer(this.newCustomer.allCustomers[currentUser].Accounts)
 
             this.setState({
                 customerAccounts: this.newCustomer.allCustomers[currentUser].Accounts.length,
