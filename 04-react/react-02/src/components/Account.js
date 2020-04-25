@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import './Account.css';
-import Button from './Button.js';
-import InputField from './InputField.js';
-import { AccountController } from './AccountController.js';
-import { Select } from './Select.js';
-import { Table } from './Table.js';
-import ImageComponent from './ImageComponent.js';
-import DisplayContent from './DisplayContent.js';
-import avatar from '../avatar.png'
-import sign5 from '../sign5.png';
+import './Account_Components/Account.css';
+import Button from './Account_Components/Button.js';
+import InputField from './Account_Components/InputField.js';
+import { AccountController } from './Account_Components/AccountController.js';
+import { Select } from './Account_Components/Select.js';
+import DisplayTableOfAllAccounts from './Account_Components/DisplayTableOfAllAccounts.js';
+import ImageComponent from './Account_Components/ImageComponent.js';
+import DisplayContent from './Account_Components/DisplayContent.js';
+import avatar from './Account_Components/avatar.png'
+import sign5 from './Account_Components/sign5.png';
+import { SectionAllAccount, CurrentCash, AccountServices, TotalCash, AddNewAccount, SelectTransaction } from './Account_Components/AccountFunctions';
+
 
 class Account extends Component {
     constructor(props) {
@@ -29,19 +31,8 @@ class Account extends Component {
             allAccountList: [],
             totalCash: ""
         }
-
-        this.handleOpenAccount = this.handleOpenAccount.bind(this);
-        this.handleSelectCustomer = this.handleSelectCustomer.bind(this);
-        this.handleSelectCustomerAccount = this.handleSelectCustomerAccount.bind(this);
-        this.handleEnterNewAccountName = this.handleEnterNewAccountName.bind(this);
-        this.handleNewInputAccountName = this.handleNewInputAccountName.bind(this);
-        this.handleOpenNewAccount = this.handleOpenNewAccount.bind(this);
-        this.handleDisplayAllAccounts = this.handleDisplayAllAccounts.bind(this);
-        this.handleInputAmount = this.handleInputAmount.bind(this);
-        this.handleCompleteTransaction = this.handleCompleteTransaction.bind(this);
-        this.handleDeleteAccount = this.handleDeleteAccount.bind(this);
     }
-    handleAccordionButton() {       //Opens the section to enter a new customer
+    handleAccordionButton = () => {       //Opens the section to enter a new customer
         const enterAccDetails = document.getElementById("enterAccDetails");
         if (enterAccDetails.style.maxHeight) {
             enterAccDetails.style.maxHeight = null;
@@ -50,7 +41,7 @@ class Account extends Component {
         }
 
     }
-    handleOpenAccount() {           //Adds a new customer
+    handleOpenAccount = () => {           //Adds a new customer
         const enterAccDetails = document.getElementById("enterAccDetails");
         try {
             const customer_Name = document.getElementById("customerName").value;
@@ -84,14 +75,14 @@ class Account extends Component {
             alert(err);
         }
     }
-    getAllAccountOfCustomer(obj) {  //Get all accounts of a particular customer
+    getAllAccountOfCustomer = (obj) => {  //Get all accounts of a particular customer
         let allAccs = [];
         for (let i = 0; i < obj.length; i++) {
             allAccs.push(Object.keys(obj[i]));
         }
         return allAccs;
     }
-    getParticularAccount(accList, acc) {
+    getParticularAccount = (accList, acc) => {
         let accIndex;
         for (let i = 0; i < accList.length; i++) {
             if (Object.keys(accList[i]).includes(acc)) {
@@ -100,7 +91,7 @@ class Account extends Component {
         }
         return accIndex;
     }
-    getAllAccountList() {
+    getAllAccountList = () => {
         let accounts = [];
         let sum = 0.00;
         let accArray = this.newCustomer.allCustomers[this.state.currentUserIndex].Accounts
@@ -113,7 +104,7 @@ class Account extends Component {
         this.setState({ allAccountList: accounts, totalCash: sum });
 
     }
-    handleSelectCustomer(e) {       //Display all details of a selected customer from dropdown
+    handleSelectCustomer = (e) => {       //Display all details of a selected customer from dropdown
 
         let elID = e.target.value;
         if (elID === "Select") {
@@ -137,8 +128,6 @@ class Account extends Component {
             for (let i = 0; i < accArray.length; i++) {
                 totalBalance += parseFloat(accArray[i][Object.keys(accArray[i])]);
             }
-            // console.log(accArray[index][Object.keys(accArray[index])]);
-
             this.setState({
                 selectedCustomer: elID,
                 currentUserIndex: index,
@@ -152,14 +141,10 @@ class Account extends Component {
                 totalCash: totalBalance
 
             });
-            let displayAllAccounts = document.getElementById("displayAllAccounts");
-            if (displayAllAccounts.style.overflow === "visible") {
-                displayAllAccounts.style.maxHeight = null;
-                displayAllAccounts.style.overflow = "hidden";
-            }
+
         }
     }
-    handleSelectCustomerAccount(e) {        //Display current balance on a selected account
+    handleSelectCustomerAccount = (e) => {        //Display current balance on a selected account
         let elID = e.target.value;
         if (elID === "Select") {
 
@@ -172,9 +157,10 @@ class Account extends Component {
                 accountCurrentCash: userAccounts[indexOfAccount][elID],
                 selectedCustomerAccount: elID
             })
+            this.getAllAccountList()
         }
     }
-    handleEnterNewAccountName(e) {      //Open dialog to enter a new account
+    handleEnterNewAccountName = (e) => {      //Open dialog to enter a new account
         let selectCustomer = document.getElementById("selectCustomer");
         if (selectCustomer.value === "Select") {
 
@@ -188,14 +174,14 @@ class Account extends Component {
         }
 
     }
-    handleNewInputAccountName(e) {      // Get and set name of new account
+    handleNewInputAccountName = (e) => {      // Get and set name of new account
         let elID = e.target.value;
         this.setState({
             newAccountName: elID
         })
 
     }
-    handleOpenNewAccount(e) {       //Add account to customers' list of account
+    handleOpenNewAccount = (e) => {       //Add account to customers' list of account
         let enterNewAccName = document.getElementById("enterNewAccName");
         let currentUser = this.state.currentUserIndex;
         let userAccounts = this.newCustomer.allCustomers[currentUser].Accounts;
@@ -224,34 +210,13 @@ class Account extends Component {
         }
 
     }
-    handleDisplayAllAccounts(e) {      // Display all accounts of customer
-        let selectCustomer = document.getElementById("selectCustomer");
-        if (selectCustomer.value === "Select") {
-
-
-        }
-        else {
-            let displayAllAccounts = document.getElementById("displayAllAccounts");
-            if (displayAllAccounts.style.maxHeight) {
-                displayAllAccounts.style.maxHeight = null;
-                displayAllAccounts.style.overflow = "hidden";
-            } else {
-                displayAllAccounts.style.maxHeight = displayAllAccounts.scrollHeight + "px";
-                displayAllAccounts.style.overflow = "visible";
-                this.getAllAccountList()
-
-            }
-        }
-
-
-    }
-    handleInputAmount(e) {      // Get amount to deposit, withdraw or transfer
+    handleInputAmount = (e) => {      // Get amount to deposit, withdraw or transfer
         let elID = e.target.value;
         this.setState({
             inputAmount: elID
         })
     }
-    handleCompleteTransaction(e) {      // Complete Transaction
+    handleCompleteTransaction = (e) => {      // Complete Transaction
         let idAmount = document.getElementById("idAmount");
         let selectCustomerAccount = document.getElementById("selectCustomerAccount");
         let selectTransaction = document.getElementById("selectTransaction");
@@ -292,7 +257,7 @@ class Account extends Component {
 
         }
     }
-    handleDeleteAccount(e) {      // Delete Account
+    handleDeleteAccount = (e) => {      // Delete Account
         let selectCustomerAccount = document.getElementById("selectCustomerAccount");
         if (selectCustomerAccount.value === "Select") {
 
@@ -315,114 +280,78 @@ class Account extends Component {
     render() {
 
         return (
+            <div className="container">
+                <div className="Account-Container w3-content w3-container">
 
-            <div className="Account-Container w3-content w3-container">
-
-                <Button name={'Add A New Customer'} class={"accordion"} onClick={this.handleAccordionButton} />
-                <div id="enterAccDetails" className="panel">
-                    <div className="inputRow">
-                        <InputField id={"customerName"} placeholder={"Enter Name Here"} />
-                        <InputField id={"accountName"} placeholder={"Enter Account Name Here"} />
-                        <InputField id={"customerAddress"} placeholder={"Enter Address Here"} />
-                        <Button name={'Open Account'} onClick={this.handleOpenAccount} />
-                    </div>
-                </div>
-                <div>
-                    <fieldset className="padTop">
-                        <legend ><b>Transaction</b></legend>
-                        <div className="col1_1_1_1">
-                            <label> Select Customer:
+                    <Button name={'Add A New Customer'} class={"accordion"} onClick={this.handleAccordionButton} />
+                    <AddNewAccount divId="enterAccDetails" div1Class="panel" div2Class={"inputRow"}
+                        input1Id={"customerName"} input1placeholder={"Enter Name Here"}
+                        input2Id={"accountName"} input2placeholder={"Enter Account Name Here"}
+                        input3Id={"customerAddress"} input3placeholder={"Enter Address Here"}
+                        name={'Open Account'} onClick={this.handleOpenAccount} />
+                    <div>
+                        <fieldset className="padTop">
+                            <legend ><b>Transaction</b></legend>
+                            <div className="col1_1_1_1">
+                                <label> Select Customer:
                             <Select value={this.state.selectedCustomer} id={"selectCustomer"}
-                                    onChange={this.handleSelectCustomer} list={this.state.customerList} />
-                            </label>
-                            <div>
-                                <label> Select Transaction:
-                            <select id="selectTransaction">
-                                        <option value="deposit">Deposit</option>
-                                        <option value="withdraw">Withdraw</option>
-                                        <option value="transfer">Transfer</option>
-
-                                    </select>
+                                        onChange={this.handleSelectCustomer} list={this.state.customerList} />
                                 </label>
+                                <SelectTransaction />
+                                <div>  <InputField id={"idAmount"} inputValue={this.state.inputAmount} onChange={this.handleInputAmount}
+                                    placeholder={"Enter amount $CAD"} readOnly={false} /></div>
+                                <div> <Button name={"Complete Transaction"} onClick={this.handleCompleteTransaction} /></div>
                             </div>
-                            <div>  <InputField id={"idAmount"} inputValue={this.state.inputAmount} onChange={this.handleInputAmount}
-                                placeholder={"Enter amount $CAD"} readOnly={false} /></div>
-                            <div> <Button name={"Complete Transaction"} onClick={this.handleCompleteTransaction} /></div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div id="displayAccDetails" className="">
-                    <fieldset>
-                        <legend ><b>{`${this.state.selectedCustomer}'s`} Account Details</b></legend>
-                        <div className="col1_2_1">
-                            <div>
+                        </fieldset>
+                    </div>
+                    <div id="displayAccDetails" className="">
+                        <fieldset>
+                            <legend ><b>{`${this.state.selectedCustomer}'s`} Account Details</b></legend>
+                            <div className="col1_2_1">
                                 <div>
-                                    <ImageComponent customerPicture={this.state.customerPicture} width={"160px"} height={"140px"} />
-                                    <ImageComponent customerPicture={this.state.customerSignature} width={"120px"} height={"60px"} style={{ marginTop: "5px", border: "1px solid black" }} />
-                                </div>
-
-                            </div>
-                            <div className="col40_60 " >
-                                <div className="padLeft row_4">
-                                    <DisplayContent content={"Customer Name"} style={{ fontWeight: "bold" }} />
-                                    <DisplayContent content={"Customer Address"} style={{ fontWeight: "bold" }} />
-                                    <DisplayContent content={"Account Number"} style={{ fontWeight: "bold" }} />
-                                    <DisplayContent content={"Accounts"} style={{ fontWeight: "bold" }} />
-                                </div>
-                                <div className="row_4">
-                                    <DisplayContent content={this.state.customerName} />
-                                    <DisplayContent content={this.state.customerAddress} />
-                                    <DisplayContent content={this.state.customerAccNo} />
-                                    <DisplayContent content={this.state.customerAccounts} />
-
-                                </div>
-                            </div>
-                            <div className="padLeft" >
-                                <fieldset>
-                                    <legend ><b>Total Cash</b></legend>
-                                    <InputField inputValue={`$CAD ${this.state.totalCash}`} readOnly={true} />
-                                </fieldset>
-                                <fieldset>
-                                    <legend ><b>All Accounts</b></legend>
-                                    <Select class={"padRight"} value={this.state.selectedAccountValue} id={"selectCustomerAccount"}
-                                        onChange={this.handleSelectCustomerAccount} list={this.state.accountList} />
-                                    {/* <Button name={" | "} style={{ border: "none", backgroundColor: "transparent" }} /> */}
-                                    <Button name={"+ Acc"} onClick={this.handleEnterNewAccountName} style={{ backgroundColor: "lightgreen", marginRight: "5px" }} />
-                                    <Button name={"X Acc"} onClick={this.handleDeleteAccount} style={{ backgroundColor: "rgb(235, 118, 118)", marginRight: "5px" }} />
-                                    <Button name={"Open All"} onClick={this.handleDisplayAllAccounts} />
-                                    <div className="panel padTop " id="enterNewAccName">
-                                        <InputField class={"padBottom padRight"} inputValue={this.state.newAccountName} onChange={this.handleNewInputAccountName}
-                                            placeholder={"New account name"} readOnly={false} />
-                                        <Button name={"+"} onClick={this.handleOpenNewAccount} />
+                                    <div>
+                                        <ImageComponent customerPicture={this.state.customerPicture} width={"160px"} height={"140px"} />
+                                        <ImageComponent customerPicture={this.state.customerSignature} width={"120px"} height={"60px"} style={{ marginTop: "5px", border: "1px solid black" }} />
                                     </div>
-                                </fieldset>
-                                <fieldset>
-                                    <legend ><b>Current Cash</b></legend>
-                                    <InputField inputValue={`$CAD ${this.state.accountCurrentCash}`} readOnly={true} />
-                                </fieldset>
+
+                                </div>
+                                <div className="col40_60 " >
+                                    <div className="padLeft row_4">
+                                        <DisplayContent content={"Customer Name"} style={{ fontWeight: "bold" }} />
+                                        <DisplayContent content={"Customer Address"} style={{ fontWeight: "bold" }} />
+                                        <DisplayContent content={"Account Number"} style={{ fontWeight: "bold" }} />
+                                        <DisplayContent content={"Accounts"} style={{ fontWeight: "bold" }} />
+                                    </div>
+                                    <div className="row_4">
+                                        <DisplayContent content={this.state.customerName} />
+                                        <DisplayContent content={this.state.customerAddress} />
+                                        <DisplayContent content={this.state.customerAccNo} />
+                                        <DisplayContent content={this.state.customerAccounts} />
+
+                                    </div>
+                                </div>
+                                <div className="padLeft" >
+                                    <TotalCash inputValue={`$CAD ${this.state.totalCash}`} readOnly={true} />
+                                    <fieldset>
+                                        <legend ><b>All Accounts</b></legend>
+                                        <SectionAllAccount selectClass={"padRight"} selectValue={this.state.selectedAccountValue} selectId={"selectCustomerAccount"}
+                                            selectOnChange={this.handleSelectCustomerAccount} selectList={this.state.accountList}
+                                            name1={"+ Acc"} onClick1={this.handleEnterNewAccountName} style1={{ backgroundColor: "lightgreen", marginRight: "5px" }}
+                                            name2={"X Acc"} onClick2={this.handleDeleteAccount} style2={{ backgroundColor: "rgb(235, 118, 118)", marginRight: "5px" }}
+                                            class={"panel padTop "} id={"enterNewAccName"} inputClass={"padBottom padRight"}
+                                            inputValue={this.state.newAccountName} onChange={this.handleNewInputAccountName}
+                                            placeholder={"New account name"} readOnly={false} btnName={"+"} onClick={this.handleOpenNewAccount}
+                                        />
+
+                                    </fieldset>
+                                    <CurrentCash inputValue={`$CAD ${this.state.accountCurrentCash}`} readOnly={true} />
+                                </div>
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </div>
+                    <AccountServices class={" col_1_4"} />
+                    <DisplayTableOfAllAccounts accountName={`${this.state.selectedCustomer}'s`} accList={this.state.allAccountList} />
                 </div>
-                <div id="" >
-                    <fieldset>
-                        <legend ><b>Accounts Services</b></legend>
-                        <div className=" col_1_4">
-                            <div style={{ backgroundColor: "#094" }}><b>Print Statement</b></div>
-                            <div style={{ backgroundColor: "#595" }}><b>Apply for Credit Increase</b> </div>
-                            <div style={{ backgroundColor: "#679" }}><b>Check Credit Score</b></div>
-                            <div style={{ backgroundColor: "#684" }}><b>Redeem Points</b></div>
-                        </div>
-
-                    </fieldset>
-                </div>
-                <div id="displayAllAccounts" className="panel">
-                    <fieldset>
-                        <legend >All of {`${this.state.selectedCustomer}'s`} Accounts</legend>
-                        <Table Acclist={this.state.allAccountList} />
-                    </fieldset>
-                </div>
-
             </div>
 
         );

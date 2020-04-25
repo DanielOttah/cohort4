@@ -5,12 +5,13 @@ export class AccountController extends React.Component {
         super(props)
         this.allCustomers = [];
         this.customerCount = 0;
-        this.createNewAccount = this.createNewAccount.bind(this);
-        this.getAccountUser = this.getAccountUser.bind(this);
+        // this.createNewAccount = this.createNewAccount.bind(this);
+        // this.getAccountUser = this.getAccountUser.bind(this);
 
     }
-    genAccNumber() {
-        return `${Math.floor((Math.random() * 1000) + 1)}-${Math.floor((Math.random() * 1000) + 1)}`; //Generates Account Number
+    genAccNumber() {//Generates Account Number
+        return `${Math.floor((Math.random() * 10) + 1)}${Math.floor((Math.random() * 10) + 1)}${Math.floor((Math.random() * 10) + 1)}-${Math.floor((Math.random() * 10) + 1)}${Math.floor((Math.random() * 10) + 1)}${Math.floor((Math.random() * 10) + 1)}${Math.floor((Math.random() * 10) + 1)}`;
+
     }
     returnImageAndSignature() {
         let imgSign = [];
@@ -37,7 +38,7 @@ export class AccountController extends React.Component {
         imgSign.push(img[this.customerCount], sign[this.customerCount]);
         return imgSign;
     }
-    getAccountUser(name) {
+    getAccountUser = (name) => {
         let counter;
         for (let i = 0; i < this.allCustomers.length; i++) {
             if (name === this.allCustomers[i].Name) {
@@ -58,7 +59,7 @@ export class AccountController extends React.Component {
             return bal;
         }
     }
-    createNewAccount(name, typeOfAccount, address) {
+    createNewAccount = (name, typeOfAccount, address) => {
         let newAccount = {};
         newAccount.Key = ++this.customerCount;
         newAccount.Name = name;

@@ -4,7 +4,7 @@ import './Account.css';
 export class Table extends Component {
 
     render() {
-        const listItem = this.props.Acclist.map((items, index) =>
+        const listItem = this.props.accList.map((items, index) =>
             <AccountList key={index.toString()} value={items} />
         )
         return (

@@ -36,7 +36,6 @@ class Navigation extends Component {
                     <a href="/React_Main_Concepts" rel="noopener noreferrer" id="svg5">
                         <img className="Svg-alt-logo" id="goal" src={goal} alt="logo" /></a>
                 </div>
-                {/* <div> */}
                 <BrowserRouter>
                     <Switch>
                         <Route path="/" exact active component={Home} />
@@ -46,7 +45,6 @@ class Navigation extends Component {
                         <Route path="/React_Main_Concepts" exact component={React_Main_Concepts} />
                     </Switch>
                 </BrowserRouter>
-                {/* </div> */}
                 <Footer />
             </div>
 
