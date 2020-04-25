@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import Home from './Home';
 import App from '../App';
-import Account from './Account';
-import Cities from './Cities';
+import Account from './Account/Account.js';
+import Cities from './Cities/Cities.js';
 import React_Main_Concepts from './React_Main_Concepts';
 import optimised_Home from '../svg/optimised_Home.svg';
 import cog1 from '../svg/cog1.svg';
@@ -19,20 +19,14 @@ class Navigation extends Component {
         return (
             <div className="home">
                 <div className="" id="svgDiv" style={{ backgroundColor: '#b9e8ee', display: 'flex', justifyContent: 'center' }}>
-
                     <a href="/" rel="noopener noreferrer" id="svg1" >
                         <img className="Svg-alt-logo" id="home" src={optimised_Home} alt="logo" /></a>
-
-
                     <a href="/App" rel="noopener noreferrer" id="svg2" >
                         <img className="Svg-logo" id="cog1" src={cog1} alt="logo" /></a>
-
                     <a href="/Account" rel="noopener noreferrer" id="svg3">
                         <img className="Svg-alt-logo" id="account" src={account} alt="logo" /></a>
-
                     <a href="/Cities" rel="noopener noreferrer" id="svg4" >
                         <img className="Svg-logo" id="edit" src={edit} alt="logo" /></a>
-
                     <a href="/React_Main_Concepts" rel="noopener noreferrer" id="svg5">
                         <img className="Svg-alt-logo" id="goal" src={goal} alt="logo" /></a>
                 </div>

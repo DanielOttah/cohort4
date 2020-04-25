@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './Account_Components/Account.css';
-import Button from './Account_Components/Button.js';
-import InputField from './Account_Components/InputField.js';
-import { AccountController } from './Account_Components/AccountController.js';
-import { Select } from './Account_Components/Select.js';
-import DisplayTableOfAllAccounts from './Account_Components/DisplayTableOfAllAccounts.js';
-import ImageComponent from './Account_Components/ImageComponent.js';
-import DisplayContent from './Account_Components/DisplayContent.js';
-import avatar from './Account_Components/avatar.png'
-import sign5 from './Account_Components/sign5.png';
-import { SectionAllAccount, CurrentCash, AccountServices, TotalCash, AddNewAccount, SelectTransaction } from './Account_Components/AccountFunctions';
+import './Account.css';
+import Button from './Button.js';
+import InputField from './InputField.js';
+import { AccountController } from './AccountController.js';
+import { Select } from './Select.js';
+import DisplayTableOfAllAccounts from './DisplayTableOfAllAccounts.js';
+import ImageComponent from './ImageComponent.js';
+import DisplayContent from './DisplayContent.js';
+import avatar from './avatar.png'
+import sign5 from './sign5.png';
+import { SectionAllAccount, CurrentCash, AccountServices, TotalCash, AddNewAccount, SelectTransaction } from './AccountFunctions';
 
 
 class Account extends Component {
