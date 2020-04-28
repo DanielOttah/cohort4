@@ -190,7 +190,7 @@ export class Community {
 
         for (let r = 0; r < apiData.length; r++) {
             let temp = [];
-            temp = await this.getCityTemp(apiData[r].name);
+            temp = await this.getCityTemp(apiData[r].Name);
             apiData[r].temp = temp; // Assign temperature values to the cities retireved from the server
         }
         for (let r = 0; r < apiData.length; r++) {

@@ -1,3 +1,156 @@
 .container {
     height: 100vh;
 }
+
+.CityContainerScroll {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid black;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    font-weight: bold;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+button:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: rgb(255, 255, 255);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (min-device-width: 1600px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+            min-height: 400px;
+        }
+    }
+}
+
+.panel1 {
+    font-size: 13px;
+    padding: 10px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    /* Turn off parallax scrolling for tablets and phones */
+    @media only screen and (min-device-width: 1600px) {
+        .bgimg-1, .bgimg-2, .bgimg-3 {
+            background-attachment: scroll;
+            min-height: 400px;
+        }
+    }
+}
+
+.low_top_margin {
+    margin-top: 2px;
+}
+
+.city-Container {
+    justify-content: center;
+    width: 65%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.SplitPane {
+    width: 100%;
+    height: 100%;
+}
+
+.SplitPane-left {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.SplitPane-right {
+    float: left;
+    width: 70%;
+    height: 100%;
+}
+
+.LeftPane {
+    width: 100%;
+    height: 100%;
+    border: double;
+}
+
+.RightPane {
+    width: 100%;
+    height: 100%;
+    border: groove;
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    height: 700px;
+    width: 750px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none!important;
+    height: 700px;
+    width: 750px;
+}
+
+.inLineDiv {
+    display: inline-block;
+}
+
+
+/*Tooltip styles*/
+
+.tooltip {
+    position: relative;
+    /* display: inline-block; */
+    /* border-bottom: 1px dotted black; */
+    display: contents;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(85, 83, 83);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 10px;
+    /* Position the tooltip */
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.hTag {
+    font-size: 48px;
+    font-weight: bold;
+    color: cadetblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

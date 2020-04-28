@@ -19,7 +19,7 @@ const createCityCard = (cnt) => {
     let btnCity = document.createElement("button"); //Create Accordion Button
     btnCity.className = "accordion1"; //Give button class
     btnCity.classList.add("fa", "fa-angle-double-right");
-    let city = " " + ct.newCt.allCities[cnt].name; //get text that will be on button | a space was added to give room for the caret arrow
+    let city = " " + ct.newCt.allCities[cnt].Name; //get text that will be on button | a space was added to give room for the caret arrow
     btnCity.id = `btnCity${city}`; //Give button id
     btnCity.appendChild(document.createTextNode(city)); //place text on button
 
@@ -32,8 +32,8 @@ const createCityCard = (cnt) => {
     div1.appendChild(createPElement(`Temperature feels like (°Cdeg): ${ct.newCt.allCities[cnt].temp[1]}`));
     div1.appendChild(createPElement(`City Population: ${ct.getPopulationofCity(city)}`));
     div1.appendChild(createPElement(`City Category: ${ct.newCt.howBig(city)}`));
-    div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[cnt].latitude}`));
-    div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[cnt].longitude}`));
+    div1.appendChild(createPElement(`City Latitude: ${ct.newCt.allCities[cnt].Latitude}`));
+    div1.appendChild(createPElement(`City Longitude: ${ct.newCt.allCities[cnt].Longitude}`));
     div1.appendChild(createPElement(`City Location: ${ct.whichSphere(city)}`));
     let h = document.createElement("hr");
     div1.appendChild(h);
