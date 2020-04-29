@@ -29,7 +29,13 @@ class Cities extends Component {
             allCityArray: [],
             allAPICityArray: [],
             currentCity: "Calgary",
-            cityTempData: {}
+            cityTempData: {},
+            cityToUpDate: "",
+
+            updateCityName: "",
+            updateCityLat: "",
+            updateCityLon: "",
+            updateCityPop: ""
         }
         this.newCity = new Community();
     }
@@ -44,10 +50,11 @@ class Cities extends Component {
                     this.state.allAPICityArray.push(serverCities[i]);
                 }
             }
+            let cnt = this.state.allCityArray.length + this.state.allAPICityArray.length;
             this.setState({
                 allCityArray: this.state.allCityArray,
                 allAPICityArray: this.state.allAPICityArray,
-                cityKey: this.state.allCityArray.length,
+                cityKey: cnt,
                 cityTempData: await this.newCity.getCityTemp(this.state.currentCity)
             })
             console.log(this.state.allCityArray);
@@ -93,17 +100,19 @@ class Cities extends Component {
                     // alert("Error! Please check your input values again - invalid entries entered.");
                 }
                 else {
+                    let key = this.state.cityKey + 1;
                     let newCity = this.newCity.createCity(this.state.cityName, this.state.cityLatitude,
-                        this.state.cityLongitude, this.state.cityPopulation, this.state.citytKey + 1);
+                        this.state.cityLongitude, this.state.cityPopulation, key.toString());
 
                     this.state.allCityArray.push(newCity);
 
                     this.setState({
                         allCityArray: this.state.allCityArray,
-                        cityKey: this.state.allCityArray.length + 1
+                        cityKey: key
                     })
                     this.newCity.apiPostData(this.saveCityToServer(), this.state.allCityArray[this.state.allCityArray.length - 1])
                     console.log(this.state.allCityArray);
+
                 }
             }
         }
@@ -134,7 +143,7 @@ class Cities extends Component {
                 apiCity.Area = serverCities[0].area;
                 apiCity.borders = serverCities[0].borders;
                 apiCity.flag = serverCities[0].flag;
-                apiCity.Capital = serverCities[0].capital;
+                apiCity.Name = serverCities[0].capital;
                 apiCity.Demonym = serverCities[0].demonym;
 
                 this.state.allAPICityArray.push(apiCity);
@@ -157,6 +166,96 @@ class Cities extends Component {
         this.setState({
             allCityArray: this.state.allCityArray
         })
+    }
+    handleClickUpdate = (e) => {
+        let cityToUpdate = (e.target.id).toString();
+        let nameOfCity = cityToUpdate.substr(4, cityToUpdate.length);
+
+        this.setState({
+            cityToUpDate: nameOfCity
+        })
+        const updatediv = document.getElementById("updateCityInfo");
+        if (updatediv.style.display === "block") {
+            updatediv.style.display = "none";
+        } else {
+            updatediv.style.display = "block";
+
+        }
+
+    }
+    handleUpdateCity = async (e) => {
+
+        const updatediv = document.getElementById("updateCityInfo");
+        let count = this.newCity.getindexOfCity(this.state.cityToUpDate, this.state.allCityArray);
+        try {
+            if (this.state.updateCityName < 0 || this.state.updateCityLat < 0 || this.state.updateCityLon < 0 || this.state.updateCityPop < 0) {
+                // throw "Error! Please check your input values again - invalid entries entered."
+            } else if (isNaN(this.state.updateCityLat - 1) || isNaN(this.state.updateCityLon - 1) || isNaN(this.state.updateCityPop - 1)) {
+                //  throw "Error! Please check your input values again - invalid entries entered."
+            } else {
+                if (this.state.updateCityName !== this.state.allCityArray[count].Name) {
+                    this.newCity.upDateData(count, "Name", this.state.updateCityName, this.state.allCityArray);
+                    this.state.allCityArray[count].Name = this.state.updateCityName
+                    this.setState({
+                        allCityArray: this.state.allCityArray,
+                        currentCity: this.state.updateCityName
+                    })
+                }
+                if (this.state.updateCityLat !== this.state.allCityArray[count].Latitude) {
+                    this.newCity.upDateData(count, "Latitude", this.state.updateCityLat, this.state.allCityArray);
+                    this.state.allCityArray[count].Latitude = this.state.updateCityLat
+                    this.setState({
+                        allCityArray: this.state.allCityArray
+                    })
+                }
+                if (this.state.updateCityLon !== this.state.allCityArray[count].Longitude) {
+                    this.newCity.upDateData(count, "Longitude", this.state.updateCityLon, this.state.allCityArray);
+                    this.state.allCityArray[count].Longitude = this.state.updateCityLat
+                    this.setState({
+                        allCityArray: this.state.allCityArray
+                    })
+                }
+                if (this.state.updateCityPop !== this.state.allCityArray[count].Population) {
+                    const selectUpdateCityInfo = document.getElementById("selectUpdateCityInfo");
+                    if (selectUpdateCityInfo.value === "realPopulation") {
+                        this.newCity.upDateData(count, "Population", this.state.updateCityPop, this.state.allCityArray);
+                        this.state.allCityArray[count].Population = this.state.updateCityPop
+                        this.setState({
+                            allCityArray: this.state.allCityArray
+                        })
+                    }
+                    else if (selectUpdateCityInfo.value === "movedIn") {
+                        const popMovedIn = this.newCity.newCt.movedIn(this.state.updateCityName, this.state.updateCityPop, this.state.allCityArray);
+                        this.newCity.upDateData(count, "Population", popMovedIn, this.state.allCityArray);
+                        this.state.allCityArray[count].Population = this.state.updateCityPop
+                        this.setState({
+                            allCityArray: this.state.allCityArray
+                        })
+                    }
+                    else if (selectUpdateCityInfo.value === "movedOut") {
+                        const popMovedIn = this.newCity.newCt.movedOut(this.state.updateCityName, this.state.updateCityPop, this.state.allCityArray);
+                        this.newCity.upDateData(count, "Population", popMovedIn, this.state.allCityArray);
+                        this.state.allCityArray[count].Population = this.state.updateCityPop
+                        this.setState({
+                            allCityArray: this.state.allCityArray
+                        })
+                    }
+                }
+                updatediv.style.display = "none";
+            }
+
+
+        } catch (err) {
+            alert(err);
+        }
+
+
+
+
+
+
+
+
     }
     handleClickAPIDelete = async (e) => {
         let cityToDelete = e.target.id;
@@ -188,6 +287,29 @@ class Cities extends Component {
             cityPopulation: e.target.value
         });
     }
+
+    handleupdateCityInputName = (e) => {
+        this.setState({
+            updateCityName: e.target.value
+        });
+    }
+    handleupdateCityInputLat = (e) => {
+        this.setState({
+            updateCityLat: e.target.value
+        });
+    }
+    handleupdateCityInputLon = (e) => {
+        this.setState({
+            updateCityLon: e.target.value
+        });
+    }
+    handleupdateCityInputPop = (e) => {
+        this.setState({
+            updateCityPop: e.target.value
+        });
+    }
+
+
     render() {
 
         return (
@@ -202,7 +324,13 @@ class Cities extends Component {
                             onChangeCityName={this.handleCityNameInput} onChangeCityLat={this.handleCityLatInput} onChangeCityLon={this.handleCityLonInput}
                             onChangeCityPop={this.handleCityPopInput} onClick={this.handleAccordionClick}
                             allCityArray={this.state.allCityArray} allAPICityArray={this.state.allAPICityArray} onClickDelete={this.handleClickDelete}
-                            onClickAPIDelete={this.handleClickAPIDelete}
+                            onClickAPIDelete={this.handleClickAPIDelete} onClickUpdate={this.handleClickUpdate} updateCity={this.state.cityToUpDate}
+                            onClickUpdateCity={this.handleUpdateCity}
+
+                            onChangeUpdateCityName={this.handleupdateCityInputName} onChangeUpdateCityLat={this.handleupdateCityInputLat}
+                            onChangeUpdateCityLon={this.handleupdateCityInputLon} onChangeUpdateCityPop={this.handleupdateCityInputPop}
+                            popValue={this.state.updateCityPop} latValue={this.state.updateCityLat} lonValue={this.state.updateCityLon}
+                            nameValue={this.state.updateCityname}
 
                         />
                     }

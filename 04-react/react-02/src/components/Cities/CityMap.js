@@ -6,7 +6,7 @@ class CityMap extends Component {
         let src = `https://maps.google.com/maps?q=${(this.props.currentCity).toLowerCase()}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
         // let src = "https://maps.google.com/maps?q={`${this.props.currentCity}`}&t=&z=13&ie=UTF8&iwloc=&output=embed"
         return (
-            <div className="RightPane">
+            <div >
                 <div className="mapouter">
                     <div className="gmap_canvas">
                         <iframe title={this.props.title} width="755" height="700" id="gmap_canvas" src={src} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>

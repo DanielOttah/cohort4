@@ -31,6 +31,10 @@ button:hover {
     cursor: pointer;
 }
 
+.textBlue {
+    color: blue;
+}
+
 .panel {
     padding: 0 18px;
     background-color: rgb(255, 255, 255);
@@ -48,7 +52,6 @@ button:hover {
 
 .panel1 {
     font-size: 13px;
-    padding: 10px;
     background-color: white;
     display: none;
     overflow: hidden;
@@ -64,6 +67,11 @@ button:hover {
 
 .low_top_margin {
     margin-top: 2px;
+}
+
+.weatherHeading {
+    display: grid;
+    grid-template-columns: 80% 20%;
 }
 
 .city-Container {
@@ -93,7 +101,8 @@ button:hover {
 .LeftPane {
     width: 100%;
     height: 100%;
-    border: double;
+    border: groove;
+    overflow-y: auto;
 }
 
 .RightPane {
@@ -107,6 +116,12 @@ button:hover {
     text-align: right;
     height: 700px;
     width: 750px;
+}
+
+.weatherpix {
+    object-fit: fill;
+    width: 750px;
+    height: 100px;
 }
 
 .gmap_canvas {

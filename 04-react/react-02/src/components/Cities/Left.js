@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CityInputField from './CityInputField.js'
 import Button from './Button.js';
 import { CreateCityContainer, CreateAPICityContainer } from './CreateCityContainer.js';
+import UpdateCityComponent from './UpdateCityComponent.js';
 import './Cities.css';
 
 class Left extends Component {
@@ -10,17 +11,18 @@ class Left extends Component {
     render() {
         const children = [];
         const apiChildren = [];
-        // console.log(this.props.allAPICityArray);
 
         for (var r = 0; r < this.props.allAPICityArray.length; r++) {
-            let btnName = this.props.allAPICityArray[r].Capital;
+            let btnName = this.props.allAPICityArray[r].Name;
             apiChildren.push(<CreateAPICityContainer key={r} index={r} name={btnName.toUpperCase()}
-                onClick={this.props.onClick} allAPICityArray={this.props.allAPICityArray} onClickAPIDelete={this.props.onClickAPIDelete} />);
+                onClick={this.props.onClick} allAPICityArray={this.props.allAPICityArray} onClickAPIDelete={this.props.onClickAPIDelete}
+                onClickEdit={this.props.onClickUpdate} />);
         };
         for (var i = 0; i < this.props.allCityArray.length; i += 1) {
             let btnName = this.props.allCityArray[i].Name;
             children.push(<CreateCityContainer key={i} index={i} name={btnName.toUpperCase()}
-                onClick={this.props.onClick} allCityArray={this.props.allCityArray} onClickDelete={this.props.onClickDelete} />);
+                onClick={this.props.onClick} allCityArray={this.props.allCityArray} onClickDelete={this.props.onClickDelete}
+                onClickEdit={this.props.onClickUpdate} />);
         };
         return (
             <div className="LeftPane" id="LeftPane">
@@ -64,7 +66,12 @@ class Left extends Component {
                     </table>
                     <Button name={this.props.AddCityName} onClick={this.props.onClickAddCity} style={{ margin: " 2px 2px" }} />
                     <div className="tooltip"> <Button name={this.props.randomCityName} onClick={this.props.onClickRandomCity} />
-                        <span className="tooltiptext">European cities</span></div>
+                        <span className="tooltiptext">European cities</span>
+                    </div>
+                    <UpdateCityComponent TextType={"text"} onClickUpdateCity={this.props.onClickUpdateCity} nameValue={this.props.nameValue}
+                        latValue={this.props.latValue} lonValue={this.props.lonValue} popValue={this.props.popValue}
+                        onChangeUpdateCityPop={this.props.onChangeUpdateCityPop} onChangeUpdateCityLon={this.props.onChangeUpdateCityLon}
+                        onChangeUpdateCityLat={this.props.onChangeUpdateCityLat} onChangeUpdateCityName={this.props.onChangeUpdateCityName} />
                 </fieldset>
 
                 <fieldset>

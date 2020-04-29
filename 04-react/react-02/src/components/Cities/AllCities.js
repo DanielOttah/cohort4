@@ -23,7 +23,7 @@ class City {
                 count = i;
             }
         }
-        arr[count].Population = parseFloat(arr[count].Population) + num;
+        arr[count].Population = parseInt(arr[count].Population) + parseInt(num);
         return parseInt(arr[count].Population);
 
     }
@@ -34,7 +34,7 @@ class City {
                 count = i;
             }
         }
-        arr[count].Population = parseFloat(arr[count].Population) - num;
+        arr[count].Population = parseInt(arr[count].Population) - parseInt(num);
         return parseInt(arr[count].Population);
     }
     howBig(cityName, arr) {
@@ -133,8 +133,6 @@ export class Community extends React.Component {
         return arr[count].Population;
     }
     createCity = (nam, lat, lon, popul, cityKey) => {
-        //  let city_temp = await this.getCityTemp(nam);
-
         let cityObj = {};
         cityObj.key = cityKey;
         cityObj.code = "Manual";
@@ -142,7 +140,6 @@ export class Community extends React.Component {
         cityObj.Latitude = parseFloat(lat);
         cityObj.Longitude = parseFloat(lon);
         cityObj.Population = parseInt(popul);
-        // cityObj.Temp = city_temp; 
         return cityObj;
     }
     getindexOfCity = (CtNam, arr) => {
@@ -188,16 +185,6 @@ export class Community extends React.Component {
         apiCity = await fetch(this.url + 'load');
         apiCity = await fetch(this.url + 'all');
         apiData = await apiCity.json();
-
-        // for (let r = 0; r < apiData.length; r++) {
-        //     let temp = [];
-        //     temp = await this.getCityTemp(apiData[r].name);
-        //     apiData[r].temp = temp; // Assign temperature values to the cities retireved from the server
-        // }
-        // for (let r = 0; r < apiData.length; r++) {
-        //     this.newCt.allCities.push(apiData[r]);
-        // }
-        // console.log(this.newCt.allCities);
         return apiData;
     }
     async postData(link = '', data = {}) {
@@ -244,116 +231,64 @@ export class Community extends React.Component {
         temp.push(parseFloat(json.current.feelslike_c).toFixed(2));
         return temp;
     }
+
+    upDateData = async (cityIndex, optn, upDateOption, arr) => {
+        const getKey = arr[cityIndex].key.toString();
+        let apiDataUpdate;
+
+        if (optn === "Name") {
+            let lat = parseFloat(arr[cityIndex].Latitude);
+            let lon = parseFloat(arr[cityIndex].Longitude);
+            let popul = parseInt(arr[cityIndex].Population);
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: getKey,
+                Latitude: lat,
+                Longitude: lon,
+                Name: `${upDateOption}`,
+                Population: popul
+            });
+        }
+        if (optn === "Latitude") {
+            let lat = parseFloat(upDateOption);
+            let lon = parseFloat(arr[cityIndex].Longitude);
+            let popul = parseInt(arr[cityIndex].Population);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: getKey, Latitude: lat,
+                Longitude: lon, Name: arr[cityIndex].Name,
+                Population: popul
+            });
+        }
+        if (optn === "Longitude") {
+            let lon = parseFloat(upDateOption);
+            let lat = parseFloat(arr[cityIndex].Latitude);
+            let popul = parseInt(arr[cityIndex].Population);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: getKey, Latitude: lat,
+                Longitude: lon, Name: arr[cityIndex].Name,
+                Population: popul
+            });
+        }
+        if (optn === "Population") {
+            let lon = parseFloat(arr[cityIndex].Longitude);
+            let lat = parseFloat(arr[cityIndex].Latitude);
+            let popul = parseInt(upDateOption);
+
+            apiDataUpdate = await this.postData(this.url + 'update', {
+                key: getKey, Latitude: lat,
+                Longitude: lon, Name: arr[cityIndex].Name, Population: popul
+            });
+        }
+        apiDataUpdate = await fetch(this.url + 'all');
+        let updatedCity = await apiDataUpdate.json();
+        console.log(updatedCity);
+
+    }
     render() {
         return null;
     }
 
 }
 
-
-
-
-
-// async const upDateData = (ct, upDateIten, upDatData) => {
-//     const getKey = this.newCt.allCities[ct].key.toString();
-//     let apiDataUpdate;
-
-//     if (upDateIten == "name") {
-//         let lat = parseFloat(this.newCt.allCities[ct].latitude);
-//         let lon = parseFloat(this.newCt.allCities[ct].longitude);
-//         let popul = parseInt(this.newCt.allCities[ct].population);
-//         apiDataUpdate = await this.postData(this.url + 'update', {
-//             key: getKey,
-//             latitude: lat,
-//             longitude: lon,
-//             name: `${upDatData}`,
-//             population: popul
-//         });
-//     }
-//     if (upDateIten == "latitude") {
-//         let lat = parseFloat(upDatData);
-//         let lon = parseFloat(this.newCt.allCities[ct].longitude);
-//         let popul = parseInt(this.newCt.allCities[ct].population);
-
-//         apiDataUpdate = await this.postData(this.url + 'update', {
-//             key: getKey, latitude: lat,
-//             longitude: lon, name: this.newCt.allCities[ct].name,
-//             population: popul
-//         });
-//     }
-//     if (upDateIten == "longitude") {
-//         let lon = parseFloat(upDatData);
-//         let lat = parseFloat(this.newCt.allCities[ct].latitude);
-//         let popul = parseInt(this.newCt.allCities[ct].population);
-
-//         apiDataUpdate = await this.postData(this.url + 'update', {
-//             key: getKey, latitude: lat,
-//             longitude: lon, name: this.newCt.allCities[ct].name,
-//             population: popul
-//         });
-//     }
-//     if (upDateIten == "population") {
-//         let lon = parseFloat(this.newCt.allCities[ct].longitude);
-//         let lat = parseFloat(this.newCt.allCities[ct].latitude);
-//         let popul = parseInt(upDatData);
-
-//         apiDataUpdate = await this.postData(this.url + 'update', {
-//             key: getKey, latitude: lat,
-//             longitude: lon, name: this.newCt.allCities[ct].name, population: popul
-//         });
-//     }
-//     apiDataUpdate = await fetch(this.url + 'all');
-//     let updatedCity = await apiDataUpdate.json();
-//     console.log(updatedCity);
-
-// }
-// async const postData = (link = '', data = {}) => {
-
-//     // Default options are marked with *
-//     const response = await fetch(link, {
-//         method: 'POST',     // *GET, POST, PUT, DELETE, etc.
-//         mode: 'cors',       // no-cors, *cors, same-origin
-//         cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
-//         credentials: 'same-origin', // include, *same-origin, omit
-//         headers: {
-//             'Content-Type': 'application/json'
-//             // 'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//         redirect: 'follow',         // manual, *follow, error
-//         referrer: 'no-referrer',    // no-referrer, *client
-//         body: JSON.stringify(data)  // body data type must match "Content-Type" header
-//     });
-
-//     const json = await response.json();    // parses JSON response into native JavaScript objects
-//     json.status = response.status;
-//     json.statusText = response.statusText;
-//     // console.log(json, typeof(json));
-//     return json;
-// }
-// const getAPICities = () => {
-//     const urlEurope = `https://restcountries.eu/rest/v2/capital/`; // url of api used
-
-//     getCity = async (cityName) => {
-//         try {
-//             const response = await fetch(this.url + `${cityName}`); //Use GET to retrieve city data
-//             let data = await response.json();// parse it as json format
-//             return data; //return the data
-
-//         } catch (error) {
-//             // alert(`${cityName} is not a capital city.`, error);
-
-//         }
-//     }
-//     getRealCityData = async (ct) => {
-//         try {
-//             let data = await this.getCity(ct); //get the parsed data
-//             // this.allAPICities.push(data[0]);
-//             return data; //return the data           
-//         } catch (error) {
-//             // alert(`${cityName} is not a capital city.`, error);
-
-//         }
-//     }
-
-// }
 
