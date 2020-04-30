@@ -2,7 +2,7 @@ import React from 'react';
 
 class City {
     constructor() {
-        this.allCities = [];
+        // this.allCities = [];
         this.cnt = 0;
     }
     show(ct, arr) {
@@ -116,13 +116,7 @@ export class Community extends React.Component {
 
         return returnVal;
     }
-    getTotalPopulation = (arr) => {
-        let totalPopulation = 0;
-        for (let i = 0; i < arr.length; i++) {
-            totalPopulation += parseInt(arr[i].Population);
-        }
-        return totalPopulation;
-    }
+
     getPopulationofCity = (ct, arr) => {
         let count = 0;
         for (let i = 0; i < arr.length; i++) {
@@ -171,12 +165,14 @@ export class Community extends React.Component {
             apiData = await this.postData(this.url + 'save', obj);// save city cos checkbox was clicked
             apiData = await fetch(this.url + 'all');
             const res = await apiData.json();
-            console.log(res);
+            return res;
+            // console.log(res);
         } else {
             let apiData = await this.postData(this.url + 'add', obj)
             apiData = await fetch(this.url + 'all');
             const res = await apiData.json();
-            console.log(res);
+            return res;
+            // console.log(res.length);
         }
     }
     async loadAPICity() {
