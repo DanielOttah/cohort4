@@ -30,6 +30,7 @@ class Cities extends Component {
             allAPICityArray: [],
             currentCity: "Calgary",
             cityTempData: {},
+            cityInfoData: [],
             cityToUpDate: "",
 
             updateCityName: "",
@@ -55,10 +56,12 @@ class Cities extends Component {
                 allCityArray: this.state.allCityArray,
                 allAPICityArray: this.state.allAPICityArray,
                 cityKey: cnt,
-                cityTempData: await this.newCity.getCityTemp(this.state.currentCity)
+                cityTempData: await this.newCity.getCityTemp(this.state.currentCity),
+                cityInfoData: await this.newCity.getCityInfo(this.state.currentCity)
             })
             console.log(this.state.allCityArray);
             console.log(this.state.allAPICityArray);
+
         } catch (err) {
             alert("Failed to load cities from server! Please confirm the server is running", err)
         }
@@ -70,8 +73,11 @@ class Cities extends Component {
         } else {
             leftdiv.style.display = "block";
             this.setState({
-                currentCity: e.target.textContent,
-                cityTempData: await this.newCity.getCityTemp(this.state.currentCity)
+                currentCity: e.target.textContent
+            })
+            this.setState({
+                cityTempData: await this.newCity.getCityTemp(this.state.currentCity),
+                cityInfoData: await this.newCity.getCityInfo(this.state.currentCity)
             })
 
         }
@@ -335,7 +341,8 @@ class Cities extends Component {
                         />
                     }
                     rightPane={
-                        <Right title={this.props.title} currentCity={this.state.currentCity} cityTempData={this.state.cityTempData} />
+                        <Right title={this.props.title} currentCity={this.state.currentCity} cityTempData={this.state.cityTempData}
+                            cityInfoData={this.state.cityInfoData} />
                     } />
 
             </div>

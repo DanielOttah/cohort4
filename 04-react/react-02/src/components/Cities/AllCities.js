@@ -218,7 +218,7 @@ export class Community extends React.Component {
         const response = await fetch(this.urlEurope + `${this.cityCapitals()}`); //Use GET to retrieve city data
         let data = await response.json();// parse it as json format
         return data; //return the data          
-    }
+    } i
     getCityTemp = async (city) => {
         let temp = [];
         let city_temp = await fetch(`http://api.weatherapi.com/v1/current.json?key=f9eb724cfbe348d5a00114754201904&q=${city}`);
@@ -279,6 +279,23 @@ export class Community extends React.Component {
         apiDataUpdate = await fetch(this.url + 'all');
         let updatedCity = await apiDataUpdate.json();
         console.log(updatedCity);
+
+    }
+    async getCityTime(lat, lon) {
+        let apiData;
+        let apiCity = await fetch(`http://api.geonames.org/timezoneJSON?lat=${lat}&lng=${lon}username=leinads`);
+        apiData = await apiCity.json();
+        return apiData;
+    }
+    async getCityInfo(city) {
+        let cityInf = [];
+        let apiData;
+        let apiCity = await fetch(`http://api.geonames.org/wikipediaSearchJSON?q=${city}&maxRows=10&username=leinads`);
+        apiData = await apiCity.json();
+        for (let i = 0; i < apiData.geonames.length; i++) {
+            cityInf.push(apiData.geonames[i].summary)
+        }
+        return cityInf;
 
     }
     render() {

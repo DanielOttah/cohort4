@@ -9,7 +9,7 @@ class CityMap extends Component {
             <div >
                 <div className="mapouter">
                     <div className="gmap_canvas">
-                        <iframe title={this.props.title} width="755" height="700" id="gmap_canvas" src={src} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                        <iframe title={this.props.title} width="100%" height="600" id="gmap_canvas" src={src} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
                         <a href="https://www.embedgooglemap.net">googlmeaps</a>
 
                     </div>

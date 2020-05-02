@@ -19,6 +19,7 @@
 
 .Svg-logo:hover {
     filter: invert(90%) sepia(6%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
+    color: #ec2d2d;
 }
 
 .Svg-alt-logo {
@@ -27,10 +28,6 @@
 }
 
 .Svg-alt-logo:hover {
-    filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%);
-}
-
-.Svg-alt-logo:active {
     filter: invert(90%) sepia(56%) saturate(4200%) hue-rotate(320deg) brightness(90%) contrast(90%);
 }
 

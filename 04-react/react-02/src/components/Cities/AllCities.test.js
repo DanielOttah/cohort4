@@ -193,3 +193,10 @@ test("Testing getCityTemp()", async () => {
     expect(typeof (cityTemp)).toBe("object");
 
 });
+test("Testing cityCapitals()", async () => {
+    let ct = new Community();
+
+    expect(typeof (ct.cityCapitals())).toBe("string");
+    expect(typeof (ct.cityCapitals())).not.toBe("Array");
+
+});
