@@ -322,10 +322,9 @@ class Cities extends Component {
             <div className="container city-Container" >
                 <JoinPane
                     leftPane={
-                        <Left CityNameId={"cityName"} CityLatId={"cityLat"} CityLonId={"cityLon"} CityPopId={"cityPop"} Nameplaceholder={"city name"}
-                            Latplaceholder={"city latitude"} Lonplaceholder={"city longitude"} Popplaceholder={"city population"}
-                            CheckType={"checkBox"} TextType={"text"} checkId={"saveCityToAPI"} AddCityName={"Add City"} onClickAddCity={this.handleAddCity}
-                            randomCityName={"Get Random City"} onClickRandomCity={this.handleGetRandomCity} cityNameInput={this.state.cityName}
+                        <Left
+                            onClickAddCity={this.handleAddCity}
+                            onClickRandomCity={this.handleGetRandomCity} cityNameInput={this.state.cityName}
                             cityLatInput={this.state.cityLatitude} cityLonInput={this.state.cityLongitude} cityPopInput={this.state.cityPopulation}
                             onChangeCityName={this.handleCityNameInput} onChangeCityLat={this.handleCityLatInput} onChangeCityLon={this.handleCityLonInput}
                             onChangeCityPop={this.handleCityPopInput} onClick={this.handleAccordionClick}

@@ -8,7 +8,7 @@ class _LinkedList {
         return this._length;
     }
     add(val) {
-        this.node = new Node(val)
+        this.node = new ListNode(val)
         if (!this.head) {
             this.head = this.node;
             this._length += 1;
@@ -100,7 +100,7 @@ class _LinkedList {
 
 export default _LinkedList;
 
-class Node {
+class ListNode {
     constructor(data) {
         this.data = data;
         this.next = null;
