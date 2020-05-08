@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+// import LinkedList from './LinkedList.js'
+import LL from './LL.js'
+
 
 
 class React_Main_Concepts extends Component {
+    // constructor(props) {
+    //     super(props)
+    //     this.sll = new LinkedList();
 
+
+    // }
     formatName = (user) => {
         return `${user.firstName} ${user.lastName}`;
         // return user.firstName + ' ' + user.lastName;
@@ -20,10 +28,13 @@ class React_Main_Concepts extends Component {
         return <h1>Hello, Stranger!</h1>;
     }
 
+
     render() {
         return (
             <div>
-                {this.introJSX()}
+                {/* {this.introJSX()} */}
+Hello
+                <LL />
             </div>
         );
     }
@@ -49,6 +60,7 @@ class Clock extends Component {
     }
 }
 export default React_Main_Concepts;
+
 
 
 //12 Main Concepts in React

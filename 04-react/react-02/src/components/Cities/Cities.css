@@ -3,7 +3,7 @@
 }
 
 .CityContainerScroll {
-    height: 500px;
+    height: 580px;
     overflow-y: auto;
 }
 
@@ -230,7 +230,7 @@ button:hover {
     display: none;
     overflow-y: auto;
     /* overflow: hidden; */
-    height: 150px;
+    /* height: 150px; */
     padding: 1px 1px;
     border: 1px solid #ccc;
     border-top: none;
