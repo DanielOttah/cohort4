@@ -112,3 +112,43 @@ test('Testing clearData() Method', () => {
 
 
 });
+
+
+test('Testing insertAt() Method', () => {
+    let sll = new _LinkedList();
+
+    sll.add(10);
+    sll.add(15);
+    sll.add(20);
+    sll.add(25);
+    sll.add(30);
+
+    expect(sll.size()).toBe(5);
+    sll.insertAt(2, 60);
+    expect(sll.size()).not.toBe(5);
+    expect(sll.size()).toBe(6);
+    expect(sll.printData()[2]).toBe(60);
+
+
+});
+
+
+test('Testing removeAt() Method', () => {
+    let sll = new _LinkedList();
+
+    sll.add(10);
+    sll.add(15);
+    sll.add(20);
+    sll.add(25);
+    sll.add(30);
+
+    expect(sll.size()).toBe(5);
+    sll.removeAt(2);
+    expect(sll.size()).not.toBe(5);
+    expect(sll.size()).toBe(4);
+    sll.removeAt(3);
+    expect(sll.size()).not.toBe(4);
+    expect(sll.size()).toBe(3);
+    expect(sll.printData()[2]).toBe(25);
+    expect(sll.printData()[0]).toBe(10);
+});

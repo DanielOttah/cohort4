@@ -117,10 +117,13 @@ class _LinkedList {
     printData() {
         let currentNode = this.head;
         let index = 0;
+        let arr = [];
         while (currentNode) {
             console.log(`Node ${++index} data: ${currentNode.data}`);
+            arr.push(currentNode.data);
             currentNode = currentNode.next;
         }
+        return arr;
     }
     displayData() {
         return this.head;
