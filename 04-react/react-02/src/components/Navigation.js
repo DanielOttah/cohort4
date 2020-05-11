@@ -5,7 +5,7 @@ import Home from './Home';
 import App from '../App';
 import Account from './Account/Account.js';
 import Cities from './Cities/Cities.js';
-import React_Main_Concepts from './React_Main_Concepts';
+import LLComponent from './LinkedList/LLComponent.js';
 import optimised_Home from '../svg/optimised_Home.svg';
 import cog1 from '../svg/cog1.svg';
 import account from '../svg/account.svg';
@@ -28,7 +28,7 @@ class Navigation extends Component {
                         <img className="Svg-alt-logo" id="account" src={account} alt="logo" /></a>
                     <a href="/Cities" rel="noopener noreferrer" id="svg4" >
                         <img className="Svg-logo" id="edit" src={edit} alt="logo" /></a>
-                    <a href="/React_Main_Concepts" rel="noopener noreferrer" id="svg5">
+                    <a href="/LLComponent" rel="noopener noreferrer" id="svg5">
                         <img className="Svg-alt-logo" id="goal" src={goal} alt="logo" /></a>
                 </div>
                 <BrowserRouter>
@@ -37,7 +37,7 @@ class Navigation extends Component {
                         <Route path="/App" exact component={App} />
                         <Route path="/Account" exact component={Account} />
                         <Route path="/Cities" exact component={Cities} />
-                        <Route path="/React_Main_Concepts" exact component={React_Main_Concepts} />
+                        <Route path="/LLComponent" exact component={LLComponent} />
                     </Switch>
                 </BrowserRouter>
                 <Footer />

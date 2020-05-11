@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 // import LinkedList from './LinkedList.js'
-import LL from './LL.js'
+import LL from './LinkedList/LLComponent.js'
 
 
 
 class React_Main_Concepts extends Component {
-    // constructor(props) {
-    //     super(props)
-    //     this.sll = new LinkedList();
 
-
-    // }
     formatName = (user) => {
         return `${user.firstName} ${user.lastName}`;
         // return user.firstName + ' ' + user.lastName;

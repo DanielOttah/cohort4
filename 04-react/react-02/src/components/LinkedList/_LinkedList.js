@@ -52,7 +52,6 @@ class _LinkedList {
         while (currentNode) {
             index++;
             if (currentNode.data === val) {
-                console.log(`index of ${currentNode.data} is ${index}`);
                 return index;
             }
             currentNode = currentNode.next;
@@ -69,27 +68,63 @@ class _LinkedList {
                 count++;
                 currentNode = currentNode.next;
             }
-            console.log(`Data at index ${index} is ${currentNode.data}`);
             return currentNode.data;
 
         }
     }
     insertAt(index, data) {
+        let node = new ListNode(data);
+        let currentNode = this.head;
+        let previousNode;
+        let currentIndex = 0;
 
+        if (index > this._length) {
+            return false;
+        }
+        if (index === 0) {
+            node.next = currentNode;
+            this.head = node;
+        } else {
+            while (currentIndex < index) {
+                currentIndex++;
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            node.next = currentNode;
+            previousNode.next = node;
+        }
+        this._length++;
     }
-    removeAt(index, data) {
-
+    removeAt(index) {
+        let currentNode = this.head;
+        let previousNode;
+        let currentIndex = 0;
+        if (index < 0 || index >= this._length) {
+            return null;
+        }
+        if (index === 0) {
+            this.head = currentNode.next;
+        } else {
+            while (currentIndex < index) {
+                currentIndex++;
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            previousNode.next = currentNode.next;
+        }
+        this._length--;
     }
     printData() {
         let currentNode = this.head;
         let index = 0;
-        let dataArray = [];
         while (currentNode) {
-            dataArray.push(currentNode.data);
-            console.log(`Item ${++index}`, currentNode.data);
+            console.log(`Node ${++index} data: ${currentNode.data}`);
             currentNode = currentNode.next;
         }
-        return dataArray;
+    }
+    displayData() {
+        return this.head;
+
     }
     clearData() {
         this.head = null;
