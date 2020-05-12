@@ -5,12 +5,14 @@ import Home from './Home';
 import App from '../App';
 import Account from './Account/Account.js';
 import Cities from './Cities/Cities.js';
+import LIFO_FIFO from './Queue_Stack/LIFO_FIFO.js';
 import LLComponent from './LinkedList/LLComponent.js';
 import optimised_Home from '../svg/optimised_Home.svg';
 import cog1 from '../svg/cog1.svg';
 import account from '../svg/account.svg';
 import edit from '../svg/edit.svg';
 import goal from '../svg/goal.svg';
+import cell from '../svg/cell.svg';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from './Footer';
 
@@ -30,6 +32,8 @@ class Navigation extends Component {
                         <img className="Svg-logo" id="edit" src={edit} alt="logo" /></a>
                     <a href="/LLComponent" rel="noopener noreferrer" id="svg5">
                         <img className="Svg-alt-logo" id="goal" src={goal} alt="logo" /></a>
+                    <a href="/LIFO_FIFO" rel="noopener noreferrer" id="svg6">
+                        <img className="Svg-logo" id="cell" src={cell} alt="logo" /></a>
                 </div>
                 <BrowserRouter>
                     <Switch>
@@ -38,6 +42,7 @@ class Navigation extends Component {
                         <Route path="/Account" exact component={Account} />
                         <Route path="/Cities" exact component={Cities} />
                         <Route path="/LLComponent" exact component={LLComponent} />
+                        <Route path="/LIFO_FIFO" exact component={LIFO_FIFO} />
                     </Switch>
                 </BrowserRouter>
                 <Footer />

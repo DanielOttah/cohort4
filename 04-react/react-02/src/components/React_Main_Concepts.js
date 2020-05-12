@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import LinkedList from './LinkedList.js'
-import LL from './LinkedList/LLComponent.js'
-
 
 
 class React_Main_Concepts extends Component {
@@ -27,9 +24,9 @@ class React_Main_Concepts extends Component {
     render() {
         return (
             <div>
-                {/* {this.introJSX()} */}
-Hello
-                <LL />
+                Hello
+                {this.introJSX()}
+
             </div>
         );
     }

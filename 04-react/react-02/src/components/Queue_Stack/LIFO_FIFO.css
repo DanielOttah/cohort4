@@ -1,0 +1,150 @@
+.container {
+    height: 100vh;
+    margin: auto;
+    width: 70%;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.col2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.col_2 {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.divHeight {
+    height: 40vh;
+    margin: auto;
+    justify-content: center;
+    background-color: cornsilk;
+}
+
+#childFIFO {
+    background: blue;
+    position: absolute;
+    height: 75px;
+    width: 50px;
+    margin: 70px;
+}
+
+#idFIFO {
+    background: darkgreen;
+    position: relative;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+}
+
+.animjs1 {
+    background: blue;
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs2 {
+    background: green;
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs3 {
+    background: red;
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs4 {
+    background: purple;
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs5 {
+    background: grey;
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs_1 {
+    background: rgb(139, 86, 5);
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs_2 {
+    background: rgb(59, 6, 52);
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs_3 {
+    background: rgb(109, 81, 235);
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs_4 {
+    background: rgb(36, 70, 33);
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}
+
+.animjs_5 {
+    background: rgb(46, 29, 29);
+    /* position: absolute; */
+    height: 30px;
+    width: 80px;
+    margin: 5px;
+    color: White;
+    text-align: center;
+    padding: 5px;
+}

@@ -138,9 +138,14 @@ class _LinkedList {
 
 export default _LinkedList;
 
-class ListNode {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
+// class ListNode {
+//     constructor(data) {
+//         this.data = data;
+//         this.next = null;
+//     }
+// }
+
+function ListNode(data) {
+    this.data = data;
+    this.next = null;
 }
