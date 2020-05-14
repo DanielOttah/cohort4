@@ -7,7 +7,7 @@ import { Input, Button } from './Input.js'
 
 import './LL.css'
 
-class LLComponent extends Component {
+export class LLComponent extends Component {
     constructor(props) {
         super(props);
         this.sll = new _LinkedList();
@@ -93,7 +93,7 @@ class LLComponent extends Component {
                                 <div className="col2"><LLOptions /> <label><Input id="idselectView" type="checkBox" />Switch View</label></div>
 
                                 <Input id="idSllOps" type="text" style={{ marginRight: "5px" }} />
-                                <Button onClick={this.handleLinkedList} name={"Complete"} />
+                                <Button data_testid="idBtnComplete" onClick={this.handleLinkedList} name={"Complete"} />
                                 <div></div>
                             </div>
                         </fieldset>
@@ -119,9 +119,8 @@ class LLComponent extends Component {
     }
 }
 
-export default LLComponent;
 
-function LLOptions() {
+export function LLOptions() {
     return <div>
         <select id="idSelect">
             <option value="select">--Select--</option>

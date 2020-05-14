@@ -7,6 +7,6 @@ export const TextBox = (props) => {
 }
 
 export const Button = (props) => {
-    return <button className={props.className} id={props.id} style={props.style} onClick={props.onClick} >{props.name}</button>
+    return <button className={props.className} id={props.id} style={props.style} onClick={props.onClick} data-testid={props.data_testid}>{props.name}</button>
 
 }

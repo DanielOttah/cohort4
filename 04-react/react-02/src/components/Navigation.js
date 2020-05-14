@@ -6,7 +6,7 @@ import App from '../App';
 import Account from './Account/Account.js';
 import Cities from './Cities/Cities.js';
 import LIFO_FIFO from './Queue_Stack/LIFO_FIFO.js';
-import LLComponent from './LinkedList/LLComponent.js';
+import { LLComponent } from './LinkedList/LLComponent.js';
 import optimised_Home from '../svg/optimised_Home.svg';
 import cog1 from '../svg/cog1.svg';
 import account from '../svg/account.svg';

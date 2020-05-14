@@ -46,13 +46,22 @@ export class LIFOFIFOClassExample extends Component {
             r_lifo: stringify(this.removedLIFO),
         })
     }
+    handleClear = () => {
+        this.setState({
+            fifo: "",
+            lifo: "",
+            r_fifo: "",
+            r_lifo: ""
+        })
+    }
     render() {
         return (
             <div>
                 <div className="col_2">
                     <div style={{ borderRight: "2px solid black", margin: "auto" }}>
-                        <Button onClick={this.handlePutIn} name={"Put In"} />
-                        <Button onClick={this.handleTakeOut} name={"Take Out"} />
+                        <Button data_testid="btn_In" onClick={this.handlePutIn} name={"Put In"} />
+                        <Button data_testid="btn_Out" onClick={this.handleTakeOut} name={"Take Out"} />
+                        <Button data_testid="btn_Clear" onClick={this.handleClear} name={"Clear"} />
                     </div>
                     <span style={{ color: "blue", marginLeft: "5px" }}>The example uses country names as tasks. Clicking 'Put In' inserts a country into the queue and stack.
                 By clicking 'Take Out', the queue and stack removes a country according to their processes.</span>
@@ -78,14 +87,16 @@ export class LIFOFIFOClassExample extends Component {
     }
 
 }
-const stringify = (array) => {
+export const stringify = (array) => {
     let list = ""
     for (let r = 0; r < array.length; r++) {
-        list += `${r + 1}: "${array[r]}" `;
+        // list += `${r + 1}: "${array[r]}" `;
+        list += r + 1 + ": " + array[r] + " ";
+
     }
     return list;
 }
-const Data = () => {
+export const Data = () => {
     const country = [
         "Afghanistan",
         "Albania",

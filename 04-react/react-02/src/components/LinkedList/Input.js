@@ -7,6 +7,6 @@ export const Input = (props) => {
 }
 
 export const Button = (props) => {
-    return <button className={props.className} id={props.id} style={props.style} onClick={props.onClick} >{props.name}</button>
+    return <button data-testid={props.data_testid} className={props.className} id={props.id} style={props.style} onClick={props.onClick} >{props.name}</button>
 
 }
