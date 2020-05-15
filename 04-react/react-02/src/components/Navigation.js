@@ -5,6 +5,7 @@ import Home from './Home';
 import App from '../App';
 import Account from './Account/Account.js';
 import Cities from './Cities/Cities.js';
+import { Settings } from './Settings/Settings.js';
 import LIFO_FIFO from './Queue_Stack/LIFO_FIFO.js';
 import { LLComponent } from './LinkedList/LLComponent.js';
 import optimised_Home from '../svg/optimised_Home.svg';
@@ -13,8 +14,11 @@ import account from '../svg/account.svg';
 import edit from '../svg/edit.svg';
 import goal from '../svg/goal.svg';
 import cell from '../svg/cell.svg';
+import settings from '../svg/settings.svg';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from './Footer';
+import ThemeContextProvider from '../context/ThemeContext';
+
 
 
 class Navigation extends Component {
@@ -34,6 +38,8 @@ class Navigation extends Component {
                         <img className="Svg-alt-logo" id="goal" src={goal} alt="logo" /></a>
                     <a href="/LIFO_FIFO" rel="noopener noreferrer" id="svg6">
                         <img className="Svg-logo" id="cell" src={cell} alt="logo" /></a>
+                    <a href="/Settings" rel="noopener noreferrer" id="svg7">
+                        <img className="Svg-alt-logo" id="settings" src={settings} alt="logo" /></a>
                 </div>
                 <BrowserRouter>
                     <Switch>
@@ -41,8 +47,11 @@ class Navigation extends Component {
                         <Route path="/App" exact component={App} />
                         <Route path="/Account" exact component={Account} />
                         <Route path="/Cities" exact component={Cities} />
-                        <Route path="/LLComponent" exact component={LLComponent} />
-                        <Route path="/LIFO_FIFO" exact component={LIFO_FIFO} />
+                        <ThemeContextProvider>
+                            <Route path="/LLComponent" exact component={LLComponent} />
+                            <Route path="/LIFO_FIFO" exact component={LIFO_FIFO} />
+                            <Route path="/Settings" exact component={Settings} />
+                        </ThemeContextProvider>
                     </Switch>
                 </BrowserRouter>
                 <Footer />
