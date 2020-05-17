@@ -17,8 +17,10 @@ class Home extends React.Component {
             <li>2nd icon - Tic-Tac-Toe</li>
             <li>3rd icon - Account</li>
             <li>4th icon - Cities</li>
+            <li>5th icon - Linked List</li>
+            <li>6th icon - Stack and Queue</li>
+            <li>7th icon - Settings</li>
           </ul>
-
         </header>
       </div>
 

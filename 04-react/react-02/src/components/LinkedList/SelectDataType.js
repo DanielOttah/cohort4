@@ -71,7 +71,6 @@ const SelectDataTypeOPtions = (props) => {
 }
 const SelectBoolOPtions = (props) => {
     return <select id="idSllBool" style={{ marginRight: "5px", display: props.display }} >
-        <option value="select">--Select--</option>
         <option value="true">True</option>
         <option value="false">False</option>
     </select>

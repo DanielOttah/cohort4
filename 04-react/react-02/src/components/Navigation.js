@@ -7,9 +7,7 @@ import Account from './Account/Account.js';
 import Cities from './Cities/Cities.js';
 import { Settings } from './Settings/Settings.js';
 import LIFO_FIFO from './Queue_Stack/LIFO_FIFO.js';
-// import { LinkedListComponent } from './LinkedList/LinkedListComponent.js';
 import { LLComponent } from './LinkedList/LLComponent.js';
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from './Footer';
 import ThemeContextProvider from '../context/ThemeContext';
 import NavBar from '../NavBar';
@@ -47,7 +45,6 @@ class Navigation extends Component {
         else if (idPage === "idLL") {
             this.setState({
                 activePage: <LLComponent />
-                // activePage: <LinkedListComponent />
             })
         }
         else if (idPage === "idQueue_Stack") {

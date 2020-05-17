@@ -10,16 +10,17 @@ export class LLComponent extends Component {
     constructor(props) {
         super(props);
         this.sll = new _LinkedList();
-        this.llArray = [];
         this.state = {
             LL: [],
             position: 0
         }
+        this.llArray = [];
     }
 
     handleLinkedList = () => {
-        const inputVal = document.getElementById("idSllOps");
         const inputValdata = document.getElementById("idSll");
+        const idSelectDataType = document.getElementById("idSelectDataType");
+        const inputValBool = document.getElementById("idSllBool");
         const selectVal = document.getElementById("idSelect");
         const selectView = document.getElementById("idselectView");
         selectView.checked ? printLL1() : printLL2();
@@ -27,14 +28,11 @@ export class LLComponent extends Component {
         if (selectVal.value === "getSize") {
             console.log(`Linked list size is: ${this.sll.size()}`);
         }
-        else if (selectVal.value === "removeData") {
-            this.sll.remove(inputVal.value);
-            console.log(this.sll.displayData());
-        }
         else if (selectVal.value === "clearData") {
             this.sll.clearData();
             this.setState({
-                LL: this.sll.printData()
+                LL: this.sll.printData(),
+                position: "head"
             })
             console.log(this.sll.displayData());
         }
@@ -42,23 +40,25 @@ export class LLComponent extends Component {
             console.log(this.sll.displayData());
         }
         else if (selectVal.value === "printData") {
-            this.sll.printData();
+            console.log(this.sll.printData());
         }
         else if (selectVal.value === "indexOfData") {
-            console.log(`index of ${inputVal.value} is ${this.sll.indexOf(inputVal.value)}`);
+            console.log(`index of ${this.state.LL[this.state.position]} is ${this.sll.indexOf(this.state.LL[this.state.position])}`);
         }
         else if (selectVal.value === "dataAt") {
-            console.log(`Data at index of ${inputVal.value} is ${this.sll.dataAt(inputVal.value)}`);
+            console.log(`Data at index of ${this.state.position} is ${this.sll.dataAt(this.state.position)}`);
         }
         else if (selectVal.value === "insertDataAt") {
-            this.sll.insertAt(inputVal.value, inputValdata.value);
+            inputValdata.style.display !== "none" ?
+                ((idSelectDataType.value === "array") ? this.sll.insertAt(this.state.position, this.llArray) : this.sll.insertAt(this.state.position, inputValdata.value))
+                : this.sll.insertAt(this.state.position, inputValBool.value);
             this.setState({
                 LL: this.sll.printData()
             })
             console.log(this.sll.displayData());
         }
         else if (selectVal.value === "removeDataAt") {
-            this.sll.removeAt(inputVal.value);
+            this.sll.removeAt(this.state.position);
             this.setState({
                 LL: this.sll.printData()
             })
@@ -69,7 +69,8 @@ export class LLComponent extends Component {
         const inputVal = document.getElementById("idSll");
         const inputValBool = document.getElementById("idSllBool");
         const idSelectDataType = document.getElementById("idSelectDataType");
-
+        this.llArray.unshift("[");
+        this.llArray.push("]")
         inputVal.style.display !== "none" ?
             ((idSelectDataType.value === "array") ? this.sll.add(this.llArray) : this.sll.add(inputVal.value))
             : this.sll.add(inputValBool.value);
@@ -77,7 +78,7 @@ export class LLComponent extends Component {
         this.setState({
             LL: this.sll.printData()
         })
-
+        this.llArray = [];
     }
     CreateLinkedListArray = () => {
         const inputVal = document.getElementById("idSll");
@@ -110,9 +111,9 @@ export class LLComponent extends Component {
                                 <div className="">
                                     <fieldset>
                                         <legend>Linked List Operations</legend>
-                                        <div className="col4_Alt">
-                                            <div className="col2"><LLOptions /> <label><Input id="idselectView" type="checkBox" />Switch View</label></div>
-                                            <Input id="idSllOps" type="text" style={{ marginRight: "5px" }} />
+                                        <div className="col3">
+                                            <div className="col2"><LLOptions /> <label><Input id="idselectView" type="checkBox" />Switch Display View</label></div>
+                                            {/* <Input id="idSllOps" type="text" style={{ marginRight: "5px" }} /> */}
                                             <Button data_testid="idBtnComplete" onClick={this.handleLinkedList} name={"Complete"} />
                                             <div>Node Position: <b>{`Node ${this.state.position}`}</b></div>
                                         </div>
@@ -146,7 +147,6 @@ export function LLOptions() {
             <option value="getSize">Get Size</option>
             <option value="indexOfData">Index Of Data</option>
             <option value="dataAt">Data at Index</option>
-            <option value="removeData">Remove Data</option>
             <option value="insertDataAt">Insert Data At</option>
             <option value="removeDataAt">Remove Data At</option>
             <option value="printData">Print All Data</option>
