@@ -24,6 +24,7 @@
 .Svg-logo {
     height: 5vmin;
     padding: 5px;
+    border-radius: 100%;
 }
 
 .Svg-logo:hover {
@@ -34,6 +35,7 @@
 .Svg-alt-logo {
     height: 5vmin;
     padding: 5px;
+    border-radius: 100%;
 }
 
 .Svg-alt-logo:hover {
