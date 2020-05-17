@@ -3,6 +3,15 @@
     display: block;
 }
 
+.AppTicTacToe {
+    /* text-align: center; */
+    margin-top: "10px";
+    height: 100vh;
+    margin: auto;
+    width: 70%;
+    justify-content: center;
+}
+
 .App {
     text-align: center;
 }

@@ -28,8 +28,10 @@ class ThemeContextProvider extends Component {
                 light: { textColor: "#0a1a0e", ui: "#90f7aa", bg: "#6cb37e" },
                 dark: { textColor: "#d8dad9", ui: "#2a6e3b", bg: "#0c3316" }
             },
-            whichTheme: this.none
+            whichTheme: this.none,
+            selectedThemeOption: "None"
         }
+        // 
 
     }
     selectTheme = (e) => {
@@ -39,28 +41,35 @@ class ThemeContextProvider extends Component {
         if (selectedTheme === "None") {
             themeId.disabled = true;
             this.setState({
-                whichTheme: this.none
+                whichTheme: this.none,
+                selectedThemeOption: "None"
             })
+            themeId.value = "None";
         } else if (selectedTheme === "blue") {
             themeId.disabled = false;
             this.setState({
-                whichTheme: this.state.blue
+                whichTheme: this.state.blue,
+                selectedThemeOption: "blue"
             })
 
         } else if (selectedTheme === "gray") {
             themeId.disabled = false;
             this.setState({
-                whichTheme: this.state.gray
+                whichTheme: this.state.gray,
+                selectedThemeOption: "gray"
             })
         } else if (selectedTheme === "green") {
             themeId.disabled = false;
             this.setState({
-                whichTheme: this.state.green
+                whichTheme: this.state.green,
+                selectedThemeOption: "green"
             })
+
         } else if (selectedTheme === "brown") {
             themeId.disabled = false;
             this.setState({
-                whichTheme: this.state.brown
+                whichTheme: this.state.brown,
+                selectedThemeOption: "brown"
             })
         }
     }
@@ -87,13 +96,13 @@ class ThemeContextProvider extends Component {
                 isLightTheme: !this.state.isLightTheme
             })
         }
-
     }
     render() {
         return (
             <ThemeContext.Provider value={{
                 ...this.state.whichTheme, isLightTheme: this.state.isLightTheme,
-                toggleLight_Dark: this.toggleLight_Dark, selectTheme: this.selectTheme
+                toggleLight_Dark: this.toggleLight_Dark, selectTheme: this.selectTheme,
+                selectedThemeOption: this.state.selectedThemeOption
             }}>
                 {this.props.children}
             </ThemeContext.Provider>

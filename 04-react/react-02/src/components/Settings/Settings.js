@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import 'C:/code/cohort4/04-react/react-02/src/App.css'
 import { ThemeContext } from '../../context/ThemeContext';
-import SelectThemeList from './SelectThemeList';
+import ThemeOptions from './ThemeOptions';
+// import SelectThemeList from './SelectThemeList';
 
 // export class Settings extends Component {
 //     static contextType = ThemeContext;
@@ -58,14 +59,7 @@ export class Settings extends Component {
                                 <div className="" style={{ paddingBottom: "10px" }}>
                                     <fieldset >
                                         <legend><b>Select Theme to Use</b></legend>
-                                        <div className="col__3" >
-                                            <SelectThemeList />
-                                            <label><b>Toggle Light and Dark Theme:</b> ({themeType})</label>
-                                            <label className="switch">
-                                                <input id="themeId" type="checkbox" onChange={toggleLight_Dark} />
-                                                <span className="slider round"></span>
-                                            </label>
-                                        </div>
+                                        <ThemeOptions themeType={themeType} toggleLight_Dark={toggleLight_Dark} />
                                     </fieldset>
                                 </div>
                             </fieldset>
@@ -75,5 +69,4 @@ export class Settings extends Component {
             }}</ThemeContext.Consumer>
         );
     }
-
 }

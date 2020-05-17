@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import _LinkedList from './_LinkedList.js'
-import SelectDataType from './SelectDataType.js'
+// import _LinkedList from './_LinkedList.js'
+import { Queue, Stack } from './_LinkedList_2.js'
+// import SelectDataType from './SelectDataType.js'
 import { Input, Button } from './Input.js'
 import { ThemeContext } from '../../context/ThemeContext';
 import './LL.css'
-import CreateLLCard from './CreateLLCard.js';
+// import CreateLLCard from './CreateLLCard.js';
 
-export class LLComponent extends Component {
+export class LinkedListComponent extends Component {
     constructor(props) {
         super(props);
-        this.sll = new _LinkedList();
-        this.llArray = [];
+        this.sll = new Queue();
+        // this.slls = new Stack();
+        this.llQueueArray = [];
+        // this.llStackArray = [];
         this.state = {
-            LL: [],
-            position: 0
+            position: 0,
+            LL: this.sll
+            // sll: new _LinkedList()
         }
     }
-
     handleLinkedList = () => {
-        const inputVal = document.getElementById("idSllOps");
-        const inputValdata = document.getElementById("idSll");
+        const inputVal = document.getElementById("idSllSubject");
+        const inputValdata = document.getElementById("idSllValue");
         const selectVal = document.getElementById("idSelect");
         const selectView = document.getElementById("idselectView");
         selectView.checked ? printLL1() : printLL2();
@@ -33,9 +36,6 @@ export class LLComponent extends Component {
         }
         else if (selectVal.value === "clearData") {
             this.sll.clearData();
-            this.setState({
-                LL: this.sll.printData()
-            })
             console.log(this.sll.displayData());
         }
         else if (selectVal.value === "displayLL") {
@@ -52,44 +52,29 @@ export class LLComponent extends Component {
         }
         else if (selectVal.value === "insertDataAt") {
             this.sll.insertAt(inputVal.value, inputValdata.value);
-            this.setState({
-                LL: this.sll.printData()
-            })
             console.log(this.sll.displayData());
         }
         else if (selectVal.value === "removeDataAt") {
             this.sll.removeAt(inputVal.value);
-            this.setState({
-                LL: this.sll.printData()
-            })
             console.log(this.sll.displayData());
         }
+
     }
     CreateLinkedList = () => {
-        const inputVal = document.getElementById("idSll");
-        const inputValBool = document.getElementById("idSllBool");
+        const inputSubject = document.getElementById("idSllSubject");
+        const inputValue = document.getElementById("idSllValue");
         const idSelectDataType = document.getElementById("idSelectDataType");
 
-        inputVal.style.display !== "none" ?
-            ((idSelectDataType.value === "array") ? this.sll.add(this.llArray) : this.sll.add(inputVal.value))
-            : this.sll.add(inputValBool.value);
+        this.sll.enqueue(inputSubject.value, inputValue.value);
+        console.log(this.sll.displayData());
 
-        this.setState({
-            LL: this.sll.printData()
-        })
-
+        // this.setState({
+        //     LL: this.sll
+        // })
     }
     CreateLinkedListArray = () => {
         const inputVal = document.getElementById("idSll");
         this.llArray.push(inputVal.value);
-    }
-    setCurrentNode = (e) => {
-        const divEl = document.getElementById(this.state.position);
-        divEl.className = divEl.className.replace(" divGlow", "");
-        this.setState({
-            position: parseInt(e.target.id)
-        })
-        e.target.className += " divGlow";
     }
     render() {
         return (
@@ -100,12 +85,14 @@ export class LLComponent extends Component {
                     <div className="bodySettings" style={{ background: currentTheme.ui, color: currentTheme.textColor }}>
                         <div className="container">
                             <fieldset>
-                                <legend>Select Type Of Data to Enter</legend>
+                                <legend>Create Linked List Node</legend>
                                 <div>
-                                    <SelectDataType onClick={this.CreateLinkedList} onClickArray={this.CreateLinkedListArray} />
+                                    <label>Enter Subject: <Input id="idSllSubject" type="text" style={{ marginRight: "5px" }} /></label>
+                                    <label>Enter Value: <Input id="idSllValue" type="text" style={{ marginRight: "5px" }} /></label>
+                                    <Button data_testid="idBtnComplete" onClick={this.CreateLinkedList} name={"Add"} />
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            {/* <fieldset>
                                 <legend>Linked List Options</legend>
                                 <div className="">
                                     <fieldset>
@@ -114,22 +101,23 @@ export class LLComponent extends Component {
                                             <div className="col2"><LLOptions /> <label><Input id="idselectView" type="checkBox" />Switch View</label></div>
                                             <Input id="idSllOps" type="text" style={{ marginRight: "5px" }} />
                                             <Button data_testid="idBtnComplete" onClick={this.handleLinkedList} name={"Complete"} />
-                                            <div>Node Position: <b>{`Node ${this.state.position}`}</b></div>
+                                            <div></div>
                                         </div>
                                     </fieldset>
                                 </div>
-                            </fieldset>
-                            <fieldset>
+                            </fieldset> */}
+                            {/* <fieldset>
                                 <legend>Linked List</legend>
+                                <pre className="LLDisplay" id="logger"></pre>
+                                <hr style={{ height: "2px", borderWidth: "1px", color: "gray", backgroundColor: "gray" }} />
                                 <div id="idLLFlowDiagram">
                                     <fieldset>
                                         <legend>Linked List Diagram Flow</legend>
-                                        <CreateLLCard linkedList={this.state.LL} onClickLLNode={this.setCurrentNode} />
+                                        <CreateLLCard linkedList={this.state.LL} />
                                     </fieldset>
                                 </div>
-                                <hr style={{ height: "2px", borderWidth: "1px", color: "gray", backgroundColor: "gray" }} />
-                                <pre className="LLDisplay" id="logger"></pre>
-                            </fieldset>
+
+                            </fieldset> */}
                         </div>
                     </div>
                 )
@@ -200,7 +188,6 @@ export function LLOptions() {
 //         }
 //     })();
 // }
-
 const printLL1 = () => {
     (function () {
         // let old = console.log;

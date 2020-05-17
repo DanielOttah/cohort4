@@ -6,14 +6,14 @@ class SelectThemeList extends Component {
     render() {
         return (
             <ThemeContext.Consumer>{(context) => {
-                const { selectTheme } = context;
+                const { selectTheme, selectedThemeOption } = context;
                 return (
                     <div>
-                        <select id="selectTheme" onChange={selectTheme}>
-                            <option value="None" >No Theme</option>
-                            <option value="gray">Gray Theme</option>
-                            <option value="blue">Blue Theme</option>
-                            <option value="brown">Brown Theme</option>
+                        <select id="selectTheme" onChange={selectTheme} value={selectedThemeOption}>
+                            <option value="None" >Default</option>
+                            <option value="gray" >Gray Theme</option>
+                            <option value="blue" >Blue Theme</option>
+                            <option value="brown" >Brown Theme</option>
                             <option value="green">Green Theme</option>
                         </select>
                     </div>
@@ -22,5 +22,4 @@ class SelectThemeList extends Component {
         );
     }
 }
-
 export default SelectThemeList;

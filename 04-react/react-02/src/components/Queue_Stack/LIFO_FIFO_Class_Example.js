@@ -80,8 +80,8 @@ export class LIFOFIFOClassExample extends Component {
                         <p><span style={{ color: "blue" }}>{`[${this.state.r_lifo}]`}</span></p>
                     </fieldset>
                 </div>
-                {/* <hr />
-                <p><span style={{ color: "blue" }}>{this.state.List}</span></p> */}
+                {/* <hr />*/}
+
             </div>
         );
     }

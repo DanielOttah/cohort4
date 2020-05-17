@@ -116,14 +116,19 @@ class _LinkedList {
     }
     printData() {
         let currentNode = this.head;
-        let index = 0;
+        // let index = 0;
         let arr = [];
-        while (currentNode) {
-            console.log(`Node ${++index} data: ${currentNode.data}`);
-            arr.push(currentNode.data);
-            currentNode = currentNode.next;
+        if (currentNode === null) {
+            return arr;
         }
-        return arr;
+        else {
+            while (currentNode) {
+                // console.log(`Node ${++index} data: ${currentNode.data}`);
+                arr.push(currentNode.data);
+                currentNode = currentNode.next;
+            }
+            return arr;
+        }
     }
     displayData() {
         return this.head;
@@ -133,7 +138,6 @@ class _LinkedList {
         this.head = null;
         this._length = 0;
     }
-
 }
 
 export default _LinkedList;

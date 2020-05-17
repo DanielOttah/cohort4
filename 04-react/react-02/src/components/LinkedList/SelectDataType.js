@@ -5,8 +5,8 @@ class SelectDataType extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            inputType: "",
-            displayInput: "none",
+            inputType: "text",
+            displayInput: "block",
             displaySelect: "none",
             displayArrayBtn: "none"
         }
@@ -14,13 +14,7 @@ class SelectDataType extends Component {
     }
     hanldeSelectDataType = () => {
         const selectDataType = document.getElementById("idSelectDataType")
-        if (selectDataType.value === "select") {
-            this.setState({
-                displayInput: "none",
-                displaySelect: "none",
-                displayArrayBtn: "none"
-            })
-        }
+
         if (selectDataType.value === "text") {
             this.setState({
                 inputType: "text",
@@ -29,14 +23,7 @@ class SelectDataType extends Component {
                 displayArrayBtn: "none"
             })
         }
-        if (selectDataType.value === "number") {
-            this.setState({
-                inputType: "number",
-                displayInput: "block",
-                displaySelect: "none",
-                displayArrayBtn: "none"
-            })
-        }
+
         if (selectDataType.value === "boolean") {
             this.setState({
                 inputType: "text",
@@ -76,9 +63,7 @@ export default SelectDataType;
 
 const SelectDataTypeOPtions = (props) => {
     return <select id="idSelectDataType" onChange={props.onChange} style={{ marginRight: "5px" }} >
-        <option value="select">--Select--</option>
         <option value="text">Text</option>
-        <option value="number">Number</option>
         <option value="boolean">Boolean</option>
         <option value="array">Array</option>
         <option value="dictionary">Dictionary</option>

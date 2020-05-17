@@ -196,7 +196,7 @@ export class Game extends React.Component {
                 </h2>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr" }}>
-                    <div className="game-board" >
+                    <div className="" >
                         <Board squares={current.squares} onClick={(i) => this.handleClick(i)} /> {/*render board*/}
                     </div>
                     <div className="game-info">
