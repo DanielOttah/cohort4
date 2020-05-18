@@ -98,8 +98,8 @@ export class LLComponent extends Component {
                 const { isLightTheme, light, dark } = context;
                 const currentTheme = isLightTheme ? light : dark;
                 return (
-                    <div className="bodySettings" style={{ background: currentTheme.ui, color: currentTheme.textColor }}>
-                        <div className="container">
+                    <div className="bodySettings" style={{ background: currentTheme.bg, color: currentTheme.textColor }}>
+                        <div className="container" style={{ background: currentTheme.ui }}>
                             <fieldset>
                                 <legend>Select Type Of Data to Enter</legend>
                                 <div>

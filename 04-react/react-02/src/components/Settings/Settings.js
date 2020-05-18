@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'C:/code/cohort4/04-react/react-02/src/App.css'
 import { ThemeContext } from '../../context/ThemeContext';
 import ThemeOptions from './ThemeOptions';
+
 // import SelectThemeList from './SelectThemeList';
 
 // export class Settings extends Component {
@@ -48,22 +49,41 @@ export class Settings extends Component {
     render() {
         return (
             <ThemeContext.Consumer>{(context) => {
-                const { isLightTheme, light, dark, toggleLight_Dark } = context;
+                const { isCustomTheme, isLightTheme, light, dark, toggleLight_Dark, onChangeBG, isCustomThemeTC, isCustomThemeBG,
+                    onChangeUI, onChangeTC, selectedThemeOption, isCustomThemeUI } = context;
                 const currentTheme = isLightTheme ? light : dark;
-                const themeType = (currentTheme.ui === "") ? "No theme selected" : (isLightTheme ? "Light Theme" : " Dark Theme");//  ;
+                const themeType = (selectedThemeOption !== "None" && selectedThemeOption !== "custom") ? (isLightTheme ? "Light Theme" : " Dark Theme") : ((selectedThemeOption === "None") ? "No theme selected" : "Custom Theme");
+                const isOnCustomTheme = (isCustomTheme) ? "block" : "none";
                 return (
-                    <div className="bodySettings" style={{ background: currentTheme.ui }}>
-                        <div className="containerSettings" style={{ background: currentTheme.bg, color: currentTheme.textColor }}>
+                    <div className="bodySettings" style={{ background: currentTheme.bg }}>
+                        <div className="containerSettings" style={{ background: currentTheme.ui, color: currentTheme.textColor }}>
                             <fieldset >
                                 <legend><b>Application Settings</b></legend>
                                 <div className="" style={{ paddingBottom: "10px" }}>
                                     <fieldset >
                                         <legend><b>Select Theme to Use</b></legend>
                                         <ThemeOptions themeType={themeType} toggleLight_Dark={toggleLight_Dark} />
+                                        <div id="idCustomTheme" style={{ display: `${isOnCustomTheme}`, marginTop: "10px", marginBottom: "10px" }}>
+                                            <legend ><b>Select Custom Theme</b></legend>
+                                            <label style={{ marginRight: "50px" }}>Background: <input id="idCustomeThemeBG" type="color" value={isCustomThemeBG} onChange={onChangeBG} /></label>
+                                            <label style={{ marginRight: "50px" }}>UI: <input id="idCustomeThemeUI" type="color" value={isCustomThemeUI} onChange={onChangeUI} /></label>
+                                            <label style={{ marginRight: "50px" }}>Text Color: <input id="idCustomeThemeTextColor" type="color" value={isCustomThemeTC} onChange={onChangeTC} /></label>
+                                        </div>
                                     </fieldset>
+
                                 </div>
+
                             </fieldset>
+
+                            <div className="AnimeDiv" >
+                                <div className="sign">
+                                    <span className="fast-flicker">d</span>an<span className="flicker">i</span>el - <br />
+                                    <span className="fast-flicker"> f</span>s<span className="flicker">d</span>
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
                 )
             }}</ThemeContext.Consumer>

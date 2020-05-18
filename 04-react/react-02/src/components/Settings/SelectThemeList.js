@@ -15,6 +15,7 @@ class SelectThemeList extends Component {
                             <option value="blue" >Blue Theme</option>
                             <option value="brown" >Brown Theme</option>
                             <option value="green">Green Theme</option>
+                            <option value="custom">Custom Theme</option>
                         </select>
                     </div>
                 )

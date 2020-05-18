@@ -9,7 +9,7 @@ class NavBar extends Component {
             <ThemeContext.Consumer>{(context) => {
                 const { isLightTheme, light, dark, selectedThemeOption } = context;
                 const currentTheme = isLightTheme ? light : dark;
-                let bgColor = (selectedThemeOption === "None") ? "#b9e8ee" : currentTheme.ui;
+                let bgColor = (selectedThemeOption === "None" || selectedThemeOption === "custom") ? "#b9e8ee" : currentTheme.ui;
                 return (
                     <div className="" id="svgDiv" style={{ background: bgColor, display: 'flex', justifyContent: 'center' }}>
                         <img onClick={this.props.onClick} className="Svg-alt-logo iconGlow" id="idHome" src={"/svg/optimised_Home.svg"} alt="logo" />

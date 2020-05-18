@@ -9,8 +9,8 @@ class Footer extends Component {
             <ThemeContext.Consumer>{(context) => {
                 const { isLightTheme, light, dark, selectedThemeOption } = context;
                 const currentTheme = isLightTheme ? light : dark;
-                let bgColor = (selectedThemeOption === "None") ? '#283234' : currentTheme.ui;
-                let txtColor = (selectedThemeOption === "None") ? 'white' : currentTheme.textColor;
+                let bgColor = (selectedThemeOption === "None" || selectedThemeOption === "custom") ? '#283234' : currentTheme.ui;
+                let txtColor = (selectedThemeOption === "None" || selectedThemeOption === "custom") ? 'white' : currentTheme.textColor;
                 return (
                     <div className="App" style={{ backgroundColor: bgColor, color: txtColor, padding: '10px' }}>
                         React App developed and maintained by
