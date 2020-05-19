@@ -249,7 +249,6 @@ class Account extends Component {
                         accountCurrentCash: userAccounts[indexOfAccount][selectCustomerAccount.value]
                     })
                 }
-
             }
             if (selectTransaction.value === "transfer") {
                 console.log("Seeing transfer");
