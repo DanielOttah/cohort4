@@ -45,7 +45,15 @@ import ThemeOptions from './ThemeOptions';
 
 //Using ThemeContext.Consumer
 export class Settings extends Component {
+    state = {
+        isBgOn: false
+    }
     static contextType = ThemeContext;
+    toggleEffectBG = () => {
+        this.setState({
+            isBGOn: !this.state.isBGOn
+        })
+    }
     render() {
         return (
             <ThemeContext.Consumer>{(context) => {
@@ -75,7 +83,7 @@ export class Settings extends Component {
 
                             </fieldset>
 
-                            <div className="AnimeDiv" >
+                            <div className={`${(this.state.isBGOn) ? "AnimeDiv" : ""}`} onClick={this.toggleEffectBG}>
                                 <div className="sign">
                                     {/* <span className="fast-flicker">d</span>an<span className="flicker">i</span>el <br /> */}
                                     <span className="fast-flicker">en</span>d-<br />
