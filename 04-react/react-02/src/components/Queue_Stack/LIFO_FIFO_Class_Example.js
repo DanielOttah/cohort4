@@ -63,21 +63,21 @@ export class LIFOFIFOClassExample extends Component {
                         <Button data_testid="btn_Out" onClick={this.handleTakeOut} name={"Take Out"} />
                         <Button data_testid="btn_Clear" onClick={this.handleClear} name={"Clear"} />
                     </div>
-                    <span style={{ color: "blue", marginLeft: "5px" }}>The example uses country names as tasks. Clicking 'Put In' inserts a country into the queue and stack.
+                    <span style={{ marginLeft: "5px" }}>The example uses country names as tasks. Clicking 'Put In' inserts a country into the queue and stack.
                 By clicking 'Take Out', the queue and stack removes a country according to their processes.</span>
                 </div>
                 <div className="col2" style={{ marginTop: "10px" }}>
                     <fieldset>
                         <legend><b> QUEUE - FIFO Example</b></legend>
-                        <p><span style={{ color: "blue" }}>{`[${this.state.fifo}]`}</span></p>
+                        <p><span>{`[${this.state.fifo}]`}</span></p>
                         <hr style={{ height: "2px", borderWidth: "1px", color: "gray", backgroundColor: "gray" }} />
-                        <p><span style={{ color: "blue" }}>{`[${this.state.r_fifo}]`}</span></p>
+                        <p><span>{`[${this.state.r_fifo}]`}</span></p>
                     </fieldset>
                     <fieldset>
                         <legend><b> STACK - LIFO Example</b></legend>
                         <p><span>{`[${this.state.lifo}]`}</span></p>
                         <hr style={{ height: "2px", borderWidth: "1px", color: "gray", backgroundColor: "gray" }} />
-                        <p><span style={{ color: "blue" }}>{`[${this.state.r_lifo}]`}</span></p>
+                        <p><span>{`[${this.state.r_lifo}]`}</span></p>
                     </fieldset>
                 </div>
                 {/* <hr />*/}

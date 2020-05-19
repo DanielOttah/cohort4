@@ -77,8 +77,10 @@ export class Settings extends Component {
 
                             <div className="AnimeDiv" >
                                 <div className="sign">
-                                    <span className="fast-flicker">d</span>an<span className="flicker">i</span>el - <br />
-                                    <span className="fast-flicker"> f</span>s<span className="flicker">d</span>
+                                    {/* <span className="fast-flicker">d</span>an<span className="flicker">i</span>el <br /> */}
+                                    <span className="fast-flicker">en</span>d-<br />
+                                    <span className="flicker">of</span><br />
+                                    <span className="fast-flicker">-fe</span>d<br />
                                 </div>
                             </div>
 

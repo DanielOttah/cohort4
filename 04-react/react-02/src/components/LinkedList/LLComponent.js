@@ -62,6 +62,13 @@ export class LLComponent extends Component {
             this.setState({
                 LL: this.sll.printData()
             })
+            if (this.state.position + 1 === this.state.LL.length) {
+                const divEl = document.getElementById(this.state.position - 1);
+                divEl.className += " divGlow";
+                this.setState({
+                    position: parseInt(this.state.position - 1)
+                })
+            }
             console.log(this.sll.displayData());
         }
     }
@@ -86,11 +93,11 @@ export class LLComponent extends Component {
     }
     setCurrentNode = (e) => {
         const divEl = document.getElementById(this.state.position);
-        divEl.className = divEl.className.replace(" divGlow", "");
+        divEl.className = divEl.className.substring(0, 6);
+        e.target.className += " divGlow";
         this.setState({
             position: parseInt(e.target.id)
         })
-        e.target.className += " divGlow";
     }
     render() {
         return (

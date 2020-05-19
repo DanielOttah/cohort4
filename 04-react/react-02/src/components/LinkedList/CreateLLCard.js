@@ -20,7 +20,7 @@ export default CreateLLCard;
 
 function LLCard(props) {
     return (<div className="col2_LL" id={`id${props.ind}`} onClick={props.onClick}>
-        <div className="LLcard" id={`${props.ind}`}>{`Node ${props.ind}: ${props.value}`}</div>
+        <div className={`${(props.ind === 0) ? "LLcard divGlow" : "LLcard"}`} id={`${props.ind}`}>{`Node ${props.ind}: ${props.value}`} </div>
         <div className="LLcardLink"> →</div>
     </div>)
 }
