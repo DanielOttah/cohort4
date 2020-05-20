@@ -15,8 +15,8 @@ export class FIFOAnimation extends Component {
             // rotateZ: 360,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn1").style.display = "none";
-        document.getElementById("btn2").style.display = "inline-block";
+        document.getElementById("idbtn1").style.display = "none";
+        document.getElementById("idbtn2").style.display = "inline-block";
     }
     handleLoadAnimation2 = () => {
         anime({
@@ -30,8 +30,8 @@ export class FIFOAnimation extends Component {
             // rotateZ: 360,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn2").style.display = "none";
-        document.getElementById("btn3").style.display = "inline-block";
+        document.getElementById("idbtn2").style.display = "none";
+        document.getElementById("idbtn3").style.display = "inline-block";
     }
     handleLoadAnimation3 = () => {
         anime({
@@ -45,8 +45,8 @@ export class FIFOAnimation extends Component {
             // rotateZ: 360,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn3").style.display = "none";
-        document.getElementById("btn4").style.display = "inline-block";
+        document.getElementById("idbtn3").style.display = "none";
+        document.getElementById("idbtn4").style.display = "inline-block";
     }
     handleLoadAnimation4 = () => {
         anime({
@@ -60,8 +60,8 @@ export class FIFOAnimation extends Component {
             // rotateZ: 360,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn4").style.display = "none";
-        document.getElementById("btn5").style.display = "inline-block";
+        document.getElementById("idbtn4").style.display = "none";
+        document.getElementById("idbtn5").style.display = "inline-block";
     }
     handleLoadAnimation5 = () => {
         anime({
@@ -75,8 +75,8 @@ export class FIFOAnimation extends Component {
             // rotateZ: 360,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn5").style.display = "none";
-        document.getElementById("btn_1").style.display = "inline-block";
+        document.getElementById("idbtn5").style.display = "none";
+        document.getElementById("idbtn_1").style.display = "inline-block";
     }
     handleUnLoadAnimation1 = () => {
         anime({
@@ -89,8 +89,8 @@ export class FIFOAnimation extends Component {
             duration: 500,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn_1").style.display = "none";
-        document.getElementById("btn_2").style.display = "inline-block";
+        document.getElementById("idbtn_1").style.display = "none";
+        document.getElementById("idbtn_2").style.display = "inline-block";
     }
     handleUnLoadAnimation2 = () => {
         anime({
@@ -103,8 +103,8 @@ export class FIFOAnimation extends Component {
             duration: 500,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn_2").style.display = "none";
-        document.getElementById("btn_3").style.display = "inline-block";
+        document.getElementById("idbtn_2").style.display = "none";
+        document.getElementById("idbtn_3").style.display = "inline-block";
 
     }
     handleUnLoadAnimation3 = () => {
@@ -118,8 +118,8 @@ export class FIFOAnimation extends Component {
             duration: 500,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn_3").style.display = "none";
-        document.getElementById("btn_4").style.display = "inline-block";
+        document.getElementById("idbtn_3").style.display = "none";
+        document.getElementById("idbtn_4").style.display = "inline-block";
 
     }
     handleUnLoadAnimation4 = () => {
@@ -133,8 +133,8 @@ export class FIFOAnimation extends Component {
             duration: 500,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn_4").style.display = "none";
-        document.getElementById("btn_5").style.display = "inline-block";
+        document.getElementById("idbtn_4").style.display = "none";
+        document.getElementById("idbtn_5").style.display = "inline-block";
 
     }
     handleUnLoadAnimation5 = () => {
@@ -148,24 +148,24 @@ export class FIFOAnimation extends Component {
             duration: 500,
             easing: 'easeOutElastic(1, .8)',
         });
-        document.getElementById("btn_5").style.display = "none";
-        document.getElementById("btn1").style.display = "inline-block";
+        document.getElementById("idbtn_5").style.display = "none";
+        document.getElementById("idbtn1").style.display = "inline-block";
 
     }
 
     render() {
         return (
             <div>
-                <Button id="btn1" onClick={this.handleLoadAnimation1} name={"Enqueue 1"} style={{ marginBottom: "50px", display: "inline-block" }} />
-                <Button id="btn2" onClick={this.handleLoadAnimation2} name={"Enqueue 2"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn3" onClick={this.handleLoadAnimation3} name={"Enqueue 3"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn4" onClick={this.handleLoadAnimation4} name={"Enqueue 4"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn5" onClick={this.handleLoadAnimation5} name={"Enqueue 5"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn_1" onClick={this.handleUnLoadAnimation1} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn_2" onClick={this.handleUnLoadAnimation2} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn_3" onClick={this.handleUnLoadAnimation3} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn_4" onClick={this.handleUnLoadAnimation4} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
-                <Button id="btn_5" onClick={this.handleUnLoadAnimation5} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn1" onClick={this.handleLoadAnimation1} name={"Enqueue 1"} style={{ marginBottom: "50px", display: "inline-block" }} />
+                <Button id="idbtn2" onClick={this.handleLoadAnimation2} name={"Enqueue 2"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn3" onClick={this.handleLoadAnimation3} name={"Enqueue 3"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn4" onClick={this.handleLoadAnimation4} name={"Enqueue 4"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn5" onClick={this.handleLoadAnimation5} name={"Enqueue 5"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn_1" onClick={this.handleUnLoadAnimation1} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn_2" onClick={this.handleUnLoadAnimation2} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn_3" onClick={this.handleUnLoadAnimation3} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn_4" onClick={this.handleUnLoadAnimation4} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
+                <Button id="idbtn_5" onClick={this.handleUnLoadAnimation5} name={"Dequeue"} style={{ marginBottom: "50px", display: "none" }} />
                 <div className="animjs1">Task 1</div>
                 <div className="animjs2">Task 2</div>
                 <div className="animjs3">Task 3</div>
