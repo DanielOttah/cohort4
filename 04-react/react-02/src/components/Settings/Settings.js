@@ -85,13 +85,12 @@ export class Settings extends Component {
 
                             <div className={`${(this.state.isBGOn) ? "AnimeDiv" : ""}`} onClick={this.toggleEffectBG}>
                                 <div className="sign">
-                                    {/* <span className="fast-flicker">d</span>an<span className="flicker">i</span>el <br /> */}
                                     <span className="fast-flicker">en</span>d-<br />
                                     <span className="flicker">of</span><br />
                                     <span className="fast-flicker">-fe</span>d<br />
                                 </div>
                             </div>
-
+                            <div className="trial-logo"><img id="" src={"/svg/logo.svg"} alt="logo" /></div>
                         </div>
 
                     </div>

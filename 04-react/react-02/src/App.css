@@ -25,17 +25,18 @@
     height: 5vmin;
     padding: 5px;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .Svg-logo:hover {
     filter: invert(90%) sepia(6%) saturate(2000%) hue-rotate(320deg) brightness(90%) contrast(90%);
-    color: #ec2d2d;
 }
 
 .Svg-alt-logo {
     height: 5vmin;
     padding: 5px;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .Svg-alt-logo:hover {
@@ -99,7 +100,7 @@
 
 /* Shake Effect*/
 
-img:hover {
+.myShakeImg:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
 }
@@ -199,7 +200,6 @@ img:hover {
     -webkit-transition: .4s;
     transition: .4s;
     cursor: pointer;
-    /* color: #d8dad9; */
 }
 
 input:checked+.slider {
@@ -228,9 +228,7 @@ input:checked+.slider:before {
 }
 
 .iconGlow {
-    /* width: 150px; */
     height: 30px;
-    /* background-color: #fff; */
     box-shadow: 0px 0px 5px 5px rgb(153, 0, 255);
     /* in order: x offset, y offset, blur size, spread size, color */
     /* blur size and spread size are optional (they default to 0) */
@@ -407,4 +405,17 @@ input:checked+.slider:before {
     to {
         opacity: 1;
     }
+}
+
+.trial-logo {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    padding: 3px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.trial-logo:hover {
+    transform: scale(1.5);
 }
