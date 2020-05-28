@@ -1,5 +1,5 @@
-class NotNumberError(ValueError):
-    pass
+# class NotNumberError(ValueError):
+#     pass
 
 
 print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -12,7 +12,7 @@ def calc_Tax(taxableIncome):
     result = []
     if taxableIncome == "" or taxableIncome.isdigit() == False:
         # return
-        raise NotNumberError()
+        raise ValueError()
     elif taxableIncome.isdigit() == True:
         print("Calculating ...")
         b1, b2, b3, b4 = 48535, 48534, 53404, 63895
@@ -83,11 +83,13 @@ def fifth_Category(num):
     return (float(num) * 33)/100
 
 
-try:
-    total_income = input('Enter total income: $CAD ')
-    calc_Tax(total_income)
-except NotNumberError as e:
-    print(f"'{total_income}' is not a valid number")
+# TODO
+# try:
+#     # total_income = input('Enter total income: $CAD ')
+#     calc_Tax(total_income := input('Enter total income: $CAD '))
+# except ValueError as e:
+#     print(f"'{total_income}' is not a valid number")
+
 
 print("")
 print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")

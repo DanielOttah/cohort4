@@ -1,5 +1,7 @@
-import pytest
+# import pytest
 from canTax import *
+# FIXME
+import pytest
 
 
 def test_first_Category():
@@ -34,10 +36,13 @@ def test_fifth_Category():
 
 def test_calc_Tax():
     val1, val2, val3, val4, val5 = "45000", "60000", "120000", "250000", "-500000"
-    assert calc_Tax("") == None
-    assert calc_Tax("asdf") == None
+    with pytest.raises(ValueError):
+        calc_Tax("")
+    with pytest.raises(ValueError):
+        calc_Tax("asdf")
+    with pytest.raises(ValueError):
+        calc_Tax(val5)
     assert round(calc_Tax(val1), 2) == 6750.00
     assert round(calc_Tax(val2), 2) == 9630.58
     assert round(calc_Tax(val3), 2) == 23191.78
     assert round(calc_Tax(val4), 2) == 61402.87
-    assert calc_Tax(val5) == None
