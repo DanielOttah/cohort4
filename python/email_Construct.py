@@ -8,4 +8,4 @@ def emailApp(fname: str, lname: str):
         return email
 
 
-print(emailApp("Leinads", "Ottah"))
+# print(emailApp("Leinads", "Ottah"))

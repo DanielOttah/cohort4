@@ -44,8 +44,8 @@ export class SplitPane extends Component {
         //     console.log(longOfCity);
         //     console.log(popOfCity);
     }
-    handleGetRandomCity = (e) => {
-    }
+    // handleGetRandomCity = (e) => {
+    // }
     handlCityNameInput = (e) => {
         this.setState({
             cityName: e.target.value
@@ -70,39 +70,4 @@ export class SplitPane extends Component {
         );
     }
 }
-export const s = (props) => {
 
-    return (
-        <div>
-
-        </div>
-    );
-
-}
-export const tr = (props) => {
-
-    return (
-        <div>
-
-        </div>
-    );
-
-}
-export const iy = (props) => {
-
-    return (
-        <div>
-
-        </div>
-    );
-
-}
-export const sdf = (props) => {
-
-    return (
-        <div>
-
-        </div>
-    );
-
-}

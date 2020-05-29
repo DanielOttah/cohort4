@@ -1,0 +1,6 @@
+
+Performed file operations from try: finally file: block - 1
+
+Performed file operations from try: finally file: block - 2
+
+Performed file operations from try: finally file: block - 3
