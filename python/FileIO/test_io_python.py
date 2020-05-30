@@ -20,6 +20,13 @@ def test_get_number_of_characters():
 
 
 def test_get_number_of_occurrences():
-    result = io_python.get_number_of_occurrences("file")
+    result = io_python.get_number_of_occurrences('else')
     assert result > 0
     assert result != 0
+
+
+def test_list_directory():
+    _path = "C:/code/cohort4/01-getting-started/src/"
+    result = io_python.list_directory(_path)
+    assert result[0] > 0
+    assert result[1] > 0
