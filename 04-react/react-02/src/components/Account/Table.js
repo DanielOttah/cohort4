@@ -20,7 +20,6 @@ export class Table extends Component {
     }
 }
 
-
 function AccountList(props) {
     return <tr><td>{props.value[0]}</td>
         <td>{props.value[1]}</td>

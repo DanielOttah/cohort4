@@ -1,36 +1,37 @@
-# import pandas as pd
+import pandas as pd
 
 # ================= METHOD 1 ==============================
 # df = pd.read_excel(
-#     r'C:\code\cohort4\python\Excel_Python\Book.xlsx', sheet_name='Sheet1')
+#     r'C:\code\cohort4\python\Excel_Python\Invoices_App.xlsx', sheet_name='Customers')
 # # print(df) #prints entire table
-# data = pd.DataFrame(df, columns=['Note', 'Key'])
+# data = pd.DataFrame(df)
 # print(data)
 
 # ================= METHOD 2 ==============================
-# df = pd.ExcelFile('Book.xlsx')
-# print(df.sheet_names)
-# # data = df.parse('Sheet1')
-# # print(data)
-# dat = df.parse(0)
-# print(dat['Note'][3:], dat['Key'][3:])
+df = pd.ExcelFile('Invoices_App.xlsx')
+# print(df.sheet_names[0])
+# data = df.parse('Sheet1')
+# print(data)
+dat = df.parse(df.sheet_names[0])  # df.parse(0)
+print(dat)
 
-# ================= PLAY ==============================
-age = 23
-message = "Eligible" if age <= 65 else "Not Eligible"
-print(message)
-
-
-def fizz_buzz(number):
-    if number % 3 == number % 5 == 0:
-        return "FizzBuzz"
-    if number % 3 == 0:
-        return "Fizz"
-    if number % 5 == 0:
-        return "Buzz"
-
-    return number
+# ================= PLAY 1 ==============================
+# age = 23
+# message = "Eligible" if age <= 65 else "Not Eligible"
+# print(message)
 
 
-number = int(input("Enter your number: "))
-print(fizz_buzz(number))
+# ================= PLAY 2 - FIZZ_BUZZ==============================
+# def fizz_buzz(number):
+#     if number % 3 == number % 5 == 0:
+#         return "FizzBuzz"
+#     if number % 3 == 0:
+#         return "Fizz"
+#     if number % 5 == 0:
+#         return "Buzz"
+
+#     return number
+
+
+# number = int(input("Enter your number: "))
+# print(fizz_buzz(number))
