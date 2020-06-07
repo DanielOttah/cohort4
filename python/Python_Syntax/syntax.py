@@ -1,5 +1,8 @@
 
 # +++++++ VARIABLE ++++++++++++++
+import functools
+
+
 def isVariable():
     _isVariable = "Daniel"
     return _isVariable
@@ -89,6 +92,39 @@ def aWhileLoop(start, count):
     while i < count:
         i += 1
     return i
+
+
+# ======== NICE WAY TO DELETE AN ITEM FROM A LIST ======================
+items = [1, 2, 3, 4, 5, 6]
+
+
+def dele(name):
+    global items
+    items = list(filter(lambda x: x != name, items))
+
+
+dele(2)
+# print(items)
+
+
+# ======== Using the reduce() ======================
+lis = [1, 3, 5, 6, 2, ]
+
+# # using reduce to compute sum of list
+# print("The sum of the list elements is : ", end="")
+# print(functools.reduce(lambda a, b: a+b, lis))
+# # using reduce to compute maximum element from list
+# print("The maximum element of the list is : ", end="")
+# print(functools.reduce(lambda a, b: a if a > b else b, lis))
+
+
+# ======== Update a dicionary using update() ======================
+dictn = {'name': "bob", 'age': 35, 'wt': 100}
+
+dictn.update({'name': 'Mike'})
+dictn.update({'age': 29})
+
+print(dictn)
 
 
 # print(isinstance(type(isNone()), None))
