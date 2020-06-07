@@ -83,10 +83,11 @@ def fifth_Category(num):
 
 
 # TODO
-# try:
-#     # total_income = input('Enter total income: $CAD ')
-#     calc_Tax(total_income := input('Enter total income: $CAD '))
-# except ValueError as e:
-#     print(f"'{total_income}' is not a valid number")
+if __name__ == "__main__":
+    try:
+        # total_income = input('Enter total income: $CAD ')
+        calc_Tax(total_income := input('Enter total income: $CAD '))
+    except ValueError as e:
+        print(f"'{total_income}' is not a valid number")
 
-print("======================== End of App ======================")
+    print("======================== End of App ======================")
