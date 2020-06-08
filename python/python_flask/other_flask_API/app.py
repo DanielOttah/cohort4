@@ -1,80 +1,52 @@
-from flask import Flask, request
-from flask_restful import Resource, Api, reqparse
-from flask_jwt import JWT, jwt_required
-from security import authenticate, identity
+from flask import Flask, jsonify
+from flask_restful import Api
+from flask_jwt import JWT
+from security import authenticate, identity as identity_function
+from user import UserRegister
+from item import Item, ItemList
+import datetime
 
 app = Flask(__name__)
 app.secret_key = 'dany'
 api = Api(app)
 
-# this create an '/auth' endpoint and the username and pword passes is checked in authenticate() then calls the identity to confirm the token
-jwt = JWT(app, authenticate, identity)
+# This code changes the default jwt `/auth` endpoint to /login
+app.config['JWT_AUTH_URL_RULE'] = '/login'
+# This code changes the expiration time of the access_key from 5mins (default) to 30mins
+app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(seconds=1800)
+# # config JWT auth key name to be 'email' instead of default 'username'
+# app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
 
-items = []
+# this create an instance '/auth' endpoint (nb changed it above) and the username and pword passes is checked in authenticate() then calls the identity to confirm the token
+jwt = JWT(app, authenticate, identity_function)
 
+# # above method display is only access_code but the one below is customized to include other info
+# jwt = JWT(app, authenticate, identity_function)
 
-class Item(Resource):
-    # importing reqparser enables us to sieve through the json data coming thru to know the exact data for update
-    parser = reqparse.RequestParser()
-    parser.add_argument('price',
-                        type=float,
-                        required=True,
-                        help="this field cannot be blank")
+# @jwt.auth_response_handler
+# def custome_response(access_token, identity):
+#     return jsonify({
+#         'access_token': access_token.decode('utf-8'),
+#         'user_id': identity.id
+#     })
 
-    @jwt_required()
-    def get(self, name):
-        # the next() get the first match from filter() after lambda has gone through the list, if no match isfound it returns 'None' | filter retuns an object
-        each_item = next(filter(lambda x: x['name'] == name, items), None)
-        # for each_item in items:
-        #     if each_item['name'] == name:
-        #         return each_item
-        return {"item": each_item}, 200 if each_item else 404
-
-    def post(self, name):
-        # the code below checks if the item exists before creating it again, if it does, it sends 400 bad request and doesnt create it
-        if next(filter(lambda x: x['name'] == name, items), None) is not None:
-            return{'message': "An item with name '{}' already exists.".format(name)}, 400
-        # nb inside the json() method, you can pass 'force=True' or 'silent =True' to handle the errors if any
-        # request_data = request.get_json()
-        # OR Use the parser
-        request_data = Item.parser.parse_args()
-        new_item = {
-            'name': name,
-            "price": request_data['price']
-        }
-        items.append(new_item)
-        return new_item, 201
-
-    def delete(self, name):
-        global items
-        # In the code below, we over-write the items list with all the other elements except the one we want to delete
-        items = list(filter(lambda x: x['name'] != name, items))
-        return {'message': f'Item {name} has been deleted.'}, 200
-
-    def put(self, name):
-        request_data = Item.parser.parse_args()
-        # line below checks if the item is in the list already, if it is we update, if not create it
-        new_item = next(filter(lambda x: x['name'] == name, items), None)
-        if new_item == None:
-            new_item = {
-                'name': name,
-                "price": request_data['price']
-            }
-            items.append(new_item)
-        else:
-            new_item.update(request_data)
-        return new_item, 201
+# If an error occurs within any of the handlers (e.g. during authentication, identity, or creating the response) we use:
 
 
-class ItemList(Resource):
-    def get(self):
-        return {'items': items}, 200
+@jwt.jwt_error_handler
+def customized_error_handler(error):
+    return jsonify({
+        'message': error.description,
+        'code': error.status_code
+    }), error.status_code
 
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
+api.add_resource(UserRegister, '/register')
 
-app.run(port=3900, debug=True)
+if __name__ == '__main__':
+    app.run(port=3900, debug=True)
 
 
 # JWT - json web token = used to encrypt messages over the web

@@ -2,17 +2,17 @@
 from werkzeug.security import safe_str_cmp
 from user import User
 
-users = [
-    User(1, 'bob', 'asdf')
-]
-
-
-username_mapping = {u.username: u for u in users}
-userid_mapping = {i.id: i for i in users}
+# users = [
+#     User(1, 'bob', 'asdf')
+# ]
+# username_mapping = {u.username: u for u in users}
+# userid_mapping = {i.id: i for i in users}
 
 
 def authenticate(username, password):
-    user = username_mapping.get(username, None)
+    # nb the code username_mapping.get() was used when the users were in the list above, however we have our users in the db now so we use User.find_by_username()
+    # user = username_mapping.get(username, None)
+    user = User.find_by_username(username)
     # if user and user.password == password: #this method can be used but the one below is for safe comparing since some programs still use python2
     if user and safe_str_cmp(user.password, password):
         return user
@@ -20,4 +20,5 @@ def authenticate(username, password):
 
 def identity(payload):
     user_id = payload['identity']
-    return userid_mapping.get(user_id, None)
+    # nb the code userid_mapping.get() was used when the users were in the list above, however we have our users in the db now so we use User.find_by_id()
+    return User.find_by_id(user_id)
