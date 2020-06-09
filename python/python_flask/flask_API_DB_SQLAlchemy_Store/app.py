@@ -33,18 +33,6 @@ app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(seconds=1800)
 # this create an instance '/auth' endpoint (nb changed it above) and the username and pword passes is checked in authenticate() then calls the identity to confirm the token
 jwt = JWT(app, authenticate, identity_function)
 
-# # above method display is only access_code but the one below is customized to include other info
-# jwt = JWT(app, authenticate, identity_function)
-
-# @jwt.auth_response_handler
-# def custome_response(access_token, identity):
-#     return jsonify({
-#         'access_token': access_token.decode('utf-8'),
-#         'user_id': identity.id
-#     })
-
-# If an error occurs within any of the handlers (e.g. during authentication, identity, or creating the response) we use:
-
 
 @jwt.jwt_error_handler
 def customized_error_handler(error):

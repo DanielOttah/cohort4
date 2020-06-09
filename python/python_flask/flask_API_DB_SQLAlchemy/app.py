@@ -9,6 +9,7 @@ from db import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 app.secret_key = 'dany'
 api = Api(app)
 
@@ -19,8 +20,6 @@ api = Api(app)
 def create_table():
     db.create_all()
 
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 
 # This code changes the default jwt `/auth` endpoint to /login
 app.config['JWT_AUTH_URL_RULE'] = '/login'

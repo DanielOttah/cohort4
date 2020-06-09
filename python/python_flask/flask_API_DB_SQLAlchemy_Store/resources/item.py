@@ -11,20 +11,12 @@ class Item(Resource):
                         required=True,
                         help="this field cannot be blank")
     parser.add_argument('store_id',
-                        type=float,
+                        type=int,
                         required=True,
                         help="store_id field cannot be blank")
 
     @jwt_required()
     def get(self, name):
-        # The code below was used when the item was stored in a list
-        # # the next() get the first match from filter() after lambda has gone through the list, if no match isfound it returns 'None' | filter retuns an object
-        # each_item = next(filter(lambda x: x['name'] == name, items), None)
-        # # for each_item in items:
-        # #     if each_item['name'] == name:
-        # #         return each_item
-        # return {"item": each_item}, 200 if each_item else 404
-
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
@@ -49,20 +41,9 @@ class Item(Resource):
         return {"message": f"{new_item.json()} was added succesfully"}, 201
 
     def delete(self, name):
-        # Old method
-        # In the code below, we over-write the items list with all the other elements except the one we want to delete
-        # items = list(filter(lambda x: x['name'] != name, items))
-        # return {'message': f'Item {name} has been deleted.'}, 200
         del_item = ItemModel.find_by_name(name)
         if del_item:
             del_item.delete_from_db()
-            # old method before SQLAlchemy
-            # connection = sqlite3.connect('data.db')
-            # cursor = connection.cursor()
-            # query = "DELETE FROM items WHERE name=?"
-            # result = cursor.execute(query, (name,))
-            # connection.commit()
-            # connection.close()
             return {"message": f"{name} was deleted succesfully"}, 201
         return {"message": f"{name} is not a recognized item"}, 400
 
@@ -76,7 +57,7 @@ class Item(Resource):
                     name, request_data['price'], request_data['store_id'])
             else:
                 put_item.price = request_data['price']
-                put_item.store_id = request_data['store_id']
+                # put_item.store_id = request_data['store_id']
 
         except:
             return {"mesage": "An error occured updating the item"}, 500
@@ -84,24 +65,7 @@ class Item(Resource):
         put_item.save_to_db()
         return{'message': "An item with name '{}' updated successfully.".format(name)}, 201
 
-        # Code below was used to check a list when items weren't in a db
-        # line below checks if the item is in the list already, if it is we update, if not create it
-        # new_item = next(filter(lambda x: x['name'] == name, items), None)
-
 
 class ItemList(Resource):
     def get(self):
-        # connection = sqlite3.connect('data.db')
-        # cursor = connection.cursor()
-        # query = "SELECT * FROM items"
-        # result = cursor.execute(query)
-        # result = ItemModel.query.all()
-        # all_items = []
-        # for x in result:
-        #     all_items.append(x.json())
-        # # connection.close()
-        # return {'items': all_items}, 200
-        # OR with just returning the code as below
         return {'Items': [x.json() for x in ItemModel.query.all()]}
-        # OR using lambda
-        # return {'items': list(map(lambda x: x.json(), ItemModel.query.all()))}
