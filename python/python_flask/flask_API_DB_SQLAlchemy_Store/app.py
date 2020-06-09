@@ -4,6 +4,7 @@ from flask_jwt import JWT
 from security import authenticate, identity as identity_function
 from resources.user import UserRegister
 from resources.item import Item, ItemList
+from resources.store import Store, StoreList
 import datetime
 from db import db
 
@@ -56,6 +57,8 @@ def customized_error_handler(error):
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
+api.add_resource(Store, '/store/<string:name>')
+api.add_resource(StoreList, '/stores')
 
 
 if __name__ == '__main__':

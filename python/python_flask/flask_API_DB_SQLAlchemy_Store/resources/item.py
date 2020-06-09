@@ -10,6 +10,10 @@ class Item(Resource):
                         type=float,
                         required=True,
                         help="this field cannot be blank")
+    parser.add_argument('store_id',
+                        type=float,
+                        required=True,
+                        help="store_id field cannot be blank")
 
     @jwt_required()
     def get(self, name):
@@ -35,7 +39,9 @@ class Item(Resource):
         # OR Use the parser
         request_data = Item.parser.parse_args()
         new_item = ItemModel(
-            name, request_data['price'])
+            name, request_data['price'], request_data['store_id'])
+        # Or use
+        # put_item.store_id = (name,**request_data)
         try:
             new_item.save_to_db()
         except:
@@ -67,9 +73,10 @@ class Item(Resource):
         try:
             if put_item is None:
                 put_item = ItemModel(
-                    name, request_data['price'])
+                    name, request_data['price'], request_data['store_id'])
             else:
                 put_item.price = request_data['price']
+                put_item.store_id = request_data['store_id']
 
         except:
             return {"mesage": "An error occured updating the item"}, 500
