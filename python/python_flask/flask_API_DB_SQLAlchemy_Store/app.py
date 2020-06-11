@@ -54,5 +54,4 @@ if __name__ == '__main__':
     db.init_app(app)
     app.run(port=3900, debug=True)
 
-
 # JWT - json web token = used to encrypt messages over the web
