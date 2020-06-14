@@ -2,6 +2,7 @@ from openpyxl import load_workbook
 import pytest
 import os
 from invoice_App import getCustomer, getInvoice, getInvoiceList, Customer, report_Invoice, getProductBought
+# from datetime import date
 
 wkBk = load_workbook('./excel_files/Invoices_App.xlsx')
 
@@ -21,10 +22,11 @@ def test_customer_Accessed():
 
 
 def test_invoice_Accessed():
-    assert getInvoice(5) == (106, '000-1239')
-    assert getInvoice(10) == (101, '000-1244')
-    assert getInvoice(1) == (104, '000-1235')
-    assert getInvoice(3) == (111, '000-1237')
+    assert getInvoice(5) == (106, '000-1239', '2020-05-09 00:00:00')
+    assert getInvoice(10) == (101, '000-1244', '2020-05-19 00:00:00')
+    assert getInvoice(1) == (104, '000-1235', '2020-05-01 00:00:00')
+    assert getInvoice(3) == (111, '000-1237', '2020-05-05 00:00:00')
+    assert getInvoice(5)[2] == ('2020-05-09 00:00:00')
 
 
 def test_customer():
@@ -49,13 +51,15 @@ def test_Product_Accessed():
 
 
 def test_invoice_created():
-    assert report_Invoice(5) == """Invoice number: 000-1239
+    pass
+    assert report_Invoice(5) == """
+    Invoice number: 000-1239
     Customer name: Tom Hanks
     Customer email: tom.hanks@ymail.com
     Customer phone: 403-777-1241
     Item(s): Bread
     Quantity: 9
-    Total cost: $CAD18"""
+    Total cost: $CAD 18"""
 
     assert report_Invoice(2) == """
     Invoice number: 000-1236

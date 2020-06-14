@@ -69,7 +69,7 @@ export class Community extends React.Component {
     constructor(props) {
         super(props);
         this.newCt = new City();
-        this.url = 'http://localhost:5000/';
+        this.url = `https://leins-cities.herokuapp.com/`;
         //  this.url = 'http://127.0.0.1:5000/';
         this.urlEurope = `https://restcountries.eu/rest/v2/capital/`; // url of api used
         this.capitals = [];
@@ -169,9 +169,9 @@ export class Community extends React.Component {
             // console.log(res);
         } else {
             let apiData = await this.postData(this.url + 'add', obj)
-            apiData = await fetch(this.url + 'all');
-            const res = await apiData.json();
-            return res;
+            // apiData = await fetch(this.url + 'all');
+            // const res = await apiData.json();
+            return apiData;
             // console.log(res.length);
         }
     }
@@ -186,7 +186,7 @@ export class Community extends React.Component {
     async postData(link = '', data = {}) {
 
         // Default options are marked with *
-        const response = await fetch(link, {
+        let response = await fetch(link, {
             method: 'POST',     // *GET, POST, PUT, DELETE, etc.
             mode: 'cors',       // no-cors, *cors, same-origin
             cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
@@ -206,19 +206,19 @@ export class Community extends React.Component {
         // console.log(json, typeof(json));
         return json;
     }
-    cityCapitals() {
-        this.capitals = ["Tirana", "Andorra la Vella", " Yerevan", "Vienna", " Baku", "Minsk", "Brussels", "Sarajevo", "Sofia", "Zagreb",
-            "Nicosia", "Prague", "Copenhagen", "Tallinn", "Helsinki", "Paris", "Tbilisi", 'Berlin', "Athens", 'Budapest', "Reykjavik", "Dublin",
-            "Nur-Sultan", "Pristina", "Riga", "Vaduz", "Vilnius", "Luxembourg", "Valletta", "Chisinau", "Monaco", "Podgorica", "Amsterdam",
-            "Skopje", "Oslo", "Warsaw", "Lisbon", "Bucharest", "Moscow", "San Marino", "Belgrade", "Bratislava", "Ljubljana", "Madrid", "Stockholm",
-            "Bern", "Ankara", "Kiev", "London"];
-        return this.capitals[Math.floor(Math.random() * 52)]
-    }
+
     async getRandomCity() {
-        const response = await fetch(this.urlEurope + `${this.cityCapitals()}`); //Use GET to retrieve city data
+        this.capitals = ["Andorra la Vella", " Yerevan", "Vienna", " Baku", "Minsk", "Brussels", "Sarajevo", "Sofia", "Zagreb",
+            "Prague", "Copenhagen", "Tallinn", "Helsinki", "Paris", "Tbilisi", 'Berlin', "Athens", 'Budapest', "Reykjavik", "Dublin",
+            "Nur-Sultan", "Pristina", "Riga", "Vaduz", "Vilnius", "Luxembourg", "Valletta", "Chisinau", "Monaco", "Amsterdam",
+            "Skopje", "Warsaw", "Lisbon", "Bucharest", "Moscow", "San Marino", "Belgrade", "Bratislava", "Ljubljana", "Madrid", "Stockholm",
+            "Bern", "Ankara", "Kiev", "London"];
+
+        let new_City = this.capitals.pop()
+        const response = await fetch(this.urlEurope + `${new_City}`); //Use GET to retrieve city data
         let data = await response.json();// parse it as json format
         return data; //return the data          
-    } i
+    }
     getCityTemp = async (city) => {
         let temp = [];
         let city_temp = await fetch(`http://api.weatherapi.com/v1/current.json?key=f9eb724cfbe348d5a00114754201904&q=${city}`);

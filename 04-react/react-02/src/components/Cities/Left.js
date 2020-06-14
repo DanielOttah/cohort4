@@ -76,6 +76,7 @@ class Left extends Component {
 
                 <fieldset>
                     <legend><b>Cities</b></legend>
+                    [api: https://leins-cities.herokuapp.com/]
                     <div className="CityContainerScroll" id="CityContainer" >
                         {children}
                         {apiChildren}

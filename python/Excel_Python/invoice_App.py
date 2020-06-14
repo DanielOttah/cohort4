@@ -9,7 +9,8 @@ def getInvoice(invoice_id):
         if line.value == invoice_id:
             # returns customerID and invoice number
             return (inv_sheet.cell(row=line.row, column=line.column+1).value,
-                    inv_sheet.cell(row=line.row, column=line.column+2).value)
+                    inv_sheet.cell(row=line.row, column=line.column+2).value,
+                    str(inv_sheet.cell(row=line.row, column=line.column+3).value))
 
 
 def getCustomer(customer_id):
@@ -67,6 +68,7 @@ def report_Invoice(invoice_id):
     Customer name: {customer.customerFullName()}
     Customer email: {customer.email}
     Customer phone: {customer.phone}
-    Item(s): {item[0]}
+    Item(s): {item[0]} | ${item[1]} each
     Quantity: {goods[1]}
     Total cost: $CAD {total_item_cost}"""
+    # return cust

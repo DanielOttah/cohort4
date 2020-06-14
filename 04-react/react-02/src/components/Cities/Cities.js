@@ -128,37 +128,38 @@ class Cities extends Component {
     }
     handleGetRandomCity = async (e) => {
         try {
-            let ind = this.newCity.getindexOfCity(this.state.cityName, this.state.allCityArray);
-            if (ind >= 0) {
-                alert("Error! City exists already");
-            } else if (ind === undefined) {
-                let indx = this.state.cityKey + 1;
-                let serverCities = await this.newCity.getRandomCity();
-                console.log(serverCities);
-                let apiCity = {};
-                apiCity.key = indx;
-                apiCity.code = "Auto";
-                apiCity.NativeName = serverCities[0].nativeName;
-                apiCity.CountryName = serverCities[0].name;
-                apiCity.CallingCodes = serverCities[0].callingCodes[0];
-                apiCity.Region = serverCities[0].region;
-                apiCity.Subregion = serverCities[0].subregion;
-                apiCity.TimeZone = serverCities[0].timezones[0];
-                apiCity.Population = serverCities[0].population;
-                apiCity.Location = serverCities[0].latlng;
-                apiCity.Area = serverCities[0].area;
-                apiCity.borders = serverCities[0].borders;
-                apiCity.flag = serverCities[0].flag;
-                apiCity.Name = serverCities[0].capital;
-                apiCity.Demonym = serverCities[0].demonym;
+            // let ind = this.newCity.getindexOfCity(this.state.cityName, this.state.allCityArray);
+            // if (ind >= 0) {
+            //     alert("Error! City exists already");
+            // } else 
+            // if (ind === undefined) {
+            let indx = this.state.cityKey + 1;
+            let serverCities = await this.newCity.getRandomCity();
+            console.log(serverCities);
+            let apiCity = {};
+            apiCity.key = indx;
+            apiCity.code = "Auto";
+            apiCity.NativeName = serverCities[0].nativeName;
+            apiCity.CountryName = serverCities[0].name;
+            apiCity.CallingCodes = serverCities[0].callingCodes[0];
+            apiCity.Region = serverCities[0].region;
+            apiCity.Subregion = serverCities[0].subregion;
+            apiCity.TimeZone = serverCities[0].timezones[0];
+            apiCity.Population = serverCities[0].population;
+            apiCity.Location = serverCities[0].latlng;
+            apiCity.Area = serverCities[0].area;
+            apiCity.borders = serverCities[0].borders;
+            apiCity.flag = serverCities[0].flag;
+            apiCity.Name = serverCities[0].capital;
+            apiCity.Demonym = serverCities[0].demonym;
 
-                this.state.allAPICityArray.push(apiCity);
-                this.setState({
-                    allAPICityArray: this.state.allAPICityArray,
-                    cityKey: indx
-                })
-                await this.newCity.apiPostData(this.saveCityToServer(), this.state.allAPICityArray[this.state.allAPICityArray.length - 1])
-            }
+            this.state.allAPICityArray.push(apiCity);
+            this.setState({
+                allAPICityArray: this.state.allAPICityArray,
+                cityKey: indx
+            })
+            await this.newCity.apiPostData(this.saveCityToServer(), this.state.allAPICityArray[this.state.allAPICityArray.length - 1])
+            // }
         } catch (err) {
             alert("Failed to load cities from server! Please confirm the server is running", err)
         }
@@ -216,7 +217,7 @@ class Cities extends Component {
                 }
                 if (this.state.updateCityLon !== this.state.allCityArray[count].Longitude) {
                     this.newCity.upDateData(count, "Longitude", this.state.updateCityLon, this.state.allCityArray);
-                    this.state.allCityArray[count].Longitude = this.state.updateCityLat
+                    this.state.allCityArray[count].Longitude = this.state.updateCityLon
                     this.setState({
                         allCityArray: this.state.allCityArray
                     })
