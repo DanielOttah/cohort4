@@ -11,7 +11,7 @@ class Left extends Component {
     render() {
         const children = [];
         const apiChildren = [];
-
+        // const checkAPICitiesLoaded = (this.props.allAPICityArray.length === 0 || this.props.allCityArray.length === 0) ? true : false
         for (var r = 0; r < this.props.allAPICityArray.length; r++) {
             let btnName = this.props.allAPICityArray[r].Name;
             apiChildren.push(<CreateAPICityContainer key={r} index={r} name={btnName.toUpperCase()}
@@ -77,6 +77,7 @@ class Left extends Component {
                 <fieldset>
                     <legend><b>Cities</b></legend>
                     [api: https://leins-cities.herokuapp.com/]
+                    {/* <div className={`${(checkAPICitiesLoaded) ? "CityContainerScroll" : "loader"}`} id="CityContainer" > */}
                     <div className="CityContainerScroll" id="CityContainer" >
                         {children}
                         {apiChildren}

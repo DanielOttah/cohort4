@@ -62,6 +62,10 @@ class Cities extends Component {
             console.log(this.state.allCityArray);
             console.log(this.state.allAPICityArray);
 
+
+
+
+
         } catch (err) {
             alert("Failed to load cities from server! Please confirm the server is running", err)
         }
