@@ -1,6 +1,6 @@
 import functions from './functions.js';
 import exercise from './syntax.js';
-import provinceCode from './province.js';
+import { provinceCode, getProvince } from './province.js';
 // **********//
 // Size Section// 
 idNumber.addEventListener('change', (() => {
@@ -170,7 +170,11 @@ myBtnClear.addEventListener('click', () => {
 
 });
 //=========== DICTIONARY AND LIBRARY=================
+// myBtnLookUp.addEventListener('click', () => {
+//     (provinceCode.getProvince(pcInput.value) == "Not a valid provincial code") ? pcmessage.textContent =
+//         "Not a valid provincial code" : pcmessage.textContent = "The province is: " + provinceCode.getProvince(pcInput.value);
+// });
 myBtnLookUp.addEventListener('click', () => {
-    (provinceCode.getProvince(pcInput.value) == "Not a valid provincial code") ? pcmessage.textContent =
-        provinceCode.getProvince(pcInput.value): pcmessage.textContent = "The province is: " + provinceCode.getProvince(pcInput.value);
+    (getProvince(pcInput.value) == "Not a valid provincial code") ? pcmessage.textContent =
+        `"${pcInput.value}" is not a valid provincial code` : pcmessage.textContent = "The province is: " + getProvince(pcInput.value);
 });

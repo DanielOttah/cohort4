@@ -1,4 +1,4 @@
-const provinceCode = {
+export const provinceCode = {
     getProvince: (pC) => {
         if (pC == "AB" || pC == "aB" || pC == "Ab" || pC == "ab") return "Alberta";
         else if (pC == "BC" || pC == "bC" || pC == "Bc" || pC == "bc") { return "British Columbia"; } else if (pC == "MB" || pC == "mB" || pC == "Mb" || pC == "mb") return "Manitoba";
@@ -17,4 +17,28 @@ const provinceCode = {
         }
     }
 };
-export default provinceCode;
+
+const provinces = {
+    "ab": "Alberta",
+    "bc": "British Columbia",
+    "nb": "New Brunswick",
+    "nl": "Newfoundland and Labrador",
+    "ns": "Nova Scotia",
+    "on": "Ontario",
+    "pe": "Prince Edward Island",
+    "sk": "Saskatchewan",
+    "nt": "Northwest Territories",
+    "nu": "Nunavut",
+    "yt": "Yukon",
+    "qc": "Quebec",
+    "mb": "Manitoba"
+}
+
+export const getProvince = (pC) => {
+    if (Object.keys(provinces).includes(pC.toLowerCase())) {
+        return provinces[pC.toLowerCase()]
+    }
+    return "Not a valid provincial code";
+}
+
+

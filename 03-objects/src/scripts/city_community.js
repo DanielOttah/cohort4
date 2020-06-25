@@ -49,15 +49,15 @@ export class City {
                     count = i;
                 }
             }
-            if (this.allCities[count].population > 100000) {
+            if (this.allCities[count].Population > 100000) {
                 size = "City";
-            } else if (20000 < this.allCities[count].population && this.allCities[count].population <= 100000) {
+            } else if (20000 < this.allCities[count].Population && this.allCities[count].Population <= 100000) {
                 size = "Large Town";
-            } else if (1000 < this.allCities[count].population && this.allCities[count].population <= 20000) {
+            } else if (1000 < this.allCities[count].Population && this.allCities[count].Population <= 20000) {
                 size = "Town";
-            } else if (100 < this.allCities[count].population && this.allCities[count].population <= 1000) {
+            } else if (100 < this.allCities[count].Population && this.allCities[count].Population <= 1000) {
                 size = "Village";
-            } else if (this.allCities[count].population && this.allCities[count].population <= 100) {
+            } else if (this.allCities[count].Population && this.allCities[count].Population <= 100) {
                 size = "Hamlet";
             }
             return size;
@@ -81,13 +81,13 @@ export class Community {
         let sph = "";
         let count = 0;
         for (let i = 0; i < this.newCt.allCities.length; i++) {
-            if (ct == this.newCt.allCities[i].name) {
+            if (ct == this.newCt.allCities[i].Name) {
                 count = i;
             }
         }
-        if (this.newCt.allCities[count].latitude > 45) {
+        if (this.newCt.allCities[count].Latitude > 45) {
             sph = "Northern Hemisphere";
-        } else if (this.newCt.allCities[count].latitude <= 45) {
+        } else if (this.newCt.allCities[count].Latitude <= 45) {
             sph = "Southern Hemisphere";
         }
         return sph;
@@ -134,7 +134,7 @@ export class Community {
                 count = i;
             }
         }
-        return this.newCt.allCities[count].population;
+        return this.newCt.allCities[count].Population;
     }
     async getCityTemp(city) {
         let temp = [];
