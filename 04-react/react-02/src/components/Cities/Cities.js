@@ -40,11 +40,13 @@ class Cities extends Component {
             error_msg: "",
             error_msg1: "",
             toolTipStyle: "none",
-            toolTip: "none"
+            toolTip: "none",
+            mostNorthern: "",
+            mostSouthern: ""
         }
         this.newCity = new Community();
     }
-    async componentDidMount() {
+    getAllCities = async () => {
         try {
             let serverCities = await this.newCity.loadAPICity();
             for (let i = 0; i < serverCities.length; i++) {
@@ -66,6 +68,10 @@ class Cities extends Component {
             console.log(this.state.allCityArray);
             console.log(this.state.allAPICityArray);
 
+            this.setState({
+                mostNorthern: this.newCity.getMostNorthern(this.state.allCityArray)[0],
+                mostSouthern: this.newCity.getMostSouthern(this.state.allCityArray)[0],
+            })
 
 
 
@@ -73,6 +79,9 @@ class Cities extends Component {
         } catch (err) {
             alert("Failed to load cities from server! Please confirm the server is running", err)
         }
+    }
+    componentDidMount() {
+        this.getAllCities()
     }
     handleAccordionClick = async (e) => {
         const leftdiv = document.getElementById(`${e.target.textContent}`);
@@ -139,8 +148,11 @@ class Cities extends Component {
 
                     this.setState({
                         allCityArray: this.state.allCityArray,
-                        cityKey: key
+                        cityKey: key,
+                        mostNorthern: this.newCity.getMostNorthern(this.state.allCityArray)[0],
+                        mostSouthern: this.newCity.getMostSouthern(this.state.allCityArray)[0],
                     })
+
                     this.newCity.apiPostData(this.saveCityToServer(), this.state.allCityArray[this.state.allCityArray.length - 1])
                     console.log(this.state.allCityArray);
 
@@ -221,7 +233,8 @@ class Cities extends Component {
         let count = this.newCity.getindexOfCity(this.state.cityToUpDate, this.state.allCityArray);
 
         try {
-            if (this.state.updateCityName < 0 || this.state.updateCityLat < 0 || this.state.updateCityLat > 45 || this.state.updateCityPop < 0) {
+            if (this.state.updateCityName < 0 || this.state.updateCityLat < -90 || this.state.updateCityLat > 90 || this.state.updateCityPop < 0
+                || this.state.updateCityLon > 180 || this.state.updateCityLon < -180) {
 
                 this.setState({
                     error_msg: "Error! invalid entries entered.",
@@ -274,9 +287,11 @@ class Cities extends Component {
                         })
                     }
                     else if (selectUpdateCityInfo.value === "movedIn") {
+                        console.log(this.state.updateCityName);
+
                         const popMovedIn = this.newCity.newCt.movedIn(this.state.updateCityName, this.state.updateCityPop, this.state.allCityArray);
                         this.newCity.upDateData(count, "Population", popMovedIn, this.state.allCityArray);
-                        this.state.allCityArray[count].Population = this.state.updateCityPop
+                        this.state.allCityArray[count].Population = popMovedIn
                         this.setState({
                             allCityArray: this.state.allCityArray
                         })
@@ -284,15 +299,19 @@ class Cities extends Component {
                     else if (selectUpdateCityInfo.value === "movedOut") {
                         const popMovedIn = this.newCity.newCt.movedOut(this.state.updateCityName, this.state.updateCityPop, this.state.allCityArray);
                         this.newCity.upDateData(count, "Population", popMovedIn, this.state.allCityArray);
-                        this.state.allCityArray[count].Population = this.state.updateCityPop
+                        this.state.allCityArray[count].Population = popMovedIn
                         this.setState({
                             allCityArray: this.state.allCityArray
                         })
                     }
                 }
                 updatediv.style.display = "none";
-            }
 
+            }
+            this.setState({
+                mostNorthern: this.newCity.getMostNorthern(this.state.allCityArray)[0],
+                mostSouthern: this.newCity.getMostSouthern(this.state.allCityArray)[0],
+            })
 
         } catch (err) {
             alert(err);
@@ -379,7 +398,7 @@ class Cities extends Component {
                             onChangeUpdateCityName={this.handleupdateCityInputName} onChangeUpdateCityLat={this.handleupdateCityInputLat}
                             onChangeUpdateCityLon={this.handleupdateCityInputLon} onChangeUpdateCityPop={this.handleupdateCityInputPop}
                             popValue={this.state.updateCityPop} latValue={this.state.updateCityLat} lonValue={this.state.updateCityLon}
-                            nameValue={this.state.updateCityname}
+                            nameValue={this.state.updateCityname} mostSouthern={this.state.mostSouthern} mostNorthern={this.state.mostNorthern}
 
                         />
                     }

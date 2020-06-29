@@ -82,8 +82,8 @@ export class FIFOAnimation extends Component {
     }
     handleLoadAnimation = () => {
 
-        console.log(this.state.counter);
-        console.log(this.state.process);
+        // console.log(this.state.counter);
+        // console.log(this.state.process);
 
         anime({
             targets: `.animjs${this.state.counter}`,

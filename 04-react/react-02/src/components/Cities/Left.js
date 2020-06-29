@@ -4,38 +4,12 @@ import Button from './Button.js';
 import { CreateCityContainer, CreateAPICityContainer } from './CreateCityContainer.js';
 import UpdateCityComponent from './UpdateCityComponent.js';
 import './Cities.css';
-import { Community } from './AllCities.js'
 
 class Left extends Component {
-    constructor(props) {
-        super(props)
-        this.myCity = new Community()
-        this.state = {
-            mostSouthern: "",
-            mostNorthern: ""
-
-        }
-    }
-
-    onClickMostNorthern = () => {
-        let apiCity = this.myCity.getMostNorthern(this.props.allAPICityArray)[0]
-        let ct = this.myCity.getMostNorthern(this.props.allCityArray)[0]
-        this.setState({
-            mostNorthern: (apiCity > ct) ? apiCity : ct
-        })
-    }
-    onClickMostSouthern = () => {
-        let apiCity = this.myCity.getMostSouthern(this.props.allAPICityArray)[0]
-        let ct = this.myCity.getMostSouthern(this.props.allCityArray)[0]
-        this.setState({
-            mostSouthern: (apiCity > ct) ? apiCity : ct
-        })
-    }
 
     render() {
         const children = [];
         const apiChildren = [];
-        // const checkAPICitiesLoaded = (this.props.allAPICityArray.length === 0 || this.props.allCityArray.length === 0) ? true : false
         for (var r = 0; r < this.props.allAPICityArray.length; r++) {
             let btnName = this.props.allAPICityArray[r].Name;
             apiChildren.push(<CreateAPICityContainer key={r} index={r} name={btnName.toUpperCase()}
@@ -97,10 +71,10 @@ class Left extends Component {
 
                     <table style={{ margin: "0px" }}>
                         <tbody>
-                            <tr><th><Button name="Most Northern" onClick={this.onClickMostNorthern} /></th>
-                                <td><input type="text" id="mostNorthern" value={this.state.mostNorthern} readOnly /></td></tr>
-                            <tr><th><Button name="Most Southern" onClick={this.onClickMostSouthern} /></th>
-                                <td><input type="text" id="mostSouthern" value={this.state.mostSouthern} readOnly /></td></tr>
+                            <tr><th>Most Northern</th>
+                                <td>{this.props.mostNorthern}</td></tr>
+                            <tr><th>Most Southern</th>
+                                <td>{this.props.mostSouthern}</td></tr>
                         </tbody>
                     </table>
                     <UpdateCityComponent TextType={"text"} toolTipStyle={this.props.toolTipStyle} error_msg={this.props.error_msg} onClickUpdateCity={this.props.onClickUpdateCity} nameValue={this.props.nameValue}
