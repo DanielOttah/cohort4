@@ -259,7 +259,7 @@ input:checked+.slider:before {
     align-items: center;
     width: 50%;
     height: 50%;
-    background-image: radial-gradient( ellipse 50% 35% at 50% 50%, #6b1839, transparent);
+    background-image: radial-gradient(ellipse 50% 35% at 50% 50%, #6b1839, transparent);
     transform: translate(-50%, -50%);
     letter-spacing: 2;
     left: 50%;
@@ -418,4 +418,21 @@ input:checked+.slider:before {
 
 .trial-logo:hover {
     transform: scale(1.5);
+}
+
+
+/*========= Account tool tip =================*/
+
+.tooltiptext {
+    /* visibility: hidden; */
+    width: auto;
+    background-color: rgb(238, 111, 111);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 10px;
+    /* Position the tooltip */
+    top: -5px;
+    left: 105%;
 }

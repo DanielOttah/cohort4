@@ -1,5 +1,6 @@
+let divNos = 0
+
 const dom_Manipulation = {
-    divNo: '0',
 
     elementClicked: (param) => {
         param = event.target;
@@ -36,13 +37,13 @@ const dom_Manipulation = {
 
     addACard: (elID) => {
 
-        if (elID.lastElementChild.innerText != "Add Card") { //Check if any card has been created
-            dom_Manipulation.divNo = Number(elID.lastChild.id.split("card")[1]) + 1;
-        } else {
-            dom_Manipulation.divNo = 1; //If no div has been created assign number to the first 
-        }
+        // if (elID.lastElementChild.innerText != "Add Card") { //Check if any card has been created
+        //     divNos = Number(elID.lastChild.id.split("card")[1]) + 1;
+        // } else {
+        //     divNos = 1; //If no div has been created assign number to the first 
+        // }
         let div = document.createElement("div"); //create a div
-        div.id = "card" + dom_Manipulation.divNo; //set the div id
+        div.id = `card${++divNos}`; //set the div id
         div.style.width = "100%"; //set the div width
         div.style.backgroundColor = "rgb(235, 235, 235)"; //set div background color
         div.style.padding = "20px"; // set div padding
@@ -53,19 +54,19 @@ const dom_Manipulation = {
         let btnAddBefore = document.createElement("BUTTON"); //create Add Before button
         btnAddBefore.appendChild(document.createTextNode("Add Before")); // put text 'add before' on it
         btnAddBefore.style.margin = "5px";
-        btnAddBefore.id = "btnAddBefore" + dom_Manipulation.divNo;
+        btnAddBefore.id = "btnAddBefore" + divNos;
 
         let btnAddAfter = document.createElement("BUTTON"); //create Add After button
         btnAddAfter.appendChild(document.createTextNode("Add After")); //put text 'add after' on it 
         btnAddAfter.style.margin = "5px";
-        btnAddAfter.id = "btnAddAfter" + dom_Manipulation.divNo;
+        btnAddAfter.id = "btnAddAfter" + divNos;
 
         let btnAddDelete = document.createElement("BUTTON"); //create delete button
         btnAddDelete.appendChild(document.createTextNode("Delete")); // put 'delete text on it
         btnAddDelete.style.margin = "5px";
-        btnAddDelete.id = "btnAddDelete" + dom_Manipulation.divNo;
+        btnAddDelete.id = "btnAddDelete" + divNos;
 
-        div.appendChild(document.createTextNode("Card " + dom_Manipulation.divNo)); //attach text to div
+        div.appendChild(document.createTextNode("Card " + divNos)); //attach text to div
         div.appendChild(br);
         div.appendChild(btnAddBefore); // attach add before button to div
         div.appendChild(btnAddAfter); // attach add after button to div
@@ -74,25 +75,39 @@ const dom_Manipulation = {
         return elID.contains(div);
     },
     elementDelete: (elID) => {
-        let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
-        elCloner.remove(); //remove parent
+        console.log(elID);
+        // let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
+        // console.log(elCloner);
+        elID.remove(); //remove parent
 
     },
+
     cardButtonAddBefore: (par, elID) => {
+        // console.log(++divNos)
+        // let divNo = Number(elID.split("btnAddBefore")[1]);
+        // console.log(document.getElementById(elID).parentNode);
+
         let itm = par.lastChild
         let clone2 = itm.cloneNode(true); //Clone Card
-        clone2.childNodes[0].textContent = "Card " + (++dom_Manipulation.divNo);
+        clone2.id = "card" + (++divNos)
+        clone2.childNodes[0].textContent = "Card " + (divNos);
         let elCloner = document.getElementById(elID).parentNode; //get the parent of the card that triggers the cloning
-        elCloner.insertAdjacentElement("beforeBegin", clone2); //insert cloned card before the cloner
+        par.insertBefore(clone2, elCloner)
+        // elCloner.insertAdjacentElement("beforeBegin", clone2); //insert cloned card before the cloner
 
         // return elID.contains(clone2);
     },
-    cardButtonAddAfter: (elID) => {
-        let itm = elID.lastChild
+    cardButtonAddAfter: (par, elID) => {
+        // console.log(par.childNodes.length)
+        // let divNo = Number(elID.split("btnAddAfter")[1]);
+
+        let itm = par.lastChild
         let clone = itm.cloneNode(true);
-        clone.childNodes[0].textContent = "Card " + (++dom_Manipulation.divNo);
-        elID.appendChild(clone); //nb insertAdjacentElement-Afterend js method can be used as well
-        return elID.contains(clone);
+        clone.id = "card" + (++divNos)
+        clone.childNodes[0].textContent = "Card " + (divNos);
+        let elCloner = document.getElementById(elID).parentNode;
+        par.insertBefore(clone, elCloner.nextSibling); //nb insertAdjacentElement-Afterend js method can be used as well
+        // return elID.contains(clone);
     },
 }
 export default dom_Manipulation;

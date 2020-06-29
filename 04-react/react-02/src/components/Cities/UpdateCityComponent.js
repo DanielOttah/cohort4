@@ -9,6 +9,8 @@ class UpdateCityComponent extends Component {
             <div className="panel1" id="updateCityInfo">
                 <fieldset style={{ margin: "0px" }}>
                     <legend ><b>Update City Information</b></legend>
+                    <span className="tooltiptext" id="toolTip" style={{ display: this.props.toolTipStyle }}>{this.props.error_msg}</span>
+
                     <table style={{ margin: "0px" }}>
                         <tbody>
                             <tr><td>

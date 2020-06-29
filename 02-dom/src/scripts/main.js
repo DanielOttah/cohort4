@@ -36,11 +36,12 @@ btnAddCard.addEventListener('click', () => {
 });
 body.addEventListener('click', () => {
     if (event.target.innerText == "Delete") {
-        dom_Manipulation.elementDelete(dom_Manipulation.elementClicked(event));
+        // dom_Manipulation.elementDelete(dom_Manipulation.elementClicked(event));
+        dom_Manipulation.elementDelete(event.target.parentNode);
     } else if (event.target.innerText == "Add Before") {
         dom_Manipulation.cardButtonAddBefore(panel1, dom_Manipulation.elementClicked(event));
     } else if (event.target.innerText == "Add After") {
-        dom_Manipulation.cardButtonAddAfter(panel1);
+        dom_Manipulation.cardButtonAddAfter(panel1, dom_Manipulation.elementClicked(event));
     }
 
 });

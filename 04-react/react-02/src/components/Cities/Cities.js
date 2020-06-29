@@ -36,7 +36,11 @@ class Cities extends Component {
             updateCityName: "",
             updateCityLat: "",
             updateCityLon: "",
-            updateCityPop: ""
+            updateCityPop: "",
+            error_msg: "",
+            error_msg1: "",
+            toolTipStyle: "none",
+            toolTip: "none"
         }
         this.newCity = new Community();
     }
@@ -96,18 +100,35 @@ class Cities extends Component {
         }
     }
     handleAddCity = () => {
+        this.setState({ toolTip: "none" })
         try {
             let ind = this.newCity.getindexOfCity(this.state.cityName, this.state.allCityArray);
 
             if (ind >= 0) {
-                alert("Error! City exists already");
+                // alert("Error! City exists already");
+                this.setState({
+                    error_msg1: "Error! City exists already",
+                    toolTip: "block"
+                })
             } else if (ind === undefined) {
                 if (this.state.cityName === "" || this.state.cityLatitude === "" || this.state.cityLongitude === "" || this.state.cityPopulation === "") {
-                    // alert("Error! Please check your input values again - No entries in one or more fields.");
+
+                    this.setState({
+                        error_msg1: "Error! No entries in one or more fields.",
+                        toolTip: "block"
+                    })
+
+                    console.log(this.state.error_msg1);
                 } else if (this.state.cityLatitude < 0 || this.state.cityLongitude < 0 || this.state.cityPopulation < 0) {
-                    // alert("Error! Please check your input values again - invalid entries entered.");
+                    this.setState({
+                        error_msg1: "Error! invalid entries entered.",
+                        toolTip: "block"
+                    })
                 } else if (isNaN(this.state.cityLatitude - 1) || isNaN(this.state.cityLongitude - 1) || isNaN(this.state.cityPopulation - 1)) {
-                    // alert("Error! Please check your input values again - invalid entries entered.");
+                    this.setState({
+                        error_msg1: "Error! invalid entries entered.",
+                        toolTip: "block"
+                    })
                 }
                 else {
                     let key = this.state.cityKey + 1;
@@ -127,7 +148,7 @@ class Cities extends Component {
             }
         }
         catch (err) {
-            alert(err);//"Failed to load cities from server! Please confirm the server is running",
+            // alert(err);//"Failed to load cities from server! Please confirm the server is running",
         }
     }
     handleGetRandomCity = async (e) => {
@@ -195,16 +216,31 @@ class Cities extends Component {
 
     }
     handleUpdateCity = async (e) => {
-
+        this.setState({ toolTipStyle: "none" })
         const updatediv = document.getElementById("updateCityInfo");
         let count = this.newCity.getindexOfCity(this.state.cityToUpDate, this.state.allCityArray);
+
         try {
-            if (this.state.updateCityName < 0 || this.state.updateCityLat < 0 || this.state.updateCityLon < 0 || this.state.updateCityPop < 0) {
-                // throw "Error! Please check your input values again - invalid entries entered."
+            if (this.state.updateCityName < 0 || this.state.updateCityLat < 0 || this.state.updateCityLat > 45 || this.state.updateCityPop < 0) {
+
+                this.setState({
+                    error_msg: "Error! invalid entries entered.",
+                    toolTipStyle: "block"
+                })
             } else if (isNaN(this.state.updateCityLat - 1) || isNaN(this.state.updateCityLon - 1) || isNaN(this.state.updateCityPop - 1)) {
-                //  throw "Error! Please check your input values again - invalid entries entered."
-            } else {
-                if (this.state.updateCityName !== this.state.allCityArray[count].Name) {
+
+                this.setState({
+                    error_msg: "Error! invalid entries entered.",
+                    toolTipStyle: "block"
+                })
+
+                // } else if (this.state.updateCityName === "" || this.state.updateCityLat === "" || this.state.updateCityLat === "" || this.state.updateCityPop === "") {
+                //     this.setState({ error_msg: "Error! Nothing to update." })
+
+            }
+            else {
+                if (this.state.updateCityName !== this.state.allCityArray[count].Name && this.state.updateCityName !== "") {
+                    console.log(this.state.updateCityName);
                     this.newCity.upDateData(count, "Name", this.state.updateCityName, this.state.allCityArray);
                     this.state.allCityArray[count].Name = this.state.updateCityName
                     this.setState({
@@ -212,21 +248,23 @@ class Cities extends Component {
                         currentCity: this.state.updateCityName
                     })
                 }
-                if (this.state.updateCityLat !== this.state.allCityArray[count].Latitude) {
+                if (this.state.updateCityLat !== "") {//this.state.allCityArray[count].Latitude) {
                     this.newCity.upDateData(count, "Latitude", this.state.updateCityLat, this.state.allCityArray);
                     this.state.allCityArray[count].Latitude = this.state.updateCityLat
                     this.setState({
                         allCityArray: this.state.allCityArray
                     })
                 }
-                if (this.state.updateCityLon !== this.state.allCityArray[count].Longitude) {
+                if (this.state.updateCityLon !== "") {//this.state.allCityArray[count].Longitude) {
                     this.newCity.upDateData(count, "Longitude", this.state.updateCityLon, this.state.allCityArray);
                     this.state.allCityArray[count].Longitude = this.state.updateCityLon
                     this.setState({
                         allCityArray: this.state.allCityArray
                     })
                 }
-                if (this.state.updateCityPop !== this.state.allCityArray[count].Population) {
+                if (this.state.updateCityPop !== "") {//this.state.allCityArray[count].Population) {
+                    console.log(this.state.updateCityPop);
+
                     const selectUpdateCityInfo = document.getElementById("selectUpdateCityInfo");
                     if (selectUpdateCityInfo.value === "realPopulation") {
                         this.newCity.upDateData(count, "Population", this.state.updateCityPop, this.state.allCityArray);
@@ -285,17 +323,17 @@ class Cities extends Component {
     }
     handleCityLatInput = (e) => {
         this.setState({
-            cityLatitude: e.target.value
+            cityLatitude: parseFloat(e.target.value)
         });
     }
     handleCityLonInput = (e) => {
         this.setState({
-            cityLongitude: e.target.value
+            cityLongitude: parseFloat(e.target.value)
         });
     }
     handleCityPopInput = (e) => {
         this.setState({
-            cityPopulation: e.target.value
+            cityPopulation: parseInt(e.target.value)
         });
     }
 
@@ -335,7 +373,8 @@ class Cities extends Component {
                             onChangeCityPop={this.handleCityPopInput} onClick={this.handleAccordionClick}
                             allCityArray={this.state.allCityArray} allAPICityArray={this.state.allAPICityArray} onClickDelete={this.handleClickDelete}
                             onClickAPIDelete={this.handleClickAPIDelete} onClickUpdate={this.handleClickUpdate} updateCity={this.state.cityToUpDate}
-                            onClickUpdateCity={this.handleUpdateCity}
+                            onClickUpdateCity={this.handleUpdateCity} error_msg={this.state.error_msg} toolTipStyle={this.state.toolTipStyle}
+                            error_msg1={this.state.error_msg1} toolTip={this.state.toolTip}
 
                             onChangeUpdateCityName={this.handleupdateCityInputName} onChangeUpdateCityLat={this.handleupdateCityInputLat}
                             onChangeUpdateCityLon={this.handleupdateCityInputLon} onChangeUpdateCityPop={this.handleupdateCityInputPop}

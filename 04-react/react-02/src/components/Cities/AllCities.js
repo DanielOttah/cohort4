@@ -82,10 +82,13 @@ export class Community extends React.Component {
                 count = i;
             }
         }
-        if (arr[count].Latitude > 45) {
+        if (arr[count].Latitude > 0) {
             sph = "Northern Hemisphere";
-        } else if (arr[count].Latitude <= 45) {
+        } else if (arr[count].Latitude < 0) {
             sph = "Southern Hemisphere";
+        }
+        else {
+            sph = "On the equator";
         }
         return sph;
     }

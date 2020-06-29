@@ -73,6 +73,7 @@ dot.addEventListener('click', (() => {
 }));
 equalTo.addEventListener('click', (() => {
 
+
     var res1 = ops.textContent.split(num1)[1];
     num2 = res1.substring(1);
 
@@ -111,26 +112,26 @@ l36.addEventListener('change', () => {
     if (taxableIncome <= b1) {
         l37.textContent = "0";
         l39.textContent = "15% ~ CAD$" + taxableIncome;
-        l42.textContent = "CAD$" + " " + functions.taxCalcBase1(taxableIncome);
+        l42.textContent = "CAD$" + " " + Math.round(functions.taxCalcBase1(taxableIncome), 2);
     } else if (taxableIncome > b1 && taxableIncome <= 97069) {
         l37.textContent = "CAD$48353 | CAD$" + (taxableIncome - b1);
         l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$" + (taxableIncome - b1);
-        l42.textContent = "CAD$" + " " + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(taxableIncome - b1));
+        l42.textContent = "CAD$" + " " + Math.round((functions.taxCalcBase1(b1) + functions.taxCalcBase2(taxableIncome - b1)), 2);
 
     } else if (taxableIncome > 97069 && taxableIncome <= 150473) {
         l37.textContent = "CAD$48353 | CAD$48534 | CAD$" + (taxableIncome - 97069);
         l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$" + (taxableIncome - 97069);
-        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(taxableIncome - 97069));
+        l42.textContent = "CAD$" + Math.round((functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(taxableIncome - 97069)), 2);
 
     } else if (taxableIncome > (150473) && taxableIncome <= 214368) {
         l37.textContent = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$" + (taxableIncome - 150473);
         l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$" + (taxableIncome - 150473);
-        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(taxableIncome - 150473));
+        l42.textContent = "CAD$" + Math.round((functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(taxableIncome - 150473)), 2);
 
     } else if (taxableIncome > 214368) {
         l37.textContent = "CAD$48353 | CAD$48534 | CAD$53404 | CAD$63895 | CAD$" + (taxableIncome - 214368);
         l39.textContent = "15% ~ CAD$48353 | 20.5% ~ CAD$48534 | 26% ~ CAD$53404 | 29% ~ CAD$63895 | CAD$" + (taxableIncome - 214368);
-        l42.textContent = "CAD$" + (functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(b4) + functions.taxCalcBase5(taxableIncome - 214368));
+        l42.textContent = "CAD$" + Math.round((functions.taxCalcBase1(b1) + functions.taxCalcBase2(b2) + functions.taxCalcBase3(b3) + functions.taxCalcBase4(b4) + functions.taxCalcBase5(taxableIncome - 214368)), 2);
 
     }
 });

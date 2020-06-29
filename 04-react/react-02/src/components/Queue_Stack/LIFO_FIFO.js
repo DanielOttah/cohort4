@@ -3,7 +3,7 @@ import './LIFO_FIFO.css'
 import 'C:/code/cohort4/04-react/react-02/src/App.css'
 // import { LIFOFIFOFunctionExample } from './LIFO_FIFO_Function_Example.js';
 import { LIFOFIFOClassExample } from './LIFO_FIFO_Class_Example.js';
-import { FIFOAnimation, LIFOAnimation } from './Animation.js';
+import { FIFOAnimation, LIFOAnimation } from './Animation copy.js';
 import { ThemeContext } from '../../context/ThemeContext';
 // import ThemeOptions from '../Settings/ThemeOptions';
 

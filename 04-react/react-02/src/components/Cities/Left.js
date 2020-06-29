@@ -4,9 +4,33 @@ import Button from './Button.js';
 import { CreateCityContainer, CreateAPICityContainer } from './CreateCityContainer.js';
 import UpdateCityComponent from './UpdateCityComponent.js';
 import './Cities.css';
+import { Community } from './AllCities.js'
 
 class Left extends Component {
+    constructor(props) {
+        super(props)
+        this.myCity = new Community()
+        this.state = {
+            mostSouthern: "",
+            mostNorthern: ""
 
+        }
+    }
+
+    onClickMostNorthern = () => {
+        let apiCity = this.myCity.getMostNorthern(this.props.allAPICityArray)[0]
+        let ct = this.myCity.getMostNorthern(this.props.allCityArray)[0]
+        this.setState({
+            mostNorthern: (apiCity > ct) ? apiCity : ct
+        })
+    }
+    onClickMostSouthern = () => {
+        let apiCity = this.myCity.getMostSouthern(this.props.allAPICityArray)[0]
+        let ct = this.myCity.getMostSouthern(this.props.allCityArray)[0]
+        this.setState({
+            mostSouthern: (apiCity > ct) ? apiCity : ct
+        })
+    }
 
     render() {
         const children = [];
@@ -28,6 +52,8 @@ class Left extends Component {
             <div className="LeftPane" id="LeftPane">
                 <fieldset className="">
                     <legend ><b>City Information</b></legend>
+                    <span className="tooltiptext" id="" style={{ display: this.props.toolTip }}>{this.props.error_msg1}</span>
+
                     <table style={{ margin: "0px" }}>
                         <tbody>
                             <tr><th>
@@ -64,11 +90,20 @@ class Left extends Component {
                                  Save City to API Server</label></td></tr>
                         </tbody>
                     </table>
+
                     <Button name="Add City" onClick={this.props.onClickAddCity} style={{ margin: " 2px 2px" }} />
                     <div className="tooltip"> <Button name="Get Random City" onClick={this.props.onClickRandomCity} />
-                        <span className="tooltiptext">European cities</span>
-                    </div>
-                    <UpdateCityComponent TextType={"text"} onClickUpdateCity={this.props.onClickUpdateCity} nameValue={this.props.nameValue}
+                        <span className="tooltiptext">European cities</span></div>
+
+                    <table style={{ margin: "0px" }}>
+                        <tbody>
+                            <tr><th><Button name="Most Northern" onClick={this.onClickMostNorthern} /></th>
+                                <td><input type="text" id="mostNorthern" value={this.state.mostNorthern} readOnly /></td></tr>
+                            <tr><th><Button name="Most Southern" onClick={this.onClickMostSouthern} /></th>
+                                <td><input type="text" id="mostSouthern" value={this.state.mostSouthern} readOnly /></td></tr>
+                        </tbody>
+                    </table>
+                    <UpdateCityComponent TextType={"text"} toolTipStyle={this.props.toolTipStyle} error_msg={this.props.error_msg} onClickUpdateCity={this.props.onClickUpdateCity} nameValue={this.props.nameValue}
                         latValue={this.props.latValue} lonValue={this.props.lonValue} popValue={this.props.popValue}
                         onChangeUpdateCityPop={this.props.onChangeUpdateCityPop} onChangeUpdateCityLon={this.props.onChangeUpdateCityLon}
                         onChangeUpdateCityLat={this.props.onChangeUpdateCityLat} onChangeUpdateCityName={this.props.onChangeUpdateCityName} />

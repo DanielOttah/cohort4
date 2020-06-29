@@ -29,9 +29,12 @@ class Account extends Component {
             newAccountName: "",
             inputAmount: "",
             allAccountList: [],
-            totalCash: ""
+            totalCash: "",
+            error_msg: ""
         }
+        // this.toolTip = document.getElementById("toolTip");
     }
+
     handleAccordionButton = () => {       //Opens the section to enter a new customer
         const enterAccDetails = document.getElementById("enterAccDetails");
         if (enterAccDetails.style.maxHeight) {
@@ -42,21 +45,27 @@ class Account extends Component {
 
     }
     handleOpenAccount = () => {           //Adds a new customer
+        let toolTip = document.getElementById("toolTip");
+        toolTip.style.display = "none"
         const enterAccDetails = document.getElementById("enterAccDetails");
         try {
             const customer_Name = document.getElementById("customerName").value;
             const Account_Name = document.getElementById("accountName").value;
             const customer_Address = document.getElementById("customerAddress").value;
             if (customer_Name === "" || Account_Name === "" || customer_Address === "") {
-                // throw "All fields must be complete to open an account."
-                alert("Error, all input fields must be filled.")
+                toolTip.style.display = "block"
+                this.setState({
+                    error_msg: "Error, all input fields must be filled."
+                })
             }
             else {
                 let index = this.newCustomer.getAccountUser(customer_Name);
                 let customers = [];
                 if (index !== undefined) {
-                    // throw "Account user already exist! You may want to update your account instead";
-                    alert("Account user already exist! You may want to update your account instead")
+                    toolTip.style.display = "block"
+                    this.setState({
+                        error_msg: "Account user already exist! You may want to update your account instead"
+                    })
                 } else if (index === undefined) {
                     this.newCustomer.createNewAccount(customer_Name, Account_Name, customer_Address);
                     for (let i = 0; i < this.newCustomer.allCustomers.length; i++) {
@@ -72,7 +81,9 @@ class Account extends Component {
             }
         }
         catch (err) {
-            alert(err);
+            this.setState({
+                error_msg: err
+            })
         }
     }
     getAllAccountOfCustomer = (obj) => {  //Get all accounts of a particular customer
@@ -182,6 +193,9 @@ class Account extends Component {
 
     }
     handleOpenNewAccount = (e) => {       //Add account to customers' list of account
+        let toolTip = document.getElementById("toolTip");
+        toolTip.style.display = "none"
+
         let enterNewAccName = document.getElementById("enterNewAccName");
         let currentUser = this.state.currentUserIndex;
         let userAccounts = this.newCustomer.allCustomers[currentUser].Accounts;
@@ -195,7 +209,11 @@ class Account extends Component {
             }
         }
         if (doesAccountExist === true) {
-            alert('Error, Account already exist!')
+            // alert('Error, Account already exist!')
+            toolTip.style.display = "block"
+            this.setState({
+                error_msg: "Error, Account already exist!"
+            })
         } else {
             userAccounts.push({ [this.state.newAccountName]: 0 });
             allCustomerAccounts = this.getAllAccountOfCustomer(this.newCustomer.allCustomers[currentUser].Accounts)
@@ -217,11 +235,17 @@ class Account extends Component {
         })
     }
     handleCompleteTransaction = (e) => {      // Complete Transaction
+        let toolTip = document.getElementById("toolTip");
+        toolTip.style.display = "none"
         let idAmount = document.getElementById("idAmount");
         let selectCustomerAccount = document.getElementById("selectCustomerAccount");
         let selectTransaction = document.getElementById("selectTransaction");
-        if (idAmount.value === '' || idAmount <= 0 || selectCustomerAccount.value === "Select" || isNaN(parseFloat(idAmount.value))) {
-            alert("Error, ensure input value is valid and an account is selected.")
+        if (idAmount.value === '' || idAmount.value <= 0 || selectCustomerAccount.value === "Select" || isNaN(parseFloat(idAmount.value))) {
+
+            toolTip.style.display = "block"
+            this.setState({
+                error_msg: "Error, ensure input value is valid."
+            })
         }
         else {
             let currentUser = this.state.currentUserIndex;
@@ -241,7 +265,10 @@ class Account extends Component {
 
                 let balance = this.newCustomer.withdraw_Txn(userAccounts[indexOfAccount][selectCustomerAccount.value], parseFloat(idAmount.value));
                 if (balance === false) {
-                    alert("Insufficient Funds");
+                    toolTip.style.display = "block"
+                    this.setState({
+                        error_msg: "Insufficient Funds"
+                    })
                 } else {
                     userAccounts[indexOfAccount][selectCustomerAccount.value] = balance;
                     this.getAllAccountList();
@@ -283,6 +310,8 @@ class Account extends Component {
                 <div className="Account-Container w3-content w3-container">
 
                     <Button name={'Add A New Customer'} class={"accordion"} onClick={this.handleAccordionButton} />
+                    <span className="tooltiptext" id="toolTip" style={{ display: "none" }}>{this.state.error_msg}</span>
+
                     <AddNewAccount divId="enterAccDetails" div1Class="panel" div2Class={"inputRow"}
                         input1Id={"customerName"} input1placeholder={"Enter Name Here"}
                         input2Id={"accountName"} input2placeholder={"Enter Account Name Here"}
@@ -297,8 +326,10 @@ class Account extends Component {
                                         onChange={this.handleSelectCustomer} list={this.state.customerList} />
                                 </label>
                                 <SelectTransaction />
-                                <div>  <InputField id={"idAmount"} inputValue={this.state.inputAmount} onChange={this.handleInputAmount}
-                                    placeholder={"Enter amount $CAD"} readOnly={false} /></div>
+                                <div>
+                                    <InputField id={"idAmount"} inputValue={this.state.inputAmount} onChange={this.handleInputAmount}
+                                        placeholder={"Enter amount $CAD"} readOnly={false} />
+                                </div>
                                 <div> <Button name={"Complete Transaction"} onClick={this.handleCompleteTransaction} /></div>
                             </div>
                         </fieldset>
