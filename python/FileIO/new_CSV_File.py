@@ -16,7 +16,6 @@ def get_All():
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         next(csv_reader)
         for row in csv_reader:
-            # clss[f"{row[0]}-{lineCount}"] = float(row[9])
             clss[f"{row.get('CLASS')}{lineCount}"] = float(row.get('RES_CNT'))
             sect[f"{row.get('SECT')}{lineCount}"] = float(row.get('RES_CNT'))
             lineCount += 1
@@ -45,28 +44,6 @@ def get_All():
     =================================================================================
     =============================== END OF REPORT ===================================
     """)
-
-    # f.write(
-    #     f"The total count according to a class category is {sum(clss.values())}")
-    # f.write(
-    #     f"The total count according to a sector category is {sum(sect.values())}")
-    # f.write(f"The total number of lines read is {lineCount}")
-    # f.write(f"**********************************************************************")
-
-    # f.write("=================================================================================")
-    # f.write("|         CATEGORY             |             RESULT                              |")
-    # f.write("=================================================================================")
-    # f.write(
-    #     f"|  Total Count by Class       |        {sum(clss.values())}                     |")
-    # f.write("=================================================================================")
-    # f.write(
-    #     f"|  Total Count by Class       |        {sum(clss.values())}                     |")
-    # f.write("=================================================================================")
-    # f.write(
-    #     f"|  Total Lines Read           |        {lineCount}                              |")
-    # f.write("=================================================================================")
-
-    # f.write("============== END OF REPORT ===================================")
     f.close()
 
 
