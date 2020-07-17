@@ -1,24 +1,17 @@
-=========== A PROGRAM TO READ CSV FILE IN PYTHON ====================
-***Beginning of report ...
 
-The total number of lines: 303
-The total for the Class Data is: 1264656
-The total for the Sector Data is: 1264656
-
-+++ Class Data:
-The residential class has a total count of 1263734
-The Industrial class has a total count of 922
-The Residual class has a total count of 0
-The Major Park Area class has a total count of 0
-
-+++ Sector Data:
-The Centre sector has a total count of 199977
-The East sector has a total count of 57666
-The West sector has a total count of 124497
-The North sector has a total count of 160502
-The South sector has a total count of 227345
-The Northeast sector has a total count of 185534
-The Northwest sector has a total count of 174126
-The Southeast sector has a total count of 135009
-The Southwest sector has a total count of 0
-***End of report ...
+    ================== REPORT SUMMARY ===================================
+    The total count according to a class category is 1260912.0
+    The total count according to a sector category is 1260912.0
+    The total number of lines read is 302
+    ********************************************************************************
+    =================================================================================
+    |         CATEGORY             |             RESULT                             |
+    =================================================================================
+    |  Total Count by Class       |        1260912.0                     |
+    =================================================================================
+    |  Total Count by Sector       |        1260912.0                    |
+    =================================================================================
+    |  Total Lines Read           |        302                              |
+    =================================================================================
+    =============================== END OF REPORT ===================================
+    

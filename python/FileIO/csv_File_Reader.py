@@ -3,7 +3,8 @@ import csv
 # https://data.calgary.ca/resource/cc4n-ndvs.json
 
 # _path = "C:/code/cohort4/python/test.txt"
-_path = "Census_by_Community_2018.csv"
+# _path = "Census_by_Community_2018.csv"
+_path = "csv.csv"
 
 
 def get_all_data(file_name):

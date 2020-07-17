@@ -57,7 +57,7 @@ def test_invoice_created():
     Customer name: Tom Hanks
     Customer email: tom.hanks@ymail.com
     Customer phone: 403-777-1241
-    Item(s): Bread
+    Item(s): Bread | $2 each
     Quantity: 9
     Total cost: $CAD 18"""
 
@@ -66,6 +66,6 @@ def test_invoice_created():
     Customer name: Fred Hammond
     Customer email: fred.hammond@ymail.com
     Customer phone: 403-777-1237
-    Item(s): Mixed Fries
+    Item(s): Mixed Fries | $3 each
     Quantity: 5
     Total cost: $CAD 15"""
