@@ -27,14 +27,45 @@ def calc_Tax(tot_income):
         return round(((income-tax_cutoffs[tax_index-1])*tax_brackets[tax_index])+49645, 2)
 
 
+can_Tax = [
+    {"income": 48535, "tax_percent": 0.15, "base_value": 0},
+    {"income": 97069, "tax_percent": 0.205, "base_value": 7280},
+    {"income": 150473, "tax_percent": 0.26, "base_value": 17230},
+    {"income": 214368, "tax_percent": 0.29, "base_value": 31115},
+    {"income": 214368, "tax_percent": 0.33, "base_value": 49645},
+]
+
+
+def calc_Tax_Bases(income, tax_Obj, indx):
+    if(indx >= 1):
+        res = ((income-can_Tax[indx-1]['income']) *
+               tax_Obj['tax_percent']) + tax_Obj['base_value']
+    elif(indx < 1):
+        res = income * tax_Obj['tax_percent']
+    return round(res, 2)
+    # return indx
+
+
+def calc_Tax_dict(tot_income):
+    tax = 0
+    tax_index = 0
+    income = float(tot_income)
+    for each_baseValue in can_Tax:
+        if(income <= each_baseValue['income']):
+            return calc_Tax_Bases(income, each_baseValue, tax_index)
+        tax_index += 1
+    return calc_Tax_Bases(income, each_baseValue, tax_index)
+
+
 print("============== The Canadian Tax Calculator App ==========")
 print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 print("")
 if __name__ == "__main__":
     try:
-        # total_income = input('Enter total income: $CAD ')
+        total_income = input('Enter total income: $CAD ')
         print(
-            f"CAD${calc_Tax(total_income := input('Enter total income: $CAD '))}")
+            f"Total tax to be paid is CAD${calc_Tax_dict(total_income)} | CAD${calc_Tax(total_income)}")
+
     except ValueError as e:
         print(f"'{total_income}' is not a valid number")
 

@@ -12,7 +12,45 @@ data = build_dict()
 
 @app.route('/')  # This refers to the homepage
 def home():
-    return jsonify(get_Client_Invoices(102))
+    return render_template("index.html")
+
+
+@app.route('/flask_dump')  # sends all data to flask template html file
+def flask_dump():
+    return render_template("flaskdump.html", data=data)
+
+
+# sends customer data to flask template html file
+@app.route('/flask_dump/customers')
+def flask_dump_Customer():
+    customer = []
+    for val in data['customers'].items():
+        val[1].update({"customer_id": val[0]})
+        customer.append(val[1])
+    return render_template("flaskdump_customers.html", data=customer)
+
+
+# sends invoice data to flask template html file
+@app.route('/flask_dump/invoices')
+def flask_dump_Invoice():
+    invoices = []
+    products = []
+    invoice_list = []
+
+    for val in data['Invoices'].items():
+        val[1].update({"invoice_id": val[0]})
+        invoices.append(val[1])
+    return render_template("flaskdump_Invoices.html", data=invoices)
+
+
+# sends products data to flask template html file
+@app.route('/flask_dump/products')
+def flask_dump_products():
+    products = []
+    for val in data['products'].items():
+        val[1].update({"products_id": val[0]})
+        products.append(val[1])
+    return render_template("flaskdump_products.html", data=products)
 
 
 @app.route('/all')  # get all data in Excel sheet

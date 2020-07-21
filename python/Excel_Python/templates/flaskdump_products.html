@@ -1,0 +1,100 @@
+<!-- saved from url=(0266)https://mp4-a.udemycdn.com/2016-11-10_08-55-57-3b4ea98e124ae6c99c5f29d926bb3aa8/original.html?ZLsCi1A1vDSnCOe9C_UvXsir4KZ7LLNA7sM4pp-Y82isEsRxQaOsf7o51aiZbMej98ZoA3fyDq28lZBrRnTIsHLWyBNaYroKY3GoF3y04PlnNXC8ZfECnqbRwerXtrdcingfXkuCl6pQ9rNEokg3tDlMY5CjA3IZ2poXx6-NvgAp -->
+
+<!--Insert this line (the one below) at the end of the script to call the api from the browser and get stores from the api-->
+<!-- httpGetAsync('http://127.0.0.1:3200/store', function(response){alert(response);}) -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <script type="text/javascript">
+        function httpGetAsync(theUrl, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            xmlHttp.send(null);
+        }
+        
+    </script>
+    
+    <script>
+    //function displayData(){
+   // let invoiceDiv = document.getElementById("dataDiv");
+  // invoiceDiv.textContent = '{{data|tojson}}';
+   //} 
+   
+
+    </script> 
+    <title>Invoice App API</title>
+   
+</head>
+
+<body>
+<header>
+        <h4>Products</h4>
+        
+    </header>
+    <div id="myElement">    </div>
+    <div id="dataDiv"> 
+    {% for each_dict in data%}
+    <div id="" class= "card center"> 
+            <h3> Product Name: {{each_dict.product_name}}</h3>
+            <p> Price: $CAD {{each_dict.price}}</p>
+            <p> Product id: {{each_dict.products_id}}</p>
+    </div>
+    <br/>
+    {%endfor%}
+    
+
+    </div>
+   
+   
+       <!-- html {
+            background: #018DED url(https://picsum.photos/id/1084/1500/1000.jpg?grayscale);
+             background-size: cover;
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 10px;
+        }-->
+        <style> 
+        body {
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+        header {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translate(-50%);
+        }      
+        #dataDiv{
+            margin:auto;
+            padding:20px;
+            height:60vh;
+            width:400px;
+            overflow:auto;
+            font-size: 20px;
+        }
+        .center{
+            display:flex;
+            justify-content:center
+        }
+        .card{
+            display:block;
+            width:auto;
+            height:auto;
+            border: 1px solid gray;
+            background:lightgreen;
+        }
+        
+
+    </style> 
+    </body>
+
+</html>
